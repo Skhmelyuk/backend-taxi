@@ -1,0 +1,73 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block content %}
+<div style="padding: 20px;">
+    <h1>📊 Dashboard</h1>
+
+    <!-- Stats Grid -->
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px;">
+        <div style="background: #0d6efd; color: white; padding: 20px; border-radius: 8px;">
+            <h3>👥 Users</h3>
+            <div style="font-size: 2em; font-weight: bold;">{{ total_users }}</div>
+            <div style="opacity: 0.8;">+{{ new_users_week }} this week</div>
+        </div>
+        <div style="background: #198754; color: white; padding: 20px; border-radius: 8px;">
+            <h3>🚗 Drivers</h3>
+            <div style="font-size: 2em; font-weight: bold;">{{ online_drivers }}</div>
+            <div style="opacity: 0.8;">online / {{ total_drivers }} approved</div>
+        </div>
+        <div style="background: #6610f2; color: white; padding: 20px; border-radius: 8px;">
+            <h3>🏁 Rides Today</h3>
+            <div style="font-size: 2em; font-weight: bold;">{{ rides_today }}</div>
+            <div style="opacity: 0.8;">{{ completed_today }} completed</div>
+        </div>
+        <div style="background: #fd7e14; color: white; padding: 20px; border-radius: 8px;">
+            <h3>💰 Revenue Today</h3>
+            <div style="font-size: 2em; font-weight: bold;">{{ revenue_today|floatformat:0 }} ₴</div>
+            <div style="opacity: 0.8;">{{ revenue_week|floatformat:0 }} ₴ this week</div>
+        </div>
+    </div>
+
+    <!-- Active Rides Alert -->
+    {% if active_rides %}
+    <div style="background: #fff3cd; border: 1px solid #ffc107; padding: 12px; border-radius: 6px; margin-bottom: 16px;">
+        ⚠️ <strong>{{ active_rides }}</strong> active rides right now
+        {% if pending_drivers %} | <strong>{{ pending_drivers }}</strong> drivers pending approval{% endif %}
+    </div>
+    {% endif %}
+
+    <!-- Recent Rides -->
+    <h2>Recent Rides</h2>
+    <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden;">
+        <thead style="background: #f8f9fa;">
+            <tr>
+                <th style="padding: 12px; text-align: left;">ID</th>
+                <th style="padding: 12px; text-align: left;">User</th>
+                <th style="padding: 12px; text-align: left;">Driver</th>
+                <th style="padding: 12px; text-align: left;">Status</th>
+                <th style="padding: 12px; text-align: left;">Price</th>
+                <th style="padding: 12px; text-align: left;">Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ride in recent_rides %}
+            <tr style="border-top: 1px solid #dee2e6;">
+                <td style="padding: 12px; font-family: monospace;">{{ ride.id|truncatechars:12 }}</td>
+                <td style="padding: 12px;">{{ ride.user.email }}</td>
+                <td style="padding: 12px;">{{ ride.driver.user.email|default:"—" }}</td>
+                <td style="padding: 12px;">
+                    <span style="background: {% if ride.status == 'completed' %}#198754{% elif ride.status == 'cancelled' %}#dc3545{% elif ride.status == 'in_progress' %}#6610f2{% else %}#fd7e14{% endif %}; color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.85em;">
+                        {{ ride.get_status_display }}
+                    </span>
+                </td>
+                <td style="padding: 12px;">{{ ride.final_price|default:ride.estimated_price|floatformat:0 }} ₴</td>
+                <td style="padding: 12px; color: #666;">{{ ride.created_at|timesince }} ago</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="6" style="padding: 20px; text-align: center; color: #666;">No rides yet</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

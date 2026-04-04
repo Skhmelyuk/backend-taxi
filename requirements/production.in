@@ -1,0 +1,12 @@
+# Include compiled base requirements
+-r base.txt
+
+# Production Server
+gunicorn>=23.0.0
+whitenoise>=6.11.0
+
+# Monitoring & Logging
+sentry-sdk>=2.52.0
+
+# Security
+django-ratelimit>=4.1.0

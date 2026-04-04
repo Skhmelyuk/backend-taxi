@@ -1,0 +1,41 @@
+# Core Django
+# Allow updates within 5.1.x to receive security patches
+Django>=5.1.5,<5.2
+djangorestframework>=3.15.2
+
+# Database
+# We use the PostGIS driver according to the requirements
+psycopg2-binary>=2.9.9
+
+# Caching & Tasks
+# Redis and Celery must match the infrastructure versions
+redis>=5.2.0
+django-redis>=5.4.0
+celery>=5.4.0
+django-celery-beat>=2.8.1
+
+# API & CORS
+# It is important to fix the CORS version for stable frontend operation
+django-cors-headers==4.3.0
+django-filter>=25.1
+
+# Environment Variables
+python-decouple==3.8
+
+# Utils
+Pillow>=12.1.0
+python-dateutil>=2.9.0
+phonenumbers>=9.0.0
+
+# Logging
+python-json-logger>=2.0.7
+
+# Clerk Authentication (JWT, JWKS)
+PyJWT==2.8.0
+cryptography==41.0.7
+requests==2.31.0
+
+# Clerk Webhook (signature verification)
+svix==1.14.0
+
+liqpay-python==1.0

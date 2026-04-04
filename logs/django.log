@@ -1,0 +1,2318 @@
+INFO 2026-04-01 09:05:28,596 command 1 138787828478720 Visit me at http://0.0.0.0:5555
+INFO 2026-04-01 09:05:28,609 command 1 138787828478720 Broker: redis://redis:6379/0
+INFO 2026-04-01 09:05:28,617 command 1 138787828478720 Registered tasks: 
+['apps.drivers.tasks.check_driver_documents_expiry',
+ 'apps.drivers.tasks.cleanup_stale_locations',
+ 'apps.drivers.tasks.notify_driver_new_ride',
+ 'apps.drivers.tasks.update_driver_statistics',
+ 'apps.notifications.tasks.cleanup_old_notifications',
+ 'apps.notifications.tasks.send_bulk_notification',
+ 'apps.notifications.tasks.send_promo_notifications',
+ 'apps.notifications.tasks.send_push_notification',
+ 'apps.rides.tasks.calculate_ride_statistics',
+ 'apps.rides.tasks.cancel_timeout_rides',
+ 'apps.rides.tasks.find_driver_for_ride',
+ 'apps.rides.tasks.generate_daily_ride_report',
+ 'celery.accumulate',
+ 'celery.backend_cleanup',
+ 'celery.chain',
+ 'celery.chord',
+ 'celery.chord_unlock',
+ 'celery.chunks',
+ 'celery.group',
+ 'celery.map',
+ 'celery.starmap']
+INFO 2026-04-01 09:05:28,628 mixins 1 138787540768448 Connected to redis://redis:6379/0
+INFO 2026-04-01 09:05:29,158 autoreload 9 125357547090688 Watching for file changes with StatReloader
+WARNING 2026-04-01 09:05:29,699 inspector 1 138787515573952 Inspect method registered failed
+WARNING 2026-04-01 09:05:29,703 inspector 1 138787296372416 Inspect method active failed
+WARNING 2026-04-01 09:05:29,704 inspector 1 138787278538432 Inspect method revoked failed
+WARNING 2026-04-01 09:05:29,706 inspector 1 138787523983040 Inspect method active_queues failed
+WARNING 2026-04-01 09:05:29,707 inspector 1 138787270145728 Inspect method conf failed
+WARNING 2026-04-01 09:05:29,715 inspector 1 138787304765120 Inspect method scheduled failed
+WARNING 2026-04-01 09:05:29,716 inspector 1 138787532375744 Inspect method stats failed
+WARNING 2026-04-01 09:05:29,716 inspector 1 138787287979712 Inspect method reserved failed
+INFO 2026-04-01 09:09:13,183 middleware 9 125357188720320 Request started: GET /
+INFO 2026-04-01 09:09:13,193 middleware 9 125357188720320 Request completed: GET / - 404
+WARNING 2026-04-01 09:09:13,195 basehttp 9 125357188720320 "GET / HTTP/1.1" 404 3633
+INFO 2026-04-01 09:09:13,718 middleware 9 125357188720320 Request started: GET /favicon.ico
+INFO 2026-04-01 09:09:13,724 middleware 9 125357188720320 Request completed: GET /favicon.ico - 404
+WARNING 2026-04-01 09:09:13,726 basehttp 9 125357188720320 "GET /favicon.ico HTTP/1.1" 404 3684
+INFO 2026-04-01 09:09:23,086 basehttp 9 125357188720320 "GET /admin/ HTTP/1.1" 302 0
+INFO 2026-04-01 09:09:23,204 basehttp 9 125357188720320 "GET /admin/login/?next=/admin/ HTTP/1.1" 200 15581
+INFO 2026-04-01 09:09:23,279 basehttp 9 125357153052352 "GET /static/admin_interface/css/language-chooser.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 200 1734
+INFO 2026-04-01 09:09:23,280 basehttp 9 125356807812800 "GET /static/admin_interface/css/list-filter-dropdown.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 200 691
+INFO 2026-04-01 09:09:23,281 basehttp 9 125357180327616 "GET /static/admin_interface/css/admin-interface.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 200 16566
+INFO 2026-04-01 09:09:23,281 basehttp 9 125357161445056 "GET /static/admin_interface/css/form-controls.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 200 2437
+INFO 2026-04-01 09:09:23,281 basehttp 9 125357169837760 "GET /static/admin_interface/css/admin-interface-fix.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 200 14785
+INFO 2026-04-01 09:09:23,282 basehttp 9 125357188720320 "GET /static/admin/css/base.css HTTP/1.1" 200 22092
+INFO 2026-04-01 09:09:23,298 basehttp 9 125356807812800 "GET /static/admin_interface/css/streamfield.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 200 5651
+INFO 2026-04-01 09:09:23,299 basehttp 9 125357180327616 "GET /static/admin_interface/css/sorl-thumbnail.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 200 1451
+INFO 2026-04-01 09:09:23,300 basehttp 9 125357188720320 "GET /static/admin_interface/css/modeltranslation.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 200 356
+INFO 2026-04-01 09:09:23,301 basehttp 9 125357153052352 "GET /static/admin_interface/css/related-modal.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 200 2867
+INFO 2026-04-01 09:09:23,302 basehttp 9 125357169837760 "GET /static/admin_interface/css/rangefilter.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 200 1238
+INFO 2026-04-01 09:09:23,303 basehttp 9 125357161445056 "GET /static/admin_interface/css/jquery.ui.tabs.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 200 5558
+INFO 2026-04-01 09:09:23,313 basehttp 9 125357169837760 "GET /static/admin_interface/css/json-widget.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 200 993
+INFO 2026-04-01 09:09:23,315 basehttp 9 125357153052352 "GET /static/admin_interface/css/tinymce.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 200 78
+INFO 2026-04-01 09:09:23,316 basehttp 9 125357180327616 "GET /static/admin_interface/css/ckeditor.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 200 2720
+INFO 2026-04-01 09:09:23,317 basehttp 9 125356807812800 "GET /static/admin_interface/css/import-export.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 200 189
+INFO 2026-04-01 09:09:23,318 basehttp 9 125357161445056 "GET /static/admin_interface/css/rtl.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 200 1016
+INFO 2026-04-01 09:09:23,321 basehttp 9 125357180327616 "GET /static/admin_interface/css/tabbed-changeform.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 200 1895
+INFO 2026-04-01 09:09:23,326 basehttp 9 125357180327616 "GET /static/admin/css/responsive.css?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 200 17972
+INFO 2026-04-01 09:09:23,331 basehttp 9 125357180327616 "GET /static/admin/css/responsive_rtl.css?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 200 2544
+INFO 2026-04-01 09:09:23,336 basehttp 9 125357180327616 "GET /static/admin_interface/foldable-apps/foldable-apps.css?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 200 1943
+INFO 2026-04-01 09:09:23,341 basehttp 9 125357180327616 "GET /static/admin_interface/magnific-popup/magnific-popup.css?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 200 6951
+INFO 2026-04-01 09:09:23,345 basehttp 9 125357188720320 "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2804
+INFO 2026-04-01 09:09:23,351 basehttp 9 125357180327616 "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810
+INFO 2026-04-01 09:09:23,351 basehttp 9 125357188720320 "GET /static/admin/css/login.css HTTP/1.1" 200 951
+INFO 2026-04-01 09:09:23,355 basehttp 9 125357180327616 "GET /static/admin/css/responsive.css HTTP/1.1" 200 17972
+INFO 2026-04-01 09:09:23,359 basehttp 9 125357169837760 "GET /static/admin_interface/foldable-apps/foldable-apps.js?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 200 1750
+INFO 2026-04-01 09:09:23,374 basehttp 9 125356807812800 "GET /static/admin_interface/related-modal/related-modal.js?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 200 6803
+INFO 2026-04-01 09:09:23,374 basehttp 9 125357161445056 "GET /static/admin/js/theme.js HTTP/1.1" 200 1653
+INFO 2026-04-01 09:09:23,375 basehttp 9 125357153052352 "GET /static/admin_interface/magnific-popup/jquery.magnific-popup.js?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 200 60830
+INFO 2026-04-01 09:09:23,387 basehttp 9 125356807812800 "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+INFO 2026-04-01 09:09:46,473 basehttp 9 125357188720320 "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+INFO 2026-04-01 09:09:46,516 basehttp 9 125357188720320 "GET /admin/ HTTP/1.1" 200 19843
+INFO 2026-04-01 09:09:46,581 basehttp 9 125357188720320 "GET /static/admin/css/dashboard.css HTTP/1.1" 200 441
+INFO 2026-04-01 09:09:46,642 basehttp 9 125357188720320 "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO 2026-04-01 09:09:46,642 basehttp 9 125356807812800 "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO 2026-04-01 09:10:15,108 middleware 9 125357188720320 Request started: GET /
+INFO 2026-04-01 09:10:15,116 middleware 9 125357188720320 Request completed: GET / - 404
+WARNING 2026-04-01 09:10:15,116 basehttp 9 125357188720320 "GET / HTTP/1.1" 404 3633
+INFO 2026-04-01 09:10:23,087 middleware 9 125357188720320 Request started: GET /users
+INFO 2026-04-01 09:10:23,102 middleware 9 125357188720320 Request completed: GET /users - 404
+WARNING 2026-04-01 09:10:23,103 basehttp 9 125357188720320 "GET /users HTTP/1.1" 404 3666
+INFO 2026-04-01 09:10:36,356 middleware 9 125357188720320 Request started: GET /api/v1/users/
+INFO 2026-04-01 09:10:36,412 middleware 9 125357188720320 Request completed: GET /api/v1/users/ - 200
+INFO 2026-04-01 09:10:36,414 basehttp 9 125357188720320 "GET /api/v1/users/ HTTP/1.1" 200 18878
+INFO 2026-04-01 09:10:36,458 basehttp 9 125357188720320 "GET /static/rest_framework/css/bootstrap.min.css HTTP/1.1" 200 121457
+INFO 2026-04-01 09:10:36,472 basehttp 9 125357161445056 "GET /static/rest_framework/css/prettify.css HTTP/1.1" 200 817
+INFO 2026-04-01 09:10:36,474 basehttp 9 125356807812800 "GET /static/rest_framework/css/bootstrap-tweaks.css HTTP/1.1" 200 3426
+INFO 2026-04-01 09:10:36,474 basehttp 9 125357180327616 "GET /static/rest_framework/css/default.css HTTP/1.1" 200 1152
+INFO 2026-04-01 09:10:36,475 basehttp 9 125357188720320 "GET /static/rest_framework/js/csrf.js HTTP/1.1" 200 1793
+INFO 2026-04-01 09:10:36,475 basehttp 9 125357169837760 "GET /static/rest_framework/js/ajax-form.js HTTP/1.1" 200 3796
+INFO 2026-04-01 09:10:36,477 basehttp 9 125357153052352 "GET /static/rest_framework/js/jquery-3.7.1.min.js HTTP/1.1" 200 87533
+INFO 2026-04-01 09:10:36,488 basehttp 9 125357161445056 "GET /static/rest_framework/js/load-ajax-form.js HTTP/1.1" 200 59
+INFO 2026-04-01 09:10:36,488 basehttp 9 125357169837760 "GET /static/rest_framework/js/default.js HTTP/1.1" 200 1268
+INFO 2026-04-01 09:10:36,489 basehttp 9 125357188720320 "GET /static/rest_framework/js/prettify-min.js HTTP/1.1" 200 13632
+INFO 2026-04-01 09:10:36,490 basehttp 9 125356807812800 "GET /static/rest_framework/js/bootstrap.min.js HTTP/1.1" 200 39680
+INFO 2026-04-01 09:10:36,543 basehttp 9 125357188720320 "GET /static/rest_framework/img/grid.png HTTP/1.1" 200 1458
+INFO 2026-04-01 09:10:36,618 basehttp 9 125357188720320 "GET /static/rest_framework/fonts/glyphicons-halflings-regular.woff2 HTTP/1.1" 200 18028
+INFO 2026-04-01 11:51:09,318 command 1 138787828478720 15 detected, shutting down
+INFO 2026-04-01 11:51:12,156 command 1 134966774813440 Visit me at http://0.0.0.0:5555
+INFO 2026-04-01 11:51:12,167 command 1 134966774813440 Broker: redis://redis:6379/0
+INFO 2026-04-01 11:51:12,175 command 1 134966774813440 Registered tasks: 
+['apps.drivers.tasks.check_driver_documents_expiry',
+ 'apps.drivers.tasks.cleanup_stale_locations',
+ 'apps.drivers.tasks.notify_driver_new_ride',
+ 'apps.drivers.tasks.update_driver_statistics',
+ 'apps.notifications.tasks.cleanup_old_notifications',
+ 'apps.notifications.tasks.send_bulk_notification',
+ 'apps.notifications.tasks.send_promo_notifications',
+ 'apps.notifications.tasks.send_push_notification',
+ 'apps.rides.tasks.calculate_ride_statistics',
+ 'apps.rides.tasks.cancel_timeout_rides',
+ 'apps.rides.tasks.find_driver_for_ride',
+ 'apps.rides.tasks.generate_daily_ride_report',
+ 'celery.accumulate',
+ 'celery.backend_cleanup',
+ 'celery.chain',
+ 'celery.chord',
+ 'celery.chord_unlock',
+ 'celery.chunks',
+ 'celery.group',
+ 'celery.map',
+ 'celery.starmap']
+INFO 2026-04-01 11:51:12,184 mixins 1 134966487099072 Connected to redis://redis:6379/0
+INFO 2026-04-01 11:51:12,944 autoreload 9 132032542843648 Watching for file changes with StatReloader
+WARNING 2026-04-01 11:51:13,260 inspector 1 134966225647296 Inspect method revoked failed
+WARNING 2026-04-01 11:51:13,282 inspector 1 134966242432704 Inspect method active failed
+WARNING 2026-04-01 11:51:13,286 inspector 1 134966478706368 Inspect method stats failed
+WARNING 2026-04-01 11:51:13,288 inspector 1 134966260266688 Inspect method registered failed
+WARNING 2026-04-01 11:51:13,289 inspector 1 134966470313664 Inspect method active_queues failed
+WARNING 2026-04-01 11:51:13,289 inspector 1 134966234040000 Inspect method reserved failed
+WARNING 2026-04-01 11:51:13,290 inspector 1 134966217254592 Inspect method conf failed
+WARNING 2026-04-01 11:51:13,290 inspector 1 134966251873984 Inspect method scheduled failed
+INFO 2026-04-01 11:55:00,246 tasks 1 139409819501312 Cancelled 0 timeout rides
+INFO 2026-04-01 11:56:19,994 command 1 134966774813440 15 detected, shutting down
+INFO 2026-04-01 11:56:22,987 command 1 132784125813504 Visit me at http://0.0.0.0:5555
+INFO 2026-04-01 11:56:22,998 command 1 132784125813504 Broker: redis://redis:6379/0
+INFO 2026-04-01 11:56:23,006 command 1 132784125813504 Registered tasks: 
+['apps.drivers.tasks.check_driver_documents_expiry',
+ 'apps.drivers.tasks.cleanup_stale_locations',
+ 'apps.drivers.tasks.notify_driver_new_ride',
+ 'apps.drivers.tasks.update_driver_statistics',
+ 'apps.notifications.tasks.cleanup_old_notifications',
+ 'apps.notifications.tasks.send_bulk_notification',
+ 'apps.notifications.tasks.send_promo_notifications',
+ 'apps.notifications.tasks.send_push_notification',
+ 'apps.rides.tasks.calculate_ride_statistics',
+ 'apps.rides.tasks.cancel_timeout_rides',
+ 'apps.rides.tasks.find_driver_for_ride',
+ 'apps.rides.tasks.generate_daily_ride_report',
+ 'celery.accumulate',
+ 'celery.backend_cleanup',
+ 'celery.chain',
+ 'celery.chord',
+ 'celery.chord_unlock',
+ 'celery.chunks',
+ 'celery.group',
+ 'celery.map',
+ 'celery.starmap']
+INFO 2026-04-01 11:56:23,018 mixins 1 132783838131904 Connected to redis://redis:6379/0
+INFO 2026-04-01 11:56:23,649 autoreload 9 136087161447168 Watching for file changes with StatReloader
+WARNING 2026-04-01 11:56:24,094 inspector 1 132783611573952 Inspect method registered failed
+WARNING 2026-04-01 11:56:24,105 inspector 1 132783603181248 Inspect method scheduled failed
+WARNING 2026-04-01 11:56:24,106 inspector 1 132783829739200 Inspect method stats failed
+WARNING 2026-04-01 11:56:24,107 inspector 1 132783594788544 Inspect method active failed
+WARNING 2026-04-01 11:56:24,109 inspector 1 132783569561280 Inspect method conf failed
+WARNING 2026-04-01 11:56:24,110 inspector 1 132783821346496 Inspect method active_queues failed
+WARNING 2026-04-01 11:56:24,112 inspector 1 132783577970368 Inspect method revoked failed
+WARNING 2026-04-01 11:56:24,113 inspector 1 132783586379456 Inspect method reserved failed
+INFO 2026-04-01 12:00:00,140 tasks 1 125309538730752 Cancelled 0 timeout rides
+INFO 2026-04-01 12:00:00,199 tasks 1 125309538730752 Cleaned up 0 stale driver locations
+INFO 2026-04-01 12:05:00,159 tasks 1 125309538730752 Cancelled 0 timeout rides
+INFO 2026-04-01 12:05:59,802 command 1 132784125813504 15 detected, shutting down
+INFO 2026-04-01 12:06:02,900 command 1 135321482494720 Visit me at http://0.0.0.0:5555
+INFO 2026-04-01 12:06:02,911 command 1 135321482494720 Broker: redis://redis:6379/0
+INFO 2026-04-01 12:06:02,920 command 1 135321482494720 Registered tasks: 
+['apps.drivers.tasks.check_driver_documents_expiry',
+ 'apps.drivers.tasks.cleanup_stale_locations',
+ 'apps.drivers.tasks.notify_driver_new_ride',
+ 'apps.drivers.tasks.update_driver_statistics',
+ 'apps.notifications.tasks.cleanup_old_notifications',
+ 'apps.notifications.tasks.send_bulk_notification',
+ 'apps.notifications.tasks.send_promo_notifications',
+ 'apps.notifications.tasks.send_push_notification',
+ 'apps.rides.tasks.calculate_ride_statistics',
+ 'apps.rides.tasks.cancel_timeout_rides',
+ 'apps.rides.tasks.find_driver_for_ride',
+ 'apps.rides.tasks.generate_daily_ride_report',
+ 'celery.accumulate',
+ 'celery.backend_cleanup',
+ 'celery.chain',
+ 'celery.chord',
+ 'celery.chord_unlock',
+ 'celery.chunks',
+ 'celery.group',
+ 'celery.map',
+ 'celery.starmap']
+INFO 2026-04-01 12:06:02,932 mixins 1 135321194813120 Connected to redis://redis:6379/0
+INFO 2026-04-01 12:06:03,805 autoreload 9 134464078177024 Watching for file changes with StatReloader
+WARNING 2026-04-01 12:06:03,992 inspector 1 135320653784768 Inspect method conf failed
+WARNING 2026-04-01 12:06:03,992 inspector 1 135320662177472 Inspect method revoked failed
+WARNING 2026-04-01 12:06:03,994 inspector 1 135321169602240 Inspect method registered failed
+WARNING 2026-04-01 12:06:03,997 inspector 1 135321152784064 Inspect method active failed
+WARNING 2026-04-01 12:06:03,997 inspector 1 135321178011328 Inspect method active_queues failed
+WARNING 2026-04-01 12:06:04,002 inspector 1 135321161193152 Inspect method scheduled failed
+WARNING 2026-04-01 12:06:04,002 inspector 1 135321186420416 Inspect method stats failed
+WARNING 2026-04-01 12:06:04,004 inspector 1 135321143326400 Inspect method reserved failed
+INFO 2026-04-01 12:08:03,249 basehttp 9 134463720109760 "GET /admin/ HTTP/1.1" 200 19843
+INFO 2026-04-01 12:08:03,310 basehttp 9 134463711717056 "GET /static/admin/css/base.css HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,312 basehttp 9 134463702275776 "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,313 basehttp 9 134463720109760 "GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,316 basehttp 9 134463693883072 "GET /static/admin_interface/css/admin-interface.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,317 basehttp 9 134463711717056 "GET /static/admin_interface/css/language-chooser.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,317 basehttp 9 134463472264896 "GET /static/admin_interface/css/form-controls.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,318 basehttp 9 134463480657600 "GET /static/admin_interface/css/admin-interface-fix.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,328 basehttp 9 134463693883072 "GET /static/admin_interface/css/related-modal.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,328 basehttp 9 134463480657600 "GET /static/admin_interface/css/jquery.ui.tabs.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,328 basehttp 9 134463702275776 "GET /static/admin_interface/css/list-filter-dropdown.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,329 basehttp 9 134463720109760 "GET /static/admin_interface/css/rangefilter.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,329 basehttp 9 134463472264896 "GET /static/admin_interface/css/streamfield.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,361 basehttp 9 134463711717056 "GET /static/admin_interface/css/modeltranslation.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,378 basehttp 9 134463693883072 "GET /static/admin/css/dashboard.css HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,378 basehttp 9 134463720109760 "GET /static/admin/css/responsive_rtl.css?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,382 basehttp 9 134463480657600 "GET /static/admin_interface/foldable-apps/foldable-apps.css?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,383 basehttp 9 134463702275776 "GET /static/admin_interface/css/ckeditor.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,384 basehttp 9 134463472264896 "GET /static/admin_interface/css/sorl-thumbnail.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,406 basehttp 9 134463711717056 "GET /static/admin_interface/css/tinymce.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,420 basehttp 9 134463693883072 "GET /static/admin_interface/css/json-widget.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,424 basehttp 9 134463720109760 "GET /static/admin_interface/css/import-export.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,430 basehttp 9 134463472264896 "GET /static/admin_interface/css/rtl.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,433 basehttp 9 134463480657600 "GET /static/admin_interface/css/tabbed-changeform.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,434 basehttp 9 134463702275776 "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,451 basehttp 9 134463711717056 "GET /static/admin/css/responsive.css?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,467 basehttp 9 134463693883072 "GET /static/admin_interface/magnific-popup/magnific-popup.css?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,468 basehttp 9 134463720109760 "GET /static/admin/js/theme.js HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,476 basehttp 9 134463472264896 "GET /static/admin_interface/foldable-apps/foldable-apps.js?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,479 basehttp 9 134463480657600 "GET /static/admin_interface/magnific-popup/jquery.magnific-popup.js?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,480 basehttp 9 134463702275776 "GET /static/admin_interface/related-modal/related-modal.js?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,527 basehttp 9 134463702275776 "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,548 basehttp 9 134463480657600 "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:03,549 basehttp 9 134463472264896 "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:10,485 middleware 9 134463472264896 Request started: GET /api/v1/users/
+INFO 2026-04-01 12:08:10,556 middleware 9 134463472264896 Request completed: GET /api/v1/users/ - 200
+INFO 2026-04-01 12:08:10,558 basehttp 9 134463472264896 "GET /api/v1/users/ HTTP/1.1" 200 18878
+INFO 2026-04-01 12:08:10,614 basehttp 9 134463720109760 "GET /static/rest_framework/css/default.css HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:10,614 basehttp 9 134463693883072 "GET /static/rest_framework/js/jquery-3.7.1.min.js HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:10,616 basehttp 9 134463480657600 "GET /static/rest_framework/css/bootstrap-tweaks.css HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:10,617 basehttp 9 134463472264896 "GET /static/rest_framework/css/bootstrap.min.css HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:10,618 basehttp 9 134463720109760 "GET /static/rest_framework/js/bootstrap.min.js HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:10,619 basehttp 9 134463702275776 "GET /static/rest_framework/css/prettify.css HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:10,623 basehttp 9 134463711717056 "GET /static/rest_framework/js/csrf.js HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:10,624 basehttp 9 134463480657600 "GET /static/rest_framework/js/default.js HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:10,624 basehttp 9 134463693883072 "GET /static/rest_framework/js/prettify-min.js HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:10,628 basehttp 9 134463472264896 "GET /static/rest_framework/js/load-ajax-form.js HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:10,628 basehttp 9 134463702275776 "GET /static/rest_framework/js/ajax-form.js HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:10,661 basehttp 9 134463711717056 "GET /static/rest_framework/img/grid.png HTTP/1.1" 304 0
+INFO 2026-04-01 12:08:10,698 basehttp 9 134463472264896 "GET /static/rest_framework/fonts/glyphicons-halflings-regular.woff2 HTTP/1.1" 304 0
+INFO 2026-04-01 12:10:00,173 tasks 1 139460819927808 Cancelled 0 timeout rides
+INFO 2026-04-01 12:10:00,228 tasks 1 139460819927808 Cleaned up 0 stale driver locations
+INFO 2026-04-01 12:15:00,075 tasks 1 139460819927808 Cancelled 0 timeout rides
+INFO 2026-04-01 12:20:00,076 tasks 1 139460819927808 Cancelled 0 timeout rides
+INFO 2026-04-01 12:20:00,133 tasks 1 139460819927808 Cleaned up 0 stale driver locations
+INFO 2026-04-01 12:25:00,072 tasks 1 139460819927808 Cancelled 0 timeout rides
+INFO 2026-04-01 12:30:00,073 tasks 1 139460819927808 Cancelled 0 timeout rides
+INFO 2026-04-01 12:30:00,116 tasks 1 139460819927808 Cleaned up 0 stale driver locations
+INFO 2026-04-01 12:35:00,074 tasks 1 139460819927808 Cancelled 0 timeout rides
+INFO 2026-04-01 12:40:00,095 tasks 1 139460819927808 Cancelled 0 timeout rides
+INFO 2026-04-01 12:40:00,153 tasks 1 139460819927808 Cleaned up 0 stale driver locations
+INFO 2026-04-01 12:41:11,484 middleware 9 134463720109760 Request started: GET /api/v1/users/ride_history/
+INFO 2026-04-01 12:41:11,515 middleware 9 134463720109760 Request completed: GET /api/v1/users/ride_history/ - 200
+INFO 2026-04-01 12:41:11,516 basehttp 9 134463720109760 "GET /api/v1/users/ride_history/ HTTP/1.1" 200 11469
+INFO 2026-04-01 12:41:11,553 basehttp 9 134463720109760 "GET /static/rest_framework/css/bootstrap.min.css HTTP/1.1" 304 0
+INFO 2026-04-01 12:41:11,554 basehttp 9 134463711717056 "GET /static/rest_framework/css/bootstrap-tweaks.css HTTP/1.1" 304 0
+INFO 2026-04-01 12:41:11,556 basehttp 9 134463472264896 "GET /static/rest_framework/css/default.css HTTP/1.1" 304 0
+INFO 2026-04-01 12:41:11,556 basehttp 9 134463702275776 "GET /static/rest_framework/css/prettify.css HTTP/1.1" 304 0
+INFO 2026-04-01 12:41:11,557 basehttp 9 134463693883072 "GET /static/rest_framework/js/jquery-3.7.1.min.js HTTP/1.1" 304 0
+INFO 2026-04-01 12:41:11,558 basehttp 9 134463480657600 "GET /static/rest_framework/js/ajax-form.js HTTP/1.1" 304 0
+INFO 2026-04-01 12:41:11,558 basehttp 9 134463711717056 "GET /static/rest_framework/js/csrf.js HTTP/1.1" 304 0
+INFO 2026-04-01 12:41:11,563 basehttp 9 134463702275776 "GET /static/rest_framework/js/bootstrap.min.js HTTP/1.1" 304 0
+INFO 2026-04-01 12:41:11,569 basehttp 9 134463472264896 "GET /static/rest_framework/js/prettify-min.js HTTP/1.1" 304 0
+INFO 2026-04-01 12:41:11,571 basehttp 9 134463693883072 "GET /static/rest_framework/js/load-ajax-form.js HTTP/1.1" 304 0
+INFO 2026-04-01 12:41:11,571 basehttp 9 134463480657600 "GET /static/rest_framework/js/default.js HTTP/1.1" 304 0
+INFO 2026-04-01 12:41:11,631 basehttp 9 134463693883072 "GET /static/rest_framework/img/grid.png HTTP/1.1" 304 0
+INFO 2026-04-01 12:41:16,501 middleware 9 134463693883072 Request started: GET /api/v1/users/me/
+INFO 2026-04-01 12:41:16,515 middleware 9 134463693883072 Request completed: GET /api/v1/users/me/ - 200
+INFO 2026-04-01 12:41:16,516 basehttp 9 134463693883072 "GET /api/v1/users/me/ HTTP/1.1" 200 12061
+INFO 2026-04-01 12:41:24,490 middleware 9 134463693883072 Request started: GET /api/v1/users/update_profile/
+ERROR 2026-04-01 12:41:24,495 exceptions 9 134463693883072 API Error: MethodNotAllowed - Метод "GET" не дозволений.
+INFO 2026-04-01 12:41:24,508 middleware 9 134463693883072 Request completed: GET /api/v1/users/update_profile/ - 405
+WARNING 2026-04-01 12:41:24,529 basehttp 9 134463693883072 "GET /api/v1/users/update_profile/ HTTP/1.1" 405 12391
+INFO 2026-04-01 12:41:28,596 middleware 9 134463693883072 Request started: GET /api/v1/users/me/
+INFO 2026-04-01 12:41:28,610 middleware 9 134463693883072 Request completed: GET /api/v1/users/me/ - 200
+INFO 2026-04-01 12:41:28,611 basehttp 9 134463693883072 "GET /api/v1/users/me/ HTTP/1.1" 200 12061
+INFO 2026-04-01 12:45:00,126 tasks 1 139460819927808 Cancelled 0 timeout rides
+INFO 2026-04-01 12:48:38,768 middleware 9 134463693883072 Request started: POST /api/v1/users/webhooks/clerk/dulant-blanch.ngro
+INFO 2026-04-01 12:48:38,796 middleware 9 134463693883072 Request completed: POST /api/v1/users/webhooks/clerk/dulant-blanch.ngro - 404
+WARNING 2026-04-01 12:48:38,797 basehttp 9 134463693883072 "POST /api/v1/users/webhooks/clerk/dulant-blanch.ngro HTTP/1.1" 404 10096
+INFO 2026-04-01 12:48:46,644 middleware 9 134463480657600 Request started: POST /api/v1/users/webhooks/clerk/dulant-blanch.ngro
+INFO 2026-04-01 12:48:46,652 middleware 9 134463480657600 Request completed: POST /api/v1/users/webhooks/clerk/dulant-blanch.ngro - 404
+WARNING 2026-04-01 12:48:46,653 basehttp 9 134463480657600 "POST /api/v1/users/webhooks/clerk/dulant-blanch.ngro HTTP/1.1" 404 10096
+INFO 2026-04-01 12:48:52,541 middleware 9 134463702275776 Request started: POST /api/v1/users/webhooks/clerk/dulant-blanch.ngro
+INFO 2026-04-01 12:48:52,549 middleware 9 134463702275776 Request completed: POST /api/v1/users/webhooks/clerk/dulant-blanch.ngro - 404
+WARNING 2026-04-01 12:48:52,550 basehttp 9 134463702275776 "POST /api/v1/users/webhooks/clerk/dulant-blanch.ngro HTTP/1.1" 404 10096
+INFO 2026-04-01 12:49:05,021 command 1 135321482494720 15 detected, shutting down
+INFO 2026-04-01 12:49:08,143 command 1 126451768099584 Visit me at http://0.0.0.0:5555
+INFO 2026-04-01 12:49:08,157 command 1 126451768099584 Broker: redis://redis:6379/0
+INFO 2026-04-01 12:49:08,166 command 1 126451768099584 Registered tasks: 
+['apps.drivers.tasks.check_driver_documents_expiry',
+ 'apps.drivers.tasks.cleanup_stale_locations',
+ 'apps.drivers.tasks.notify_driver_new_ride',
+ 'apps.drivers.tasks.update_driver_statistics',
+ 'apps.notifications.tasks.cleanup_old_notifications',
+ 'apps.notifications.tasks.send_bulk_notification',
+ 'apps.notifications.tasks.send_promo_notifications',
+ 'apps.notifications.tasks.send_push_notification',
+ 'apps.rides.tasks.calculate_ride_statistics',
+ 'apps.rides.tasks.cancel_timeout_rides',
+ 'apps.rides.tasks.find_driver_for_ride',
+ 'apps.rides.tasks.generate_daily_ride_report',
+ 'celery.accumulate',
+ 'celery.backend_cleanup',
+ 'celery.chain',
+ 'celery.chord',
+ 'celery.chord_unlock',
+ 'celery.chunks',
+ 'celery.group',
+ 'celery.map',
+ 'celery.starmap']
+INFO 2026-04-01 12:49:08,174 mixins 1 126451479353024 Connected to redis://redis:6379/0
+INFO 2026-04-01 12:49:08,690 autoreload 9 138995029938944 Watching for file changes with StatReloader
+WARNING 2026-04-01 12:49:09,237 inspector 1 126451462551232 Inspect method active_queues failed
+WARNING 2026-04-01 12:49:09,238 inspector 1 126451445733056 Inspect method scheduled failed
+WARNING 2026-04-01 12:49:09,241 inspector 1 126450942322368 Inspect method conf failed
+WARNING 2026-04-01 12:49:09,247 inspector 1 126451437323968 Inspect method active failed
+WARNING 2026-04-01 12:49:09,249 inspector 1 126451470960320 Inspect method stats failed
+WARNING 2026-04-01 12:49:09,249 inspector 1 126450950731456 Inspect method revoked failed
+WARNING 2026-04-01 12:49:09,250 inspector 1 126451454142144 Inspect method registered failed
+WARNING 2026-04-01 12:49:09,253 inspector 1 126451428914880 Inspect method reserved failed
+INFO 2026-04-01 12:49:15,544 middleware 9 138994671154880 Request started: POST /api/v1/users/webhooks/clerk/dulant-blanch.ngro
+INFO 2026-04-01 12:49:15,556 middleware 9 138994671154880 Request completed: POST /api/v1/users/webhooks/clerk/dulant-blanch.ngro - 404
+WARNING 2026-04-01 12:49:15,558 basehttp 9 138994671154880 "POST /api/v1/users/webhooks/clerk/dulant-blanch.ngro HTTP/1.1" 404 10096
+INFO 2026-04-01 12:49:53,713 middleware 9 138994661713600 Request started: POST /api/v1/users/webhooks/clerk/
+ERROR 2026-04-01 12:49:53,713 views 9 138994661713600 Webhook error: Invalid base64-encoded string: number of data characters (21) cannot be 1 more than a multiple of 4
+Traceback (most recent call last):
+  File "/app/apps/users/views.py", line 113, in clerk_webhook
+    wh = Webhook(settings.CLERK_WEBHOOK_SECRET)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/svix/webhooks.py", line 29, in __init__
+    self._whsecret = base64.b64decode(whsecret)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/base64.py", line 88, in b64decode
+    return binascii.a2b_base64(s, strict_mode=validate)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+binascii.Error: Invalid base64-encoded string: number of data characters (21) cannot be 1 more than a multiple of 4
+INFO 2026-04-01 12:49:53,734 middleware 9 138994661713600 Request completed: POST /api/v1/users/webhooks/clerk/ - 500
+ERROR 2026-04-01 12:49:53,735 basehttp 9 138994661713600 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 500 112
+INFO 2026-04-01 12:50:00,182 tasks 1 135790382523136 Cancelled 0 timeout rides
+INFO 2026-04-01 12:50:00,224 tasks 1 135790382523136 Cleaned up 0 stale driver locations
+INFO 2026-04-01 12:53:51,753 command 1 126451768099584 15 detected, shutting down
+INFO 2026-04-01 12:54:07,288 command 1 138065741980416 Visit me at http://0.0.0.0:5555
+INFO 2026-04-01 12:54:07,301 command 1 138065741980416 Broker: redis://redis:6379/0
+INFO 2026-04-01 12:54:07,309 command 1 138065741980416 Registered tasks: 
+['apps.drivers.tasks.check_driver_documents_expiry',
+ 'apps.drivers.tasks.cleanup_stale_locations',
+ 'apps.drivers.tasks.notify_driver_new_ride',
+ 'apps.drivers.tasks.update_driver_statistics',
+ 'apps.notifications.tasks.cleanup_old_notifications',
+ 'apps.notifications.tasks.send_bulk_notification',
+ 'apps.notifications.tasks.send_promo_notifications',
+ 'apps.notifications.tasks.send_push_notification',
+ 'apps.rides.tasks.calculate_ride_statistics',
+ 'apps.rides.tasks.cancel_timeout_rides',
+ 'apps.rides.tasks.find_driver_for_ride',
+ 'apps.rides.tasks.generate_daily_ride_report',
+ 'celery.accumulate',
+ 'celery.backend_cleanup',
+ 'celery.chain',
+ 'celery.chord',
+ 'celery.chord_unlock',
+ 'celery.chunks',
+ 'celery.group',
+ 'celery.map',
+ 'celery.starmap']
+INFO 2026-04-01 12:54:07,317 mixins 1 138065454274240 Connected to redis://redis:6379/0
+INFO 2026-04-01 12:54:08,196 autoreload 9 135845778789120 Watching for file changes with StatReloader
+WARNING 2026-04-01 12:54:08,411 inspector 1 138065437472448 Inspect method active_queues failed
+WARNING 2026-04-01 12:54:08,415 inspector 1 138065179817664 Inspect method conf failed
+WARNING 2026-04-01 12:54:08,416 inspector 1 138065188210368 Inspect method revoked failed
+WARNING 2026-04-01 12:54:08,418 inspector 1 138065213388480 Inspect method scheduled failed
+WARNING 2026-04-01 12:54:08,422 inspector 1 138065445881536 Inspect method stats failed
+WARNING 2026-04-01 12:54:08,425 inspector 1 138065196603072 Inspect method reserved failed
+WARNING 2026-04-01 12:54:08,425 inspector 1 138065204995776 Inspect method active failed
+WARNING 2026-04-01 12:54:08,426 inspector 1 138065429063360 Inspect method registered failed
+INFO 2026-04-01 12:57:02,021 middleware 9 135845487908544 Request started: POST /api/v1/users/webhooks/clerk/
+INFO 2026-04-01 12:57:02,023 views 9 135845487908544 Received Clerk webhook: user.created
+WARNING 2026-04-01 12:57:02,023 services 9 135845487908544 No email found for Clerk user: user_2g7np7Hrk0SN6kj5EDMLDaKNL0S
+INFO 2026-04-01 12:57:02,024 middleware 9 135845487908544 Request completed: POST /api/v1/users/webhooks/clerk/ - 200
+INFO 2026-04-01 12:57:02,024 basehttp 9 135845487908544 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 200 21
+INFO 2026-04-01 12:57:10,438 middleware 9 135845487908544 Request started: POST /api/v1/users/webhooks/clerk/
+INFO 2026-04-01 12:57:10,439 views 9 135845487908544 Received Clerk webhook: user.created
+WARNING 2026-04-01 12:57:10,440 services 9 135845487908544 No email found for Clerk user: user_2g7np7Hrk0SN6kj5EDMLDaKNL0S
+INFO 2026-04-01 12:57:10,440 middleware 9 135845487908544 Request completed: POST /api/v1/users/webhooks/clerk/ - 200
+INFO 2026-04-01 12:57:10,441 basehttp 9 135845487908544 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 200 21
+ERROR 2026-04-01 12:57:33,195 basehttp 9 135845470074560 "GET /api/v1/users/ HTTP/1.1" 500 183513
+ERROR 2026-04-01 12:57:37,557 basehttp 9 135845470074560 "GET /api/v1/users/ HTTP/1.1" 500 183522
+ERROR 2026-04-01 12:57:51,065 basehttp 9 135845470074560 "GET / HTTP/1.1" 500 183234
+ERROR 2026-04-01 12:58:09,280 basehttp 9 135845470074560 "GET /admin/ HTTP/1.1" 500 333089
+INFO 2026-04-01 13:02:59,478 middleware 9 135845470074560 Request started: GET /
+INFO 2026-04-01 13:02:59,507 middleware 9 135845470074560 Request completed: GET / - 404
+WARNING 2026-04-01 13:02:59,509 basehttp 9 135845470074560 "GET / HTTP/1.1" 404 3633
+INFO 2026-04-01 13:03:08,131 middleware 9 135845470074560 Request started: GET /api/v1/users/
+ERROR 2026-04-01 13:03:08,136 exceptions 9 135845470074560 API Error: NotAuthenticated - Реквізити перевірки достовірності не надані.
+INFO 2026-04-01 13:03:08,200 middleware 9 135845470074560 Request completed: GET /api/v1/users/ - 401
+WARNING 2026-04-01 13:03:08,201 basehttp 9 135845470074560 "GET /api/v1/users/ HTTP/1.1" 401 10293
+INFO 2026-04-01 13:03:54,473 middleware 9 135845487908544 Request started: POST /api/v1/users/webhooks/clerk/
+INFO 2026-04-01 13:03:54,474 views 9 135845487908544 Received Clerk webhook: user.created
+WARNING 2026-04-01 13:03:54,474 services 9 135845487908544 No email found for Clerk user: user_2g7np7Hrk0SN6kj5EDMLDaKNL0S
+INFO 2026-04-01 13:03:54,474 middleware 9 135845487908544 Request completed: POST /api/v1/users/webhooks/clerk/ - 200
+INFO 2026-04-01 13:03:54,475 basehttp 9 135845487908544 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 200 21
+INFO 2026-04-01 13:04:49,651 basehttp 9 135845470074560 "GET /admin/ HTTP/1.1" 302 0
+INFO 2026-04-01 13:04:49,766 basehttp 9 135845470074560 "GET /admin/login/?next=/admin/ HTTP/1.1" 200 15581
+INFO 2026-04-01 13:04:49,864 basehttp 9 135845470074560 "GET /static/admin/css/base.css HTTP/1.1" 304 0
+INFO 2026-04-01 13:04:49,865 basehttp 9 135845185058496 "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+INFO 2026-04-01 13:04:49,866 basehttp 9 135845168273088 "GET /static/admin_interface/css/admin-interface-fix.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 13:04:49,866 basehttp 9 135845176665792 "GET /static/admin_interface/css/admin-interface.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 13:04:49,866 basehttp 9 135845478467264 "GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+INFO 2026-04-01 13:04:49,868 basehttp 9 135845185058496 "GET /static/admin_interface/css/language-chooser.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 13:04:49,870 basehttp 9 135845168273088 "GET /static/admin_interface/css/list-filter-dropdown.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 13:04:49,870 basehttp 9 135845159880384 "GET /static/admin_interface/css/form-controls.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 13:04:49,870 basehttp 9 135845176665792 "GET /static/admin_interface/css/rangefilter.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 13:04:49,874 basehttp 9 135845159880384 "GET /static/admin_interface/css/streamfield.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 13:04:49,874 basehttp 9 135845478467264 "GET /static/admin_interface/css/related-modal.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 13:04:49,902 basehttp 9 135845470074560 "GET /static/admin_interface/css/jquery.ui.tabs.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 13:04:49,910 basehttp 9 135845185058496 "GET /static/admin_interface/css/modeltranslation.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 13:04:49,911 basehttp 9 135845168273088 "GET /static/admin_interface/css/sorl-thumbnail.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 13:04:49,914 basehttp 9 135845176665792 "GET /static/admin_interface/css/ckeditor.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 13:04:49,919 basehttp 9 135845159880384 "GET /static/admin_interface/css/json-widget.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 13:04:49,919 basehttp 9 135845478467264 "GET /static/admin_interface/css/tinymce.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 13:04:49,944 basehttp 9 135845470074560 "GET /static/admin_interface/css/import-export.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 13:04:49,952 basehttp 9 135845185058496 "GET /static/admin_interface/css/rtl.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 13:04:49,954 basehttp 9 135845168273088 "GET /static/admin_interface/css/tabbed-changeform.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 13:04:49,957 basehttp 9 135845176665792 "GET /static/admin/css/login.css HTTP/1.1" 304 0
+INFO 2026-04-01 13:04:49,962 basehttp 9 135845478467264 "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+INFO 2026-04-01 13:04:49,963 basehttp 9 135845159880384 "GET /static/admin/css/responsive.css?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 13:04:49,987 basehttp 9 135845470074560 "GET /static/admin/css/responsive_rtl.css?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 13:04:49,994 basehttp 9 135845185058496 "GET /static/admin_interface/foldable-apps/foldable-apps.css?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 13:04:49,996 basehttp 9 135845168273088 "GET /static/admin_interface/magnific-popup/magnific-popup.css?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 13:04:50,001 basehttp 9 135845176665792 "GET /static/admin/js/theme.js HTTP/1.1" 304 0
+INFO 2026-04-01 13:04:50,004 basehttp 9 135845478467264 "GET /static/admin_interface/foldable-apps/foldable-apps.js?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 13:04:50,006 basehttp 9 135845159880384 "GET /static/admin_interface/magnific-popup/jquery.magnific-popup.js?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 13:04:50,030 basehttp 9 135845470074560 "GET /static/admin_interface/related-modal/related-modal.js?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 13:04:50,059 basehttp 9 135845159880384 "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+INFO 2026-04-01 13:05:08,885 basehttp 9 135845159880384 "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+INFO 2026-04-01 13:05:08,928 basehttp 9 135845159880384 "GET /admin/ HTTP/1.1" 200 19843
+INFO 2026-04-01 13:05:08,966 basehttp 9 135845159880384 "GET /static/admin/css/dashboard.css HTTP/1.1" 304 0
+INFO 2026-04-01 13:05:09,023 basehttp 9 135845159880384 "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+INFO 2026-04-01 13:05:09,024 basehttp 9 135845470074560 "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+INFO 2026-04-01 13:05:13,781 basehttp 9 135845159880384 "GET /admin/users/user/ HTTP/1.1" 200 27381
+INFO 2026-04-01 13:05:13,910 basehttp 9 135845168273088 "GET /static/admin/js/core.js HTTP/1.1" 200 6208
+INFO 2026-04-01 13:05:13,911 basehttp 9 135845176665792 "GET /static/admin/css/changelists.css HTTP/1.1" 200 6878
+INFO 2026-04-01 13:05:13,911 basehttp 9 135845185058496 "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 9097
+INFO 2026-04-01 13:05:13,918 basehttp 9 135845159880384 "GET /admin/jsi18n/ HTTP/1.1" 200 12182
+INFO 2026-04-01 13:05:13,923 basehttp 9 135845176665792 "GET /static/admin/js/actions.js HTTP/1.1" 200 8076
+INFO 2026-04-01 13:05:13,926 basehttp 9 135845470074560 "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 285314
+INFO 2026-04-01 13:05:13,934 basehttp 9 135845159880384 "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+INFO 2026-04-01 13:05:13,935 basehttp 9 135845185058496 "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO 2026-04-01 13:05:13,937 basehttp 9 135845168273088 "GET /static/admin/js/urlify.js HTTP/1.1" 200 7887
+INFO 2026-04-01 13:05:13,939 basehttp 9 135845176665792 "GET /static/admin/img/search.svg HTTP/1.1" 200 458
+INFO 2026-04-01 13:05:13,940 basehttp 9 135845470074560 "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+INFO 2026-04-01 13:05:13,941 basehttp 9 135845478467264 "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 325171
+INFO 2026-04-01 13:05:14,010 basehttp 9 135845470074560 "GET /static/admin/js/filters.js HTTP/1.1" 200 978
+INFO 2026-04-01 13:05:14,036 basehttp 9 135845176665792 "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+INFO 2026-04-01 13:05:14,037 basehttp 9 135845185058496 "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 200 1097
+INFO 2026-04-01 13:05:23,690 middleware 9 135845151487680 Request started: POST /api/v1/users/webhooks/clerk/
+INFO 2026-04-01 13:05:23,691 views 9 135845151487680 Received Clerk webhook: user.created
+WARNING 2026-04-01 13:05:23,691 services 9 135845151487680 No email found for Clerk user: user_2g7np7Hrk0SN6kj5EDMLDaKNL0S
+INFO 2026-04-01 13:05:23,691 middleware 9 135845151487680 Request completed: POST /api/v1/users/webhooks/clerk/ - 200
+INFO 2026-04-01 13:05:23,691 basehttp 9 135845151487680 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 200 21
+INFO 2026-04-01 13:05:41,479 basehttp 9 135845470074560 "GET /admin/users/user/ HTTP/1.1" 200 27381
+INFO 2026-04-01 13:05:41,572 basehttp 9 135845470074560 "GET /admin/jsi18n/ HTTP/1.1" 200 12182
+INFO 2026-04-01 14:29:47,070 middleware 9 135845470074560 Request started: POST /api/v1/users/webhooks/clerk/
+INFO 2026-04-01 14:29:47,100 views 9 135845470074560 Received Clerk webhook: user.created
+ERROR 2026-04-01 14:29:47,299 views 9 135845470074560 Webhook error: null value in column "first_name" of relation "users" violates not-null constraint
+DETAIL:  Failing row contains (!PMherGrgAMm9dS025SBPNjljkagfEytpvF3RMv2Y, f, def0464e-3c5b-43b9-b5c7-c4f1cfc24b57, user_3BlBTmpllrPEGfu6IlgZcglEgIR, skhmelyuk1985@gmail.com, null, null, null, , user, t, f, f, , 2026-04-01 14:29:47.288718+00, 2026-04-01 14:29:47.289309+00, null).
+Traceback (most recent call last):
+  File "/app/apps/users/services.py", line 30, in handle_clerk_user_created
+    user = User.objects.get(clerk_user_id=clerk_user_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/query.py", line 651, in get
+    raise self.model.DoesNotExist(
+apps.users.models.User.DoesNotExist: User matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.NotNullViolation: null value in column "first_name" of relation "users" violates not-null constraint
+DETAIL:  Failing row contains (!PMherGrgAMm9dS025SBPNjljkagfEytpvF3RMv2Y, f, def0464e-3c5b-43b9-b5c7-c4f1cfc24b57, user_3BlBTmpllrPEGfu6IlgZcglEgIR, skhmelyuk1985@gmail.com, null, null, null, , user, t, f, f, , 2026-04-01 14:29:47.288718+00, 2026-04-01 14:29:47.289309+00, null).
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/apps/users/views.py", line 122, in clerk_webhook
+    handle_clerk_user_created(data)
+  File "/app/apps/users/services.py", line 33, in handle_clerk_user_created
+    user = User.objects.create_user(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/apps/users/models.py", line 37, in create_user
+    user.save(using=self._db)
+  File "/usr/local/lib/python3.12/site-packages/django/contrib/auth/base_user.py", line 62, in save
+    super().save(*args, **kwargs)
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 892, in save
+    self.save_base(
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 998, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 1161, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 1202, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/query.py", line 1852, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1836, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: null value in column "first_name" of relation "users" violates not-null constraint
+DETAIL:  Failing row contains (!PMherGrgAMm9dS025SBPNjljkagfEytpvF3RMv2Y, f, def0464e-3c5b-43b9-b5c7-c4f1cfc24b57, user_3BlBTmpllrPEGfu6IlgZcglEgIR, skhmelyuk1985@gmail.com, null, null, null, , user, t, f, f, , 2026-04-01 14:29:47.288718+00, 2026-04-01 14:29:47.289309+00, null).
+
+INFO 2026-04-01 14:29:47,338 middleware 9 135845470074560 Request completed: POST /api/v1/users/webhooks/clerk/ - 500
+ERROR 2026-04-01 14:29:47,345 basehttp 9 135845470074560 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 500 382
+INFO 2026-04-01 14:29:51,537 middleware 9 135845478467264 Request started: POST /api/v1/users/webhooks/clerk/
+INFO 2026-04-01 14:29:51,538 views 9 135845478467264 Received Clerk webhook: user.created
+ERROR 2026-04-01 14:29:51,560 views 9 135845478467264 Webhook error: null value in column "first_name" of relation "users" violates not-null constraint
+DETAIL:  Failing row contains (!RLqRg8uRoeymsuOG3ozXVmVhs4DG8c5axukIJjZx, f, a3e9c91c-f58f-46b6-8779-bed79d3f4898, user_3BlBTmpllrPEGfu6IlgZcglEgIR, skhmelyuk1985@gmail.com, null, null, null, , user, t, f, f, , 2026-04-01 14:29:51.559169+00, 2026-04-01 14:29:51.559448+00, null).
+Traceback (most recent call last):
+  File "/app/apps/users/services.py", line 30, in handle_clerk_user_created
+    user = User.objects.get(clerk_user_id=clerk_user_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/query.py", line 651, in get
+    raise self.model.DoesNotExist(
+apps.users.models.User.DoesNotExist: User matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.NotNullViolation: null value in column "first_name" of relation "users" violates not-null constraint
+DETAIL:  Failing row contains (!RLqRg8uRoeymsuOG3ozXVmVhs4DG8c5axukIJjZx, f, a3e9c91c-f58f-46b6-8779-bed79d3f4898, user_3BlBTmpllrPEGfu6IlgZcglEgIR, skhmelyuk1985@gmail.com, null, null, null, , user, t, f, f, , 2026-04-01 14:29:51.559169+00, 2026-04-01 14:29:51.559448+00, null).
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/apps/users/views.py", line 122, in clerk_webhook
+    handle_clerk_user_created(data)
+  File "/app/apps/users/services.py", line 33, in handle_clerk_user_created
+    user = User.objects.create_user(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/apps/users/models.py", line 37, in create_user
+    user.save(using=self._db)
+  File "/usr/local/lib/python3.12/site-packages/django/contrib/auth/base_user.py", line 62, in save
+    super().save(*args, **kwargs)
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 892, in save
+    self.save_base(
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 998, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 1161, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 1202, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/query.py", line 1852, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1836, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: null value in column "first_name" of relation "users" violates not-null constraint
+DETAIL:  Failing row contains (!RLqRg8uRoeymsuOG3ozXVmVhs4DG8c5axukIJjZx, f, a3e9c91c-f58f-46b6-8779-bed79d3f4898, user_3BlBTmpllrPEGfu6IlgZcglEgIR, skhmelyuk1985@gmail.com, null, null, null, , user, t, f, f, , 2026-04-01 14:29:51.559169+00, 2026-04-01 14:29:51.559448+00, null).
+
+INFO 2026-04-01 14:29:51,563 middleware 9 135845478467264 Request completed: POST /api/v1/users/webhooks/clerk/ - 500
+ERROR 2026-04-01 14:29:51,564 basehttp 9 135845478467264 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 500 382
+INFO 2026-04-01 14:30:30,626 basehttp 9 135845168273088 "GET /admin/users/user/ HTTP/1.1" 200 27381
+INFO 2026-04-01 14:30:30,744 basehttp 9 135845176665792 "GET /static/admin_interface/css/form-controls.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,746 basehttp 9 135845487908544 "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,753 basehttp 9 135845176665792 "GET /static/admin/css/base.css HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,754 basehttp 9 135845185058496 "GET /static/admin_interface/css/rtl.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,759 basehttp 9 135845185058496 "GET /static/admin_interface/css/jquery.ui.tabs.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,760 basehttp 9 135845151487680 "GET /static/admin_interface/css/list-filter-dropdown.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,760 basehttp 9 135845487908544 "GET /static/admin_interface/css/admin-interface-fix.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,761 basehttp 9 135845159880384 "GET /static/admin_interface/css/streamfield.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,769 basehttp 9 135845151487680 "GET /static/admin_interface/css/modeltranslation.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,769 basehttp 9 135845168273088 "GET /admin/jsi18n/ HTTP/1.1" 200 12182
+INFO 2026-04-01 14:30:30,771 basehttp 9 135845159880384 "GET /static/admin_interface/css/json-widget.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,773 basehttp 9 135845168273088 "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,798 basehttp 9 135845176665792 "GET /static/admin_interface/css/language-chooser.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,807 basehttp 9 135845487908544 "GET /static/admin_interface/css/sorl-thumbnail.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,808 basehttp 9 135845185058496 "GET /static/admin_interface/css/tabbed-changeform.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,814 basehttp 9 135845151487680 "GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,820 basehttp 9 135845159880384 "GET /static/admin_interface/css/rangefilter.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,821 basehttp 9 135845168273088 "GET /static/admin_interface/css/import-export.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,844 basehttp 9 135845176665792 "GET /static/admin_interface/css/ckeditor.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,855 basehttp 9 135845487908544 "GET /static/admin_interface/css/admin-interface.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,856 basehttp 9 135845185058496 "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,858 basehttp 9 135845151487680 "GET /static/admin/css/responsive_rtl.css?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,866 basehttp 9 135845159880384 "GET /static/admin/css/responsive.css?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,870 basehttp 9 135845168273088 "GET /static/admin_interface/foldable-apps/foldable-apps.css?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,889 basehttp 9 135845176665792 "GET /static/admin_interface/css/related-modal.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,900 basehttp 9 135845487908544 "GET /static/admin_interface/css/tinymce.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,906 basehttp 9 135845185058496 "GET /static/admin_interface/magnific-popup/magnific-popup.css?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,907 basehttp 9 135845151487680 "GET /static/admin/js/theme.js HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,910 basehttp 9 135845159880384 "GET /static/admin/js/core.js HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,915 basehttp 9 135845168273088 "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,933 basehttp 9 135845176665792 "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,947 basehttp 9 135845487908544 "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,951 basehttp 9 135845185058496 "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,953 basehttp 9 135845151487680 "GET /static/admin_interface/foldable-apps/foldable-apps.js?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,955 basehttp 9 135845159880384 "GET /static/admin_interface/magnific-popup/jquery.magnific-popup.js?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,961 basehttp 9 135845168273088 "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,979 basehttp 9 135845176665792 "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,993 basehttp 9 135845487908544 "GET /static/admin_interface/related-modal/related-modal.js?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:30,996 basehttp 9 135845185058496 "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:31,003 basehttp 9 135845159880384 "GET /static/admin/img/search.svg HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:31,004 basehttp 9 135845151487680 "GET /static/admin/img/icon-yes.svg HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:31,064 basehttp 9 135845151487680 "GET /static/admin/js/filters.js HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:31,065 basehttp 9 135845159880384 "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:31,130 basehttp 9 135845159880384 "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:31,132 basehttp 9 135845151487680 "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:31,138 basehttp 9 135845185058496 "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 304 0
+INFO 2026-04-01 14:30:58,897 basehttp 9 135845151487680 "GET /admin/users/user/ HTTP/1.1" 200 27381
+INFO 2026-04-01 14:30:58,974 basehttp 9 135845151487680 "GET /admin/jsi18n/ HTTP/1.1" 200 12182
+INFO 2026-04-01 14:34:05,053 middleware 9 135845478467264 Request started: POST /api/v1/users/webhooks/clerk/
+INFO 2026-04-01 14:34:05,053 views 9 135845478467264 Received Clerk webhook: user.created
+ERROR 2026-04-01 14:34:05,075 views 9 135845478467264 Webhook error: null value in column "first_name" of relation "users" violates not-null constraint
+DETAIL:  Failing row contains (!IkV9wOa6qnmgWV2fxTbSgft5V6rSV1MUnRnmb6O3, f, 2475ac14-b932-43fd-bdcb-7a246226fb7d, user_3BlC0G5zE9lCENVTyNo1myOwEel, ikhmelyuk2013@gmail.com, null, null, null, , user, t, f, f, , 2026-04-01 14:34:05.074101+00, 2026-04-01 14:34:05.074118+00, null).
+Traceback (most recent call last):
+  File "/app/apps/users/services.py", line 30, in handle_clerk_user_created
+    user = User.objects.get(clerk_user_id=clerk_user_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/query.py", line 651, in get
+    raise self.model.DoesNotExist(
+apps.users.models.User.DoesNotExist: User matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.NotNullViolation: null value in column "first_name" of relation "users" violates not-null constraint
+DETAIL:  Failing row contains (!IkV9wOa6qnmgWV2fxTbSgft5V6rSV1MUnRnmb6O3, f, 2475ac14-b932-43fd-bdcb-7a246226fb7d, user_3BlC0G5zE9lCENVTyNo1myOwEel, ikhmelyuk2013@gmail.com, null, null, null, , user, t, f, f, , 2026-04-01 14:34:05.074101+00, 2026-04-01 14:34:05.074118+00, null).
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/apps/users/views.py", line 122, in clerk_webhook
+    handle_clerk_user_created(data)
+  File "/app/apps/users/services.py", line 33, in handle_clerk_user_created
+    user = User.objects.create_user(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/apps/users/models.py", line 37, in create_user
+    user.save(using=self._db)
+  File "/usr/local/lib/python3.12/site-packages/django/contrib/auth/base_user.py", line 62, in save
+    super().save(*args, **kwargs)
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 892, in save
+    self.save_base(
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 998, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 1161, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 1202, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/query.py", line 1852, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1836, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: null value in column "first_name" of relation "users" violates not-null constraint
+DETAIL:  Failing row contains (!IkV9wOa6qnmgWV2fxTbSgft5V6rSV1MUnRnmb6O3, f, 2475ac14-b932-43fd-bdcb-7a246226fb7d, user_3BlC0G5zE9lCENVTyNo1myOwEel, ikhmelyuk2013@gmail.com, null, null, null, , user, t, f, f, , 2026-04-01 14:34:05.074101+00, 2026-04-01 14:34:05.074118+00, null).
+
+INFO 2026-04-01 14:34:05,077 middleware 9 135845478467264 Request completed: POST /api/v1/users/webhooks/clerk/ - 500
+ERROR 2026-04-01 14:34:05,078 basehttp 9 135845478467264 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 500 382
+INFO 2026-04-01 14:34:09,253 middleware 9 135845470074560 Request started: POST /api/v1/users/webhooks/clerk/
+INFO 2026-04-01 14:34:09,253 views 9 135845470074560 Received Clerk webhook: user.created
+ERROR 2026-04-01 14:34:09,275 views 9 135845470074560 Webhook error: null value in column "first_name" of relation "users" violates not-null constraint
+DETAIL:  Failing row contains (!KoqvdcXq68KubaR2RINLInX3gTyO3prEPRMqMbyX, f, 6e949a4b-c612-4bab-8ae0-7da4be41b443, user_3BlC0G5zE9lCENVTyNo1myOwEel, ikhmelyuk2013@gmail.com, null, null, null, , user, t, f, f, , 2026-04-01 14:34:09.274278+00, 2026-04-01 14:34:09.274295+00, null).
+Traceback (most recent call last):
+  File "/app/apps/users/services.py", line 30, in handle_clerk_user_created
+    user = User.objects.get(clerk_user_id=clerk_user_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/query.py", line 651, in get
+    raise self.model.DoesNotExist(
+apps.users.models.User.DoesNotExist: User matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.NotNullViolation: null value in column "first_name" of relation "users" violates not-null constraint
+DETAIL:  Failing row contains (!KoqvdcXq68KubaR2RINLInX3gTyO3prEPRMqMbyX, f, 6e949a4b-c612-4bab-8ae0-7da4be41b443, user_3BlC0G5zE9lCENVTyNo1myOwEel, ikhmelyuk2013@gmail.com, null, null, null, , user, t, f, f, , 2026-04-01 14:34:09.274278+00, 2026-04-01 14:34:09.274295+00, null).
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/apps/users/views.py", line 122, in clerk_webhook
+    handle_clerk_user_created(data)
+  File "/app/apps/users/services.py", line 33, in handle_clerk_user_created
+    user = User.objects.create_user(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/apps/users/models.py", line 37, in create_user
+    user.save(using=self._db)
+  File "/usr/local/lib/python3.12/site-packages/django/contrib/auth/base_user.py", line 62, in save
+    super().save(*args, **kwargs)
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 892, in save
+    self.save_base(
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 998, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 1161, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 1202, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/query.py", line 1852, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1836, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: null value in column "first_name" of relation "users" violates not-null constraint
+DETAIL:  Failing row contains (!KoqvdcXq68KubaR2RINLInX3gTyO3prEPRMqMbyX, f, 6e949a4b-c612-4bab-8ae0-7da4be41b443, user_3BlC0G5zE9lCENVTyNo1myOwEel, ikhmelyuk2013@gmail.com, null, null, null, , user, t, f, f, , 2026-04-01 14:34:09.274278+00, 2026-04-01 14:34:09.274295+00, null).
+
+INFO 2026-04-01 14:34:09,277 middleware 9 135845470074560 Request completed: POST /api/v1/users/webhooks/clerk/ - 500
+ERROR 2026-04-01 14:34:09,278 basehttp 9 135845470074560 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 500 382
+INFO 2026-04-01 14:34:13,558 basehttp 9 135845151487680 "GET /admin/users/user/ HTTP/1.1" 200 27381
+INFO 2026-04-01 14:34:13,635 basehttp 9 135845151487680 "GET /admin/jsi18n/ HTTP/1.1" 200 12182
+INFO 2026-04-01 14:35:04,736 middleware 9 135845143094976 Request started: POST /api/v1/users/webhooks/clerk/
+INFO 2026-04-01 14:35:04,736 views 9 135845143094976 Received Clerk webhook: user.created
+ERROR 2026-04-01 14:35:04,757 views 9 135845143094976 Webhook error: null value in column "first_name" of relation "users" violates not-null constraint
+DETAIL:  Failing row contains (!uwO7rduoiZLxEYMyThKpTJer4upukhM3OYibcQOX, f, 31594225-ea2d-4a88-8fe3-170faaffad12, user_3BlBTmpllrPEGfu6IlgZcglEgIR, skhmelyuk1985@gmail.com, null, null, null, , user, t, f, f, , 2026-04-01 14:35:04.756209+00, 2026-04-01 14:35:04.756229+00, null).
+Traceback (most recent call last):
+  File "/app/apps/users/services.py", line 30, in handle_clerk_user_created
+    user = User.objects.get(clerk_user_id=clerk_user_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/query.py", line 651, in get
+    raise self.model.DoesNotExist(
+apps.users.models.User.DoesNotExist: User matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.NotNullViolation: null value in column "first_name" of relation "users" violates not-null constraint
+DETAIL:  Failing row contains (!uwO7rduoiZLxEYMyThKpTJer4upukhM3OYibcQOX, f, 31594225-ea2d-4a88-8fe3-170faaffad12, user_3BlBTmpllrPEGfu6IlgZcglEgIR, skhmelyuk1985@gmail.com, null, null, null, , user, t, f, f, , 2026-04-01 14:35:04.756209+00, 2026-04-01 14:35:04.756229+00, null).
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/apps/users/views.py", line 122, in clerk_webhook
+    handle_clerk_user_created(data)
+  File "/app/apps/users/services.py", line 33, in handle_clerk_user_created
+    user = User.objects.create_user(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/apps/users/models.py", line 37, in create_user
+    user.save(using=self._db)
+  File "/usr/local/lib/python3.12/site-packages/django/contrib/auth/base_user.py", line 62, in save
+    super().save(*args, **kwargs)
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 892, in save
+    self.save_base(
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 998, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 1161, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 1202, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/query.py", line 1852, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1836, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: null value in column "first_name" of relation "users" violates not-null constraint
+DETAIL:  Failing row contains (!uwO7rduoiZLxEYMyThKpTJer4upukhM3OYibcQOX, f, 31594225-ea2d-4a88-8fe3-170faaffad12, user_3BlBTmpllrPEGfu6IlgZcglEgIR, skhmelyuk1985@gmail.com, null, null, null, , user, t, f, f, , 2026-04-01 14:35:04.756209+00, 2026-04-01 14:35:04.756229+00, null).
+
+INFO 2026-04-01 14:35:04,760 middleware 9 135845143094976 Request completed: POST /api/v1/users/webhooks/clerk/ - 500
+ERROR 2026-04-01 14:35:04,761 basehttp 9 135845143094976 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 500 382
+INFO 2026-04-01 14:37:37,857 autoreload 9 135845778789120 /app/apps/users/services.py changed, reloading.
+INFO 2026-04-01 14:37:40,644 autoreload 99 125739000128256 Watching for file changes with StatReloader
+INFO 2026-04-01 14:38:02,920 autoreload 99 125739000128256 /app/core/authentication.py changed, reloading.
+INFO 2026-04-01 14:38:04,571 autoreload 111 128465980625664 Watching for file changes with StatReloader
+INFO 2026-04-01 14:39:31,274 middleware 111 128465621743296 Request started: POST /api/v1/users/webhooks/clerk/
+INFO 2026-04-01 14:39:31,276 views 111 128465621743296 Received Clerk webhook: user.created
+INFO 2026-04-01 14:39:31,309 services 111 128465621743296 Created user from webhook: ikhmelyuk2013@gmail.com
+INFO 2026-04-01 14:39:31,309 middleware 111 128465621743296 Request completed: POST /api/v1/users/webhooks/clerk/ - 200
+INFO 2026-04-01 14:39:31,311 basehttp 111 128465621743296 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 200 21
+INFO 2026-04-01 15:02:30,776 middleware 111 128465621743296 Request started: POST /api/v1/users/webhooks/clerk/
+INFO 2026-04-01 15:02:30,776 views 111 128465621743296 Received Clerk webhook: user.created
+ERROR 2026-04-01 15:02:30,800 views 111 128465621743296 Webhook error: duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(skhmelyuk1985@gmail.com) already exists.
+Traceback (most recent call last):
+  File "/app/apps/users/services.py", line 30, in handle_clerk_user_created
+    user = User.objects.get(clerk_user_id=clerk_user_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/query.py", line 651, in get
+    raise self.model.DoesNotExist(
+apps.users.models.User.DoesNotExist: User matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(skhmelyuk1985@gmail.com) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/apps/users/views.py", line 122, in clerk_webhook
+    handle_clerk_user_created(data)
+  File "/app/apps/users/services.py", line 33, in handle_clerk_user_created
+    user = User.objects.create_user(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/apps/users/models.py", line 37, in create_user
+    user.save(using=self._db)
+  File "/usr/local/lib/python3.12/site-packages/django/contrib/auth/base_user.py", line 62, in save
+    super().save(*args, **kwargs)
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 892, in save
+    self.save_base(
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 998, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 1161, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 1202, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/query.py", line 1852, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1836, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(skhmelyuk1985@gmail.com) already exists.
+
+INFO 2026-04-01 15:02:30,809 middleware 111 128465621743296 Request completed: POST /api/v1/users/webhooks/clerk/ - 500
+ERROR 2026-04-01 15:02:30,812 basehttp 111 128465621743296 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 500 145
+INFO 2026-04-01 15:24:58,359 middleware 111 128465621743296 Request started: POST /api/v1/users/webhooks/clerk/
+INFO 2026-04-01 15:24:58,360 views 111 128465621743296 Received Clerk webhook: user.deleted
+INFO 2026-04-01 15:24:58,399 services 111 128465621743296 Deactivated user from webhook: ikhmelyuk2013@gmail.com
+INFO 2026-04-01 15:24:58,400 middleware 111 128465621743296 Request completed: POST /api/v1/users/webhooks/clerk/ - 200
+INFO 2026-04-01 15:24:58,400 basehttp 111 128465621743296 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 200 21
+INFO 2026-04-01 15:25:03,592 middleware 111 128465611253440 Request started: POST /api/v1/users/webhooks/clerk/
+INFO 2026-04-01 15:25:03,593 views 111 128465611253440 Received Clerk webhook: user.deleted
+WARNING 2026-04-01 15:25:03,612 services 111 128465611253440 User not found for webhook delete: user_3BlBTmpllrPEGfu6IlgZcglEgIR
+INFO 2026-04-01 15:25:03,612 middleware 111 128465611253440 Request completed: POST /api/v1/users/webhooks/clerk/ - 200
+INFO 2026-04-01 15:25:03,613 basehttp 111 128465611253440 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 200 21
+INFO 2026-04-01 15:32:58,257 middleware 111 128465611253440 Request started: POST /api/v1/users/webhooks/clerk/
+INFO 2026-04-01 15:32:58,257 views 111 128465611253440 Received Clerk webhook: user.created
+ERROR 2026-04-01 15:32:58,277 views 111 128465611253440 Webhook error: duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(ikhmelyuk2013@gmail.com) already exists.
+Traceback (most recent call last):
+  File "/app/apps/users/services.py", line 30, in handle_clerk_user_created
+    user = User.objects.get(clerk_user_id=clerk_user_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/query.py", line 651, in get
+    raise self.model.DoesNotExist(
+apps.users.models.User.DoesNotExist: User matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(ikhmelyuk2013@gmail.com) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/apps/users/views.py", line 122, in clerk_webhook
+    handle_clerk_user_created(data)
+  File "/app/apps/users/services.py", line 33, in handle_clerk_user_created
+    user = User.objects.create_user(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/apps/users/models.py", line 37, in create_user
+    user.save(using=self._db)
+  File "/usr/local/lib/python3.12/site-packages/django/contrib/auth/base_user.py", line 62, in save
+    super().save(*args, **kwargs)
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 892, in save
+    self.save_base(
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 998, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 1161, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 1202, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/query.py", line 1852, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1836, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(ikhmelyuk2013@gmail.com) already exists.
+
+INFO 2026-04-01 15:32:58,280 middleware 111 128465611253440 Request completed: POST /api/v1/users/webhooks/clerk/ - 500
+ERROR 2026-04-01 15:32:58,280 basehttp 111 128465611253440 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 500 145
+INFO 2026-04-01 15:33:02,444 middleware 111 128465621743296 Request started: POST /api/v1/users/webhooks/clerk/
+INFO 2026-04-01 15:33:02,444 views 111 128465621743296 Received Clerk webhook: user.created
+ERROR 2026-04-01 15:33:02,465 views 111 128465621743296 Webhook error: duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(ikhmelyuk2013@gmail.com) already exists.
+Traceback (most recent call last):
+  File "/app/apps/users/services.py", line 30, in handle_clerk_user_created
+    user = User.objects.get(clerk_user_id=clerk_user_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/query.py", line 651, in get
+    raise self.model.DoesNotExist(
+apps.users.models.User.DoesNotExist: User matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(ikhmelyuk2013@gmail.com) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/apps/users/views.py", line 122, in clerk_webhook
+    handle_clerk_user_created(data)
+  File "/app/apps/users/services.py", line 33, in handle_clerk_user_created
+    user = User.objects.create_user(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/apps/users/models.py", line 37, in create_user
+    user.save(using=self._db)
+  File "/usr/local/lib/python3.12/site-packages/django/contrib/auth/base_user.py", line 62, in save
+    super().save(*args, **kwargs)
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 892, in save
+    self.save_base(
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 998, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 1161, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 1202, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/query.py", line 1852, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1836, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(ikhmelyuk2013@gmail.com) already exists.
+
+INFO 2026-04-01 15:33:02,467 middleware 111 128465621743296 Request completed: POST /api/v1/users/webhooks/clerk/ - 500
+ERROR 2026-04-01 15:33:02,468 basehttp 111 128465621743296 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 500 145
+INFO 2026-04-01 15:33:48,202 basehttp 111 128465602860736 "GET /admin/users/user/ HTTP/1.1" 200 28172
+INFO 2026-04-01 15:33:48,266 basehttp 111 128465602860736 "GET /static/admin/css/base.css HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,272 basehttp 111 128465576634048 "GET /static/admin_interface/css/admin-interface.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,274 basehttp 111 128465585026752 "GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,276 basehttp 111 128465568241344 "GET /static/admin_interface/css/admin-interface-fix.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,277 basehttp 111 128465602860736 "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,277 basehttp 111 128465089066688 "GET /static/admin_interface/css/form-controls.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,280 basehttp 111 128465576634048 "GET /static/admin_interface/css/language-chooser.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,280 basehttp 111 128465585026752 "GET /static/admin_interface/css/list-filter-dropdown.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,284 basehttp 111 128465089066688 "GET /static/admin_interface/css/related-modal.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,285 basehttp 111 128465568241344 "GET /static/admin_interface/css/rangefilter.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,304 basehttp 111 128465594468032 "GET /admin/jsi18n/ HTTP/1.1" 200 12182
+INFO 2026-04-01 15:33:48,309 basehttp 111 128465594468032 "GET /static/admin_interface/css/streamfield.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,323 basehttp 111 128465602860736 "GET /static/admin_interface/css/jquery.ui.tabs.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,328 basehttp 111 128465585026752 "GET /static/admin_interface/css/modeltranslation.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,329 basehttp 111 128465576634048 "GET /static/admin_interface/css/sorl-thumbnail.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,331 basehttp 111 128465089066688 "GET /static/admin_interface/css/ckeditor.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,333 basehttp 111 128465568241344 "GET /static/admin_interface/css/tinymce.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,354 basehttp 111 128465594468032 "GET /static/admin_interface/css/json-widget.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,368 basehttp 111 128465602860736 "GET /static/admin_interface/css/import-export.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,373 basehttp 111 128465585026752 "GET /static/admin_interface/css/rtl.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,378 basehttp 111 128465576634048 "GET /static/admin_interface/css/tabbed-changeform.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,380 basehttp 111 128465089066688 "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,381 basehttp 111 128465568241344 "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,399 basehttp 111 128465594468032 "GET /static/admin/css/responsive.css?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,414 basehttp 111 128465602860736 "GET /static/admin/css/responsive_rtl.css?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,418 basehttp 111 128465585026752 "GET /static/admin_interface/foldable-apps/foldable-apps.css?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,422 basehttp 111 128465576634048 "GET /static/admin_interface/magnific-popup/magnific-popup.css?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,426 basehttp 111 128465089066688 "GET /static/admin/js/theme.js HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,429 basehttp 111 128465568241344 "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,443 basehttp 111 128465594468032 "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,459 basehttp 111 128465602860736 "GET /static/admin/js/core.js HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,463 basehttp 111 128465585026752 "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,469 basehttp 111 128465576634048 "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,472 basehttp 111 128465089066688 "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,475 basehttp 111 128465568241344 "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,489 basehttp 111 128465594468032 "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,504 basehttp 111 128465602860736 "GET /static/admin_interface/foldable-apps/foldable-apps.js?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,509 basehttp 111 128465585026752 "GET /static/admin_interface/magnific-popup/jquery.magnific-popup.js?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,515 basehttp 111 128465576634048 "GET /static/admin_interface/related-modal/related-modal.js?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,523 basehttp 111 128465568241344 "GET /static/admin/img/search.svg HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,538 basehttp 111 128465089066688 "GET /static/admin/img/icon-no.svg HTTP/1.1" 200 560
+INFO 2026-04-01 15:33:48,576 basehttp 111 128465568241344 "GET /static/admin/img/icon-yes.svg HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,585 basehttp 111 128465089066688 "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,586 basehttp 111 128465576634048 "GET /static/admin/js/filters.js HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,607 basehttp 111 128465602860736 "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,608 basehttp 111 128465585026752 "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+INFO 2026-04-01 15:33:48,608 basehttp 111 128465594468032 "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 304 0
+INFO 2026-04-01 15:34:33,784 basehttp 111 128465576634048 "GET /admin/users/user/30f0bb24-f9b6-437a-a204-55284015e90d/change/ HTTP/1.1" 200 45202
+INFO 2026-04-01 15:34:33,848 basehttp 111 128465568241344 "GET /static/admin/js/SelectBox.js HTTP/1.1" 200 4530
+INFO 2026-04-01 15:34:33,850 basehttp 111 128465594468032 "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 586
+INFO 2026-04-01 15:34:33,850 basehttp 111 128465089066688 "GET /static/admin/css/forms.css HTTP/1.1" 200 8794
+INFO 2026-04-01 15:34:33,851 basehttp 111 128465585026752 "GET /static/admin/js/SelectFilter2.js HTTP/1.1" 200 15502
+INFO 2026-04-01 15:34:33,861 basehttp 111 128465585026752 "GET /static/admin/css/widgets.css HTTP/1.1" 200 11564
+INFO 2026-04-01 15:34:33,872 basehttp 111 128465585026752 "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+INFO 2026-04-01 15:34:33,874 basehttp 111 128465576634048 "GET /admin/jsi18n/ HTTP/1.1" 200 12182
+INFO 2026-04-01 15:34:34,058 basehttp 111 128465576634048 "GET /static/admin/img/selector-icons.svg HTTP/1.1" 200 3291
+INFO 2026-04-01 15:34:34,059 basehttp 111 128465594468032 "GET /static/admin/img/icon-unknown-alt.svg HTTP/1.1" 200 655
+INFO 2026-04-01 15:34:34,059 basehttp 111 128465585026752 "GET /static/admin/img/icon-unknown.svg HTTP/1.1" 200 655
+INFO 2026-04-01 15:35:12,455 basehttp 111 128465594468032 "POST /admin/users/user/30f0bb24-f9b6-437a-a204-55284015e90d/change/ HTTP/1.1" 302 0
+INFO 2026-04-01 15:35:12,531 basehttp 111 128465594468032 "GET /admin/users/user/ HTTP/1.1" 200 28423
+INFO 2026-04-01 15:35:12,636 basehttp 111 128465594468032 "GET /admin/jsi18n/ HTTP/1.1" 200 12182
+INFO 2026-04-01 15:35:16,437 basehttp 111 128465594468032 "GET /admin/users/user/e80c33d0-a8b9-484e-a5f1-9b001b75608a/change/ HTTP/1.1" 200 45224
+INFO 2026-04-01 15:35:16,532 basehttp 111 128465594468032 "GET /admin/jsi18n/ HTTP/1.1" 200 12182
+INFO 2026-04-01 15:35:23,906 basehttp 111 128465594468032 "POST /admin/users/user/e80c33d0-a8b9-484e-a5f1-9b001b75608a/change/ HTTP/1.1" 302 0
+INFO 2026-04-01 15:35:23,980 basehttp 111 128465594468032 "GET /admin/users/user/ HTTP/1.1" 200 28421
+INFO 2026-04-01 15:35:24,080 basehttp 111 128465594468032 "GET /admin/jsi18n/ HTTP/1.1" 200 12182
+INFO 2026-04-01 15:37:18,665 middleware 111 128465621743296 Request started: POST /api/v1/users/webhooks/clerk/
+INFO 2026-04-01 15:37:18,666 views 111 128465621743296 Received Clerk webhook: user.created
+ERROR 2026-04-01 15:37:18,686 views 111 128465621743296 Webhook error: duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(ikhmelyuk2013@gmail.com) already exists.
+Traceback (most recent call last):
+  File "/app/apps/users/services.py", line 30, in handle_clerk_user_created
+    user = User.objects.get(clerk_user_id=clerk_user_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/query.py", line 651, in get
+    raise self.model.DoesNotExist(
+apps.users.models.User.DoesNotExist: User matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(ikhmelyuk2013@gmail.com) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/apps/users/views.py", line 122, in clerk_webhook
+    handle_clerk_user_created(data)
+  File "/app/apps/users/services.py", line 33, in handle_clerk_user_created
+    user = User.objects.create_user(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/apps/users/models.py", line 37, in create_user
+    user.save(using=self._db)
+  File "/usr/local/lib/python3.12/site-packages/django/contrib/auth/base_user.py", line 62, in save
+    super().save(*args, **kwargs)
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 892, in save
+    self.save_base(
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 998, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 1161, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 1202, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/query.py", line 1852, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1836, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(ikhmelyuk2013@gmail.com) already exists.
+
+INFO 2026-04-01 15:37:18,689 middleware 111 128465621743296 Request completed: POST /api/v1/users/webhooks/clerk/ - 500
+ERROR 2026-04-01 15:37:18,689 basehttp 111 128465621743296 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 500 145
+INFO 2026-04-01 15:43:25,718 command 1 138065741980416 15 detected, shutting down
+INFO 2026-04-01 15:43:29,659 command 1 125375498953472 Visit me at http://0.0.0.0:5555
+INFO 2026-04-01 15:43:29,670 command 1 125375498953472 Broker: redis://redis:6379/0
+INFO 2026-04-01 15:43:29,678 command 1 125375498953472 Registered tasks: 
+['apps.drivers.tasks.check_driver_documents_expiry',
+ 'apps.drivers.tasks.cleanup_stale_locations',
+ 'apps.drivers.tasks.notify_driver_new_ride',
+ 'apps.drivers.tasks.update_driver_statistics',
+ 'apps.notifications.tasks.cleanup_old_notifications',
+ 'apps.notifications.tasks.send_bulk_notification',
+ 'apps.notifications.tasks.send_promo_notifications',
+ 'apps.notifications.tasks.send_push_notification',
+ 'apps.rides.tasks.calculate_ride_statistics',
+ 'apps.rides.tasks.cancel_timeout_rides',
+ 'apps.rides.tasks.find_driver_for_ride',
+ 'apps.rides.tasks.generate_daily_ride_report',
+ 'celery.accumulate',
+ 'celery.backend_cleanup',
+ 'celery.chain',
+ 'celery.chord',
+ 'celery.chord_unlock',
+ 'celery.chunks',
+ 'celery.group',
+ 'celery.map',
+ 'celery.starmap']
+INFO 2026-04-01 15:43:29,686 mixins 1 125375211259584 Connected to redis://redis:6379/0
+INFO 2026-04-01 15:43:30,514 autoreload 9 125772048757504 Watching for file changes with StatReloader
+WARNING 2026-04-01 15:43:30,757 inspector 1 125375078176448 Inspect method revoked failed
+WARNING 2026-04-01 15:43:30,758 inspector 1 125375103354560 Inspect method scheduled failed
+WARNING 2026-04-01 15:43:30,760 inspector 1 125375111747264 Inspect method registered failed
+WARNING 2026-04-01 15:43:30,764 inspector 1 125375094961856 Inspect method active failed
+WARNING 2026-04-01 15:43:30,771 inspector 1 125374591661760 Inspect method conf failed
+WARNING 2026-04-01 15:43:30,773 inspector 1 125375120139968 Inspect method active_queues failed
+WARNING 2026-04-01 15:43:30,774 inspector 1 125375086569152 Inspect method reserved failed
+WARNING 2026-04-01 15:43:30,774 inspector 1 125375128532672 Inspect method stats failed
+INFO 2026-04-01 15:45:00,305 tasks 1 130281035756288 Cancelled 0 timeout rides
+INFO 2026-04-01 15:50:00,095 tasks 1 130281035756288 Cancelled 0 timeout rides
+INFO 2026-04-01 15:50:00,146 tasks 1 130281035756288 Cleaned up 0 stale driver locations
+INFO 2026-04-01 15:52:59,828 middleware 9 125771757827776 Request started: POST /api/v1/users/webhooks/clerk/
+INFO 2026-04-01 15:52:59,830 views 9 125771757827776 Received Clerk webhook: user.deleted
+WARNING 2026-04-01 15:52:59,852 services 9 125771757827776 User not found for webhook delete: user_3BlJABsCUi1FWAyuaiqxxnbfeD6
+INFO 2026-04-01 15:52:59,853 middleware 9 125771757827776 Request completed: POST /api/v1/users/webhooks/clerk/ - 200
+INFO 2026-04-01 15:52:59,854 basehttp 9 125771757827776 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 200 21
+INFO 2026-04-01 15:53:05,167 basehttp 9 125771666417344 "GET /admin/users/user/ HTTP/1.1" 200 28168
+INFO 2026-04-01 15:53:05,236 basehttp 9 125771666417344 "GET /admin/jsi18n/ HTTP/1.1" 200 12182
+INFO 2026-04-01 15:53:13,458 basehttp 9 125771666417344 "POST /admin/users/user/ HTTP/1.1" 200 21186
+INFO 2026-04-01 15:53:13,513 basehttp 9 125771666417344 "GET /static/admin/js/cancel.js HTTP/1.1" 200 729
+INFO 2026-04-01 15:53:15,718 basehttp 9 125771666417344 "POST /admin/users/user/ HTTP/1.1" 302 0
+INFO 2026-04-01 15:53:15,795 basehttp 9 125771666417344 "GET /admin/users/user/ HTTP/1.1" 200 27524
+INFO 2026-04-01 15:53:15,895 basehttp 9 125771666417344 "GET /admin/jsi18n/ HTTP/1.1" 200 12182
+INFO 2026-04-01 15:55:00,064 tasks 1 130281035756288 Cancelled 0 timeout rides
+INFO 2026-04-01 16:00:00,084 tasks 1 130281035756288 Cleaned up 0 stale driver locations
+INFO 2026-04-01 16:00:00,139 tasks 1 130281035756288 Cancelled 0 timeout rides
+INFO 2026-04-01 16:05:00,080 tasks 1 130281035756288 Cancelled 0 timeout rides
+INFO 2026-04-01 16:05:31,512 middleware 9 125771666417344 Request started: POST /api/v1/users/webhooks/clerk/
+INFO 2026-04-01 16:05:31,513 views 9 125771666417344 Received Clerk webhook: user.created
+INFO 2026-04-01 16:05:31,554 services 9 125771666417344 Created user from webhook: ikhmelyuk2013@gmail.com
+INFO 2026-04-01 16:05:31,554 middleware 9 125771666417344 Request completed: POST /api/v1/users/webhooks/clerk/ - 200
+INFO 2026-04-01 16:05:31,555 basehttp 9 125771666417344 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 200 21
+INFO 2026-04-01 16:06:18,938 basehttp 9 125771674810048 "GET /admin/users/user/ HTTP/1.1" 200 28170
+INFO 2026-04-01 16:06:19,030 basehttp 9 125771674810048 "GET /admin/jsi18n/ HTTP/1.1" 200 12182
+INFO 2026-04-01 16:10:00,078 tasks 1 130281035756288 Cancelled 0 timeout rides
+INFO 2026-04-01 16:10:00,139 tasks 1 130281035756288 Cleaned up 0 stale driver locations
+INFO 2026-04-01 16:11:47,811 middleware 9 125771757827776 Request started: POST /api/v1/users/webhooks/clerk/
+INFO 2026-04-01 16:11:47,812 views 9 125771757827776 Received Clerk webhook: user.created
+ERROR 2026-04-01 16:11:47,832 views 9 125771757827776 Webhook error: duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(ikhmelyuk2013@gmail.com) already exists.
+Traceback (most recent call last):
+  File "/app/apps/users/services.py", line 30, in handle_clerk_user_created
+    user = User.objects.get(clerk_user_id=clerk_user_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/query.py", line 651, in get
+    raise self.model.DoesNotExist(
+apps.users.models.User.DoesNotExist: User matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(ikhmelyuk2013@gmail.com) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/apps/users/views.py", line 122, in clerk_webhook
+    handle_clerk_user_created(data)
+  File "/app/apps/users/services.py", line 33, in handle_clerk_user_created
+    user = User.objects.create_user(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/apps/users/models.py", line 37, in create_user
+    user.save(using=self._db)
+  File "/usr/local/lib/python3.12/site-packages/django/contrib/auth/base_user.py", line 62, in save
+    super().save(*args, **kwargs)
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 892, in save
+    self.save_base(
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 998, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 1161, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 1202, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/query.py", line 1852, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1836, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(ikhmelyuk2013@gmail.com) already exists.
+
+INFO 2026-04-01 16:11:47,860 middleware 9 125771757827776 Request completed: POST /api/v1/users/webhooks/clerk/ - 500
+ERROR 2026-04-01 16:11:47,862 basehttp 9 125771757827776 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 500 145
+INFO 2026-04-01 16:15:00,082 tasks 1 130281035756288 Cancelled 0 timeout rides
+INFO 2026-04-01 16:20:00,079 tasks 1 130281035756288 Cleaned up 0 stale driver locations
+INFO 2026-04-01 16:20:00,130 tasks 1 130281035756288 Cancelled 0 timeout rides
+INFO 2026-04-01 16:25:00,078 tasks 1 130281035756288 Cancelled 0 timeout rides
+INFO 2026-04-01 16:30:00,079 tasks 1 130281035756288 Cancelled 0 timeout rides
+INFO 2026-04-01 16:30:00,158 tasks 1 130281035756288 Cleaned up 0 stale driver locations
+INFO 2026-04-01 16:34:20,355 middleware 9 125771674810048 Request started: POST /api/v1/users/webhooks/clerk/
+INFO 2026-04-01 16:34:20,356 views 9 125771674810048 Received Clerk webhook: user.created
+WARNING 2026-04-01 16:34:20,356 services 9 125771674810048 No email found for Clerk user: user_2g7np7Hrk0SN6kj5EDMLDaKNL0S
+INFO 2026-04-01 16:34:20,356 middleware 9 125771674810048 Request completed: POST /api/v1/users/webhooks/clerk/ - 200
+INFO 2026-04-01 16:34:20,357 basehttp 9 125771674810048 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 200 21
+INFO 2026-04-01 16:34:27,551 middleware 9 125771757827776 Request started: POST /api/v1/users/webhooks/clerk/
+INFO 2026-04-01 16:34:27,552 views 9 125771757827776 Received Clerk webhook: user.created
+WARNING 2026-04-01 16:34:27,552 services 9 125771757827776 No email found for Clerk user: user_2g7np7Hrk0SN6kj5EDMLDaKNL0S
+INFO 2026-04-01 16:34:27,553 middleware 9 125771757827776 Request completed: POST /api/v1/users/webhooks/clerk/ - 200
+INFO 2026-04-01 16:34:27,553 basehttp 9 125771757827776 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 200 21
+INFO 2026-04-01 16:35:00,070 tasks 1 130281035756288 Cancelled 0 timeout rides
+INFO 2026-04-01 16:41:41,834 tasks 1 130281035756288 Cleaned up 0 stale driver locations
+INFO 2026-04-01 16:41:41,903 tasks 1 130281035756288 Cancelled 0 timeout rides
+INFO 2026-04-01 18:59:07,781 command 1 133888745591552 Visit me at http://0.0.0.0:5555
+INFO 2026-04-01 18:59:07,793 command 1 133888745591552 Broker: redis://redis:6379/0
+INFO 2026-04-01 18:59:07,801 command 1 133888745591552 Registered tasks: 
+['apps.drivers.tasks.check_driver_documents_expiry',
+ 'apps.drivers.tasks.cleanup_stale_locations',
+ 'apps.drivers.tasks.notify_driver_new_ride',
+ 'apps.drivers.tasks.update_driver_statistics',
+ 'apps.notifications.tasks.cleanup_old_notifications',
+ 'apps.notifications.tasks.send_bulk_notification',
+ 'apps.notifications.tasks.send_promo_notifications',
+ 'apps.notifications.tasks.send_push_notification',
+ 'apps.rides.tasks.calculate_ride_statistics',
+ 'apps.rides.tasks.cancel_timeout_rides',
+ 'apps.rides.tasks.find_driver_for_ride',
+ 'apps.rides.tasks.generate_daily_ride_report',
+ 'celery.accumulate',
+ 'celery.backend_cleanup',
+ 'celery.chain',
+ 'celery.chord',
+ 'celery.chord_unlock',
+ 'celery.chunks',
+ 'celery.group',
+ 'celery.map',
+ 'celery.starmap']
+INFO 2026-04-01 18:59:07,810 mixins 1 133888457897664 Connected to redis://redis:6379/0
+INFO 2026-04-01 18:59:08,216 autoreload 9 126740726715136 Watching for file changes with StatReloader
+WARNING 2026-04-01 18:59:08,865 inspector 1 133888441095872 Inspect method active_queues failed
+WARNING 2026-04-01 18:59:08,877 inspector 1 133888215082688 Inspect method scheduled failed
+WARNING 2026-04-01 18:59:08,877 inspector 1 133888449504960 Inspect method stats failed
+WARNING 2026-04-01 18:59:08,882 inspector 1 133888189904576 Inspect method revoked failed
+WARNING 2026-04-01 18:59:08,883 inspector 1 133888198297280 Inspect method reserved failed
+WARNING 2026-04-01 18:59:08,890 inspector 1 133888223475392 Inspect method registered failed
+WARNING 2026-04-01 18:59:08,891 inspector 1 133888206689984 Inspect method active failed
+WARNING 2026-04-01 18:59:08,891 inspector 1 133888181511872 Inspect method conf failed
+INFO 2026-04-01 18:59:08,938 tasks 1 123319057543936 Cleaned up 0 stale driver locations
+INFO 2026-04-01 18:59:09,001 tasks 1 123319057543936 Cancelled 0 timeout rides
+INFO 2026-04-01 19:00:00,074 tasks 1 123319057543936 Cancelled 0 timeout rides
+INFO 2026-04-01 19:00:00,130 tasks 1 123319057543936 Cleaned up 0 stale driver locations
+INFO 2026-04-01 19:01:37,880 middleware 9 126740368467648 Request started: POST /api/v1/users/webhooks/clerk/
+INFO 2026-04-01 19:01:37,883 views 9 126740368467648 Received Clerk webhook: user.created
+ERROR 2026-04-01 19:01:37,910 views 9 126740368467648 Webhook error: duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(skhmelyuk1985@gmail.com) already exists.
+Traceback (most recent call last):
+  File "/app/apps/users/services.py", line 30, in handle_clerk_user_created
+    user = User.objects.get(clerk_user_id=clerk_user_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/query.py", line 651, in get
+    raise self.model.DoesNotExist(
+apps.users.models.User.DoesNotExist: User matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(skhmelyuk1985@gmail.com) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/apps/users/views.py", line 122, in clerk_webhook
+    handle_clerk_user_created(data)
+  File "/app/apps/users/services.py", line 33, in handle_clerk_user_created
+    user = User.objects.create_user(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/apps/users/models.py", line 37, in create_user
+    user.save(using=self._db)
+  File "/usr/local/lib/python3.12/site-packages/django/contrib/auth/base_user.py", line 62, in save
+    super().save(*args, **kwargs)
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 892, in save
+    self.save_base(
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 998, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 1161, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 1202, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/query.py", line 1852, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1836, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(skhmelyuk1985@gmail.com) already exists.
+
+INFO 2026-04-01 19:01:37,922 middleware 9 126740368467648 Request completed: POST /api/v1/users/webhooks/clerk/ - 500
+ERROR 2026-04-01 19:01:37,925 basehttp 9 126740368467648 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 500 145
+INFO 2026-04-01 19:01:42,082 middleware 9 126740357977792 Request started: POST /api/v1/users/webhooks/clerk/
+INFO 2026-04-01 19:01:42,083 views 9 126740357977792 Received Clerk webhook: user.created
+ERROR 2026-04-01 19:01:42,104 views 9 126740357977792 Webhook error: duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(skhmelyuk1985@gmail.com) already exists.
+Traceback (most recent call last):
+  File "/app/apps/users/services.py", line 30, in handle_clerk_user_created
+    user = User.objects.get(clerk_user_id=clerk_user_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/query.py", line 651, in get
+    raise self.model.DoesNotExist(
+apps.users.models.User.DoesNotExist: User matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(skhmelyuk1985@gmail.com) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/apps/users/views.py", line 122, in clerk_webhook
+    handle_clerk_user_created(data)
+  File "/app/apps/users/services.py", line 33, in handle_clerk_user_created
+    user = User.objects.create_user(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/apps/users/models.py", line 37, in create_user
+    user.save(using=self._db)
+  File "/usr/local/lib/python3.12/site-packages/django/contrib/auth/base_user.py", line 62, in save
+    super().save(*args, **kwargs)
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 892, in save
+    self.save_base(
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 998, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 1161, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 1202, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/query.py", line 1852, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1836, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(skhmelyuk1985@gmail.com) already exists.
+
+INFO 2026-04-01 19:01:42,107 middleware 9 126740357977792 Request completed: POST /api/v1/users/webhooks/clerk/ - 500
+ERROR 2026-04-01 19:01:42,107 basehttp 9 126740357977792 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 500 145
+INFO 2026-04-01 19:01:47,282 basehttp 9 126740349585088 "GET /admin/users/user/ HTTP/1.1" 200 28170
+INFO 2026-04-01 19:01:47,382 basehttp 9 126740114433728 "GET /static/admin_interface/css/admin-interface.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,383 basehttp 9 126740106041024 "GET /static/admin_interface/css/admin-interface-fix.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,383 basehttp 9 126740341192384 "GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,384 basehttp 9 126740122826432 "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,385 basehttp 9 126740097648320 "GET /static/admin_interface/css/form-controls.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,385 basehttp 9 126740349585088 "GET /static/admin/css/base.css HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,396 basehttp 9 126740122826432 "GET /static/admin_interface/css/jquery.ui.tabs.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,397 basehttp 9 126740114433728 "GET /static/admin_interface/css/language-chooser.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,399 basehttp 9 126740106041024 "GET /static/admin_interface/css/list-filter-dropdown.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,400 basehttp 9 126740349585088 "GET /static/admin_interface/css/related-modal.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,401 basehttp 9 126740341192384 "GET /static/admin_interface/css/rangefilter.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,402 basehttp 9 126740097648320 "GET /static/admin_interface/css/streamfield.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,439 basehttp 9 126740122826432 "GET /static/admin_interface/css/modeltranslation.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,442 basehttp 9 126740114433728 "GET /static/admin_interface/css/sorl-thumbnail.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,447 basehttp 9 126740341192384 "GET /static/admin_interface/css/tinymce.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,447 basehttp 9 126740106041024 "GET /static/admin_interface/css/ckeditor.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,450 basehttp 9 126740097648320 "GET /static/admin_interface/css/import-export.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,450 basehttp 9 126740349585088 "GET /static/admin_interface/css/json-widget.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,482 basehttp 9 126740122826432 "GET /static/admin_interface/css/rtl.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,485 basehttp 9 126740114433728 "GET /static/admin_interface/css/tabbed-changeform.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,489 basehttp 9 126740341192384 "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,491 basehttp 9 126740106041024 "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,495 basehttp 9 126740097648320 "GET /static/admin/css/responsive.css?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,496 basehttp 9 126740349585088 "GET /static/admin/css/responsive_rtl.css?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,524 basehttp 9 126740122826432 "GET /static/admin_interface/foldable-apps/foldable-apps.css?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,529 basehttp 9 126740114433728 "GET /static/admin_interface/magnific-popup/magnific-popup.css?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,549 basehttp 9 126740341192384 "GET /static/admin/js/theme.js HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,550 basehttp 9 126740097648320 "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,550 basehttp 9 126740349585088 "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,563 basehttp 9 126740106041024 "GET /admin/jsi18n/ HTTP/1.1" 200 12182
+INFO 2026-04-01 19:01:47,568 basehttp 9 126740122826432 "GET /static/admin/js/core.js HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,574 basehttp 9 126740106041024 "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,575 basehttp 9 126740114433728 "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,591 basehttp 9 126740341192384 "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,593 basehttp 9 126740097648320 "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,600 basehttp 9 126740349585088 "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,612 basehttp 9 126740122826432 "GET /static/admin_interface/foldable-apps/foldable-apps.js?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,619 basehttp 9 126740106041024 "GET /static/admin_interface/magnific-popup/jquery.magnific-popup.js?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,621 basehttp 9 126740114433728 "GET /static/admin_interface/related-modal/related-modal.js?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,640 basehttp 9 126740341192384 "GET /static/admin/img/icon-yes.svg HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,641 basehttp 9 126740097648320 "GET /static/admin/img/search.svg HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,687 basehttp 9 126740097648320 "GET /static/admin/js/filters.js HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,687 basehttp 9 126740341192384 "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,710 basehttp 9 126740114433728 "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,711 basehttp 9 126740106041024 "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:47,713 basehttp 9 126740122826432 "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 304 0
+INFO 2026-04-01 19:01:48,267 middleware 9 126740341192384 Request started: GET /favicon.ico
+INFO 2026-04-01 19:01:48,281 middleware 9 126740341192384 Request completed: GET /favicon.ico - 404
+WARNING 2026-04-01 19:01:48,282 basehttp 9 126740341192384 "GET /favicon.ico HTTP/1.1" 404 3684
+INFO 2026-04-01 19:01:50,396 basehttp 9 126740341192384 "GET /admin/users/user/ HTTP/1.1" 200 28170
+INFO 2026-04-01 19:01:50,471 basehttp 9 126740341192384 "GET /admin/jsi18n/ HTTP/1.1" 200 12182
+INFO 2026-04-01 19:02:35,460 basehttp 9 126740341192384 "GET /admin/users/user/e80c33d0-a8b9-484e-a5f1-9b001b75608a/change/ HTTP/1.1" 200 45232
+INFO 2026-04-01 19:02:35,503 basehttp 9 126740122826432 "GET /static/admin/js/SelectBox.js HTTP/1.1" 304 0
+INFO 2026-04-01 19:02:35,503 basehttp 9 126740114433728 "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 304 0
+INFO 2026-04-01 19:02:35,504 basehttp 9 126740097648320 "GET /static/admin/css/forms.css HTTP/1.1" 304 0
+INFO 2026-04-01 19:02:35,505 basehttp 9 126740106041024 "GET /static/admin/js/SelectFilter2.js HTTP/1.1" 304 0
+INFO 2026-04-01 19:02:35,516 basehttp 9 126740106041024 "GET /static/admin/css/widgets.css HTTP/1.1" 304 0
+INFO 2026-04-01 19:02:35,527 basehttp 9 126740341192384 "GET /admin/jsi18n/ HTTP/1.1" 200 12182
+INFO 2026-04-01 19:02:35,534 basehttp 9 126740341192384 "GET /static/admin/js/change_form.js HTTP/1.1" 304 0
+INFO 2026-04-01 19:02:35,785 basehttp 9 126740097648320 "GET /static/admin/img/selector-icons.svg HTTP/1.1" 304 0
+INFO 2026-04-01 19:02:35,786 basehttp 9 126740341192384 "GET /static/admin/img/icon-unknown.svg HTTP/1.1" 304 0
+INFO 2026-04-01 19:02:35,787 basehttp 9 126740106041024 "GET /static/admin/img/icon-unknown-alt.svg HTTP/1.1" 304 0
+INFO 2026-04-01 19:02:54,503 basehttp 9 126740106041024 "GET /admin/users/user/ HTTP/1.1" 200 28170
+INFO 2026-04-01 19:02:54,639 basehttp 9 126740106041024 "GET /admin/jsi18n/ HTTP/1.1" 200 12182
+INFO 2026-04-01 19:05:00,107 tasks 1 123319057543936 Cancelled 0 timeout rides
+INFO 2026-04-01 19:06:28,270 middleware 9 126740357977792 Request started: POST /api/v1/users/webhooks/clerk/
+INFO 2026-04-01 19:06:28,271 views 9 126740357977792 Received Clerk webhook: user.created
+ERROR 2026-04-01 19:06:28,291 views 9 126740357977792 Webhook error: duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(skhmelyuk1985@gmail.com) already exists.
+Traceback (most recent call last):
+  File "/app/apps/users/services.py", line 30, in handle_clerk_user_created
+    user = User.objects.get(clerk_user_id=clerk_user_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/query.py", line 651, in get
+    raise self.model.DoesNotExist(
+apps.users.models.User.DoesNotExist: User matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(skhmelyuk1985@gmail.com) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/apps/users/views.py", line 122, in clerk_webhook
+    handle_clerk_user_created(data)
+  File "/app/apps/users/services.py", line 33, in handle_clerk_user_created
+    user = User.objects.create_user(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/apps/users/models.py", line 37, in create_user
+    user.save(using=self._db)
+  File "/usr/local/lib/python3.12/site-packages/django/contrib/auth/base_user.py", line 62, in save
+    super().save(*args, **kwargs)
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 892, in save
+    self.save_base(
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 998, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 1161, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 1202, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/query.py", line 1852, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1836, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(skhmelyuk1985@gmail.com) already exists.
+
+INFO 2026-04-01 19:06:28,294 middleware 9 126740357977792 Request completed: POST /api/v1/users/webhooks/clerk/ - 500
+ERROR 2026-04-01 19:06:28,294 basehttp 9 126740357977792 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 500 145
+INFO 2026-04-01 19:10:00,072 tasks 1 123319057543936 Cancelled 0 timeout rides
+INFO 2026-04-01 19:10:00,130 tasks 1 123319057543936 Cleaned up 0 stale driver locations
+INFO 2026-04-01 19:15:00,076 tasks 1 123319057543936 Cancelled 0 timeout rides
+INFO 2026-04-01 19:18:23,986 middleware 9 126740349585088 Request started: POST /api/v1/users/webhooks/clerk/
+INFO 2026-04-01 19:18:23,987 views 9 126740349585088 Received Clerk webhook: user.updated
+WARNING 2026-04-01 19:18:24,006 services 9 126740349585088 User not found for webhook update: user_3BliXXeu29762mBT8qPUUhNG6KL
+INFO 2026-04-01 19:18:24,006 middleware 9 126740349585088 Request completed: POST /api/v1/users/webhooks/clerk/ - 200
+INFO 2026-04-01 19:18:24,007 basehttp 9 126740349585088 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 200 21
+INFO 2026-04-01 19:18:24,102 middleware 9 126740106041024 Request started: POST /api/v1/users/webhooks/clerk/
+INFO 2026-04-01 19:18:24,103 views 9 126740106041024 Received Clerk webhook: user.updated
+WARNING 2026-04-01 19:18:24,122 services 9 126740106041024 User not found for webhook update: user_3BliXXeu29762mBT8qPUUhNG6KL
+INFO 2026-04-01 19:18:24,122 middleware 9 126740106041024 Request completed: POST /api/v1/users/webhooks/clerk/ - 200
+INFO 2026-04-01 19:18:24,123 basehttp 9 126740106041024 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 200 21
+INFO 2026-04-01 19:18:55,252 basehttp 9 126740097648320 "GET /admin/users/user/ HTTP/1.1" 200 28170
+INFO 2026-04-01 19:18:55,321 basehttp 9 126740097648320 "GET /admin/jsi18n/ HTTP/1.1" 200 12182
+INFO 2026-04-01 19:18:58,807 basehttp 9 126740097648320 "GET /admin/users/user/ HTTP/1.1" 200 28170
+INFO 2026-04-01 19:18:58,887 basehttp 9 126740097648320 "GET /admin/jsi18n/ HTTP/1.1" 200 12182
+INFO 2026-04-01 19:19:08,164 basehttp 9 126740097648320 "GET /admin/users/user/e80c33d0-a8b9-484e-a5f1-9b001b75608a/change/ HTTP/1.1" 200 45232
+INFO 2026-04-01 19:19:08,251 basehttp 9 126740097648320 "GET /admin/jsi18n/ HTTP/1.1" 200 12182
+INFO 2026-04-01 19:19:14,090 basehttp 9 126740097648320 "GET /admin/users/user/ HTTP/1.1" 200 28170
+INFO 2026-04-01 19:20:00,119 tasks 1 123319057543936 Cancelled 0 timeout rides
+INFO 2026-04-01 19:20:00,179 tasks 1 123319057543936 Cleaned up 0 stale driver locations
+INFO 2026-04-01 19:20:10,344 middleware 9 126740106041024 Request started: POST /api/v1/users/webhooks/clerk/
+INFO 2026-04-01 19:20:10,345 views 9 126740106041024 Received Clerk webhook: user.created
+INFO 2026-04-01 19:20:10,386 services 9 126740106041024 Created user from webhook: serhiikhmel991@gmail.com
+INFO 2026-04-01 19:20:10,386 middleware 9 126740106041024 Request completed: POST /api/v1/users/webhooks/clerk/ - 200
+INFO 2026-04-01 19:20:10,387 basehttp 9 126740106041024 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 200 21
+INFO 2026-04-01 19:20:36,540 basehttp 9 126740097648320 "GET /admin/users/user/ HTTP/1.1" 200 28953
+INFO 2026-04-01 19:20:36,618 basehttp 9 126740097648320 "GET /admin/jsi18n/ HTTP/1.1" 200 12182
+INFO 2026-04-01 19:25:00,075 tasks 1 123319057543936 Cancelled 0 timeout rides
+INFO 2026-04-01 19:30:00,064 tasks 1 123319057543936 Cancelled 0 timeout rides
+INFO 2026-04-01 19:30:00,124 tasks 1 123319057543936 Cleaned up 0 stale driver locations
+INFO 2026-04-01 19:33:42,208 middleware 9 126740097648320 Request started: POST /api/v1/users/webhooks/clerk/
+INFO 2026-04-01 19:33:42,211 views 9 126740097648320 Received Clerk webhook: user.created
+ERROR 2026-04-01 19:33:42,241 views 9 126740097648320 Webhook error: duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(skhmelyuk1985@gmail.com) already exists.
+Traceback (most recent call last):
+  File "/app/apps/users/services.py", line 30, in handle_clerk_user_created
+    user = User.objects.get(clerk_user_id=clerk_user_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/query.py", line 651, in get
+    raise self.model.DoesNotExist(
+apps.users.models.User.DoesNotExist: User matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(skhmelyuk1985@gmail.com) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/apps/users/views.py", line 122, in clerk_webhook
+    handle_clerk_user_created(data)
+  File "/app/apps/users/services.py", line 33, in handle_clerk_user_created
+    user = User.objects.create_user(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/apps/users/models.py", line 37, in create_user
+    user.save(using=self._db)
+  File "/usr/local/lib/python3.12/site-packages/django/contrib/auth/base_user.py", line 62, in save
+    super().save(*args, **kwargs)
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 892, in save
+    self.save_base(
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 998, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 1161, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/base.py", line 1202, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/query.py", line 1852, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1836, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(skhmelyuk1985@gmail.com) already exists.
+
+INFO 2026-04-01 19:33:42,247 middleware 9 126740097648320 Request completed: POST /api/v1/users/webhooks/clerk/ - 500
+ERROR 2026-04-01 19:33:42,249 basehttp 9 126740097648320 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 500 145
+INFO 2026-04-01 19:35:00,224 tasks 1 123319057543936 Cancelled 0 timeout rides
+INFO 2026-04-01 19:40:00,089 tasks 1 123319057543936 Cancelled 0 timeout rides
+INFO 2026-04-01 19:40:00,151 tasks 1 123319057543936 Cleaned up 0 stale driver locations
+INFO 2026-04-01 19:45:00,070 tasks 1 123319057543936 Cancelled 0 timeout rides
+INFO 2026-04-01 19:50:00,073 tasks 1 123319057543936 Cleaned up 0 stale driver locations
+INFO 2026-04-01 19:50:00,133 tasks 1 123319057543936 Cancelled 0 timeout rides
+INFO 2026-04-01 19:55:00,075 tasks 1 123319057543936 Cancelled 0 timeout rides
+INFO 2026-04-01 20:00:00,096 tasks 1 123319057543936 Cancelled 0 timeout rides
+INFO 2026-04-01 20:00:00,147 tasks 1 123319057543936 Cleaned up 0 stale driver locations
+INFO 2026-04-01 20:05:00,074 tasks 1 123319057543936 Cancelled 0 timeout rides
+INFO 2026-04-01 20:10:00,074 tasks 1 123319057543936 Cleaned up 0 stale driver locations
+INFO 2026-04-01 20:10:00,135 tasks 1 123319057543936 Cancelled 0 timeout rides
+INFO 2026-04-01 20:13:33,542 command 1 133888745591552 15 detected, shutting down
+INFO 2026-04-03 06:40:17,700 command 1 135768053781248 Visit me at http://0.0.0.0:5555
+INFO 2026-04-03 06:40:17,717 command 1 135768053781248 Broker: redis://redis:6379/0
+INFO 2026-04-03 06:40:17,725 command 1 135768053781248 Registered tasks: 
+['apps.drivers.tasks.check_driver_documents_expiry',
+ 'apps.drivers.tasks.cleanup_stale_locations',
+ 'apps.drivers.tasks.notify_driver_new_ride',
+ 'apps.drivers.tasks.update_driver_statistics',
+ 'apps.notifications.tasks.cleanup_old_notifications',
+ 'apps.notifications.tasks.send_bulk_notification',
+ 'apps.notifications.tasks.send_promo_notifications',
+ 'apps.notifications.tasks.send_push_notification',
+ 'apps.rides.tasks.calculate_ride_statistics',
+ 'apps.rides.tasks.cancel_timeout_rides',
+ 'apps.rides.tasks.find_driver_for_ride',
+ 'apps.rides.tasks.generate_daily_ride_report',
+ 'celery.accumulate',
+ 'celery.backend_cleanup',
+ 'celery.chain',
+ 'celery.chord',
+ 'celery.chord_unlock',
+ 'celery.chunks',
+ 'celery.group',
+ 'celery.map',
+ 'celery.starmap']
+INFO 2026-04-03 06:40:17,734 mixins 1 135767766091456 Connected to redis://redis:6379/0
+INFO 2026-04-03 06:40:18,063 autoreload 9 126286251565824 Watching for file changes with StatReloader
+INFO 2026-04-03 06:40:18,725 tasks 1 126518832931584 Cleaned up 0 stale driver locations
+INFO 2026-04-03 06:40:18,790 tasks 1 126518832931584 Cancelled 0 timeout rides
+WARNING 2026-04-03 06:40:18,804 inspector 1 135767757698752 Inspect method stats failed
+WARNING 2026-04-03 06:40:18,809 inspector 1 135767657535168 Inspect method scheduled failed
+WARNING 2026-04-03 06:40:18,811 inspector 1 135767623964352 Inspect method conf failed
+WARNING 2026-04-03 06:40:18,815 inspector 1 135767649142464 Inspect method active failed
+WARNING 2026-04-03 06:40:18,816 inspector 1 135767665927872 Inspect method registered failed
+WARNING 2026-04-03 06:40:18,822 inspector 1 135767640749760 Inspect method reserved failed
+WARNING 2026-04-03 06:40:18,822 inspector 1 135767674320576 Inspect method active_queues failed
+WARNING 2026-04-03 06:40:18,823 inspector 1 135767632357056 Inspect method revoked failed
+INFO 2026-04-03 06:40:48,407 basehttp 9 126285960623808 "GET /admin/ HTTP/1.1" 200 20991
+INFO 2026-04-03 06:40:48,526 basehttp 9 126285942789824 "GET /static/admin_interface/css/list-filter-dropdown.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,528 basehttp 9 126285720315584 "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,530 basehttp 9 126285960623808 "GET /static/admin_interface/css/related-modal.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,531 basehttp 9 126285942789824 "GET /static/admin_interface/css/admin-interface-fix.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,531 basehttp 9 126285720315584 "GET /static/admin_interface/css/rangefilter.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,533 basehttp 9 126285728708288 "GET /static/admin/js/theme.js HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,533 basehttp 9 126285711922880 "GET /static/admin_interface/css/admin-interface.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,534 basehttp 9 126285960623808 "GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,535 basehttp 9 126285728708288 "GET /static/admin_interface/css/form-controls.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,535 basehttp 9 126285952231104 "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,537 basehttp 9 126285711922880 "GET /static/admin_interface/css/streamfield.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,539 basehttp 9 126285952231104 "GET /static/admin_interface/css/json-widget.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,572 basehttp 9 126285942789824 "GET /static/admin/css/responsive_rtl.css?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,575 basehttp 9 126285720315584 "GET /static/admin_interface/css/language-chooser.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,578 basehttp 9 126285728708288 "GET /static/admin_interface/css/modeltranslation.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,579 basehttp 9 126285960623808 "GET /static/admin_interface/css/jquery.ui.tabs.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,581 basehttp 9 126285711922880 "GET /static/admin_interface/css/sorl-thumbnail.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,584 basehttp 9 126285952231104 "GET /static/admin_interface/css/tabbed-changeform.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,615 basehttp 9 126285942789824 "GET /static/admin/css/base.css HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,617 basehttp 9 126285720315584 "GET /static/admin_interface/magnific-popup/magnific-popup.css?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,621 basehttp 9 126285728708288 "GET /static/admin_interface/css/tinymce.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,623 basehttp 9 126285960623808 "GET /static/admin_interface/css/import-export.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,625 basehttp 9 126285711922880 "GET /static/admin/css/responsive.css?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,628 basehttp 9 126285952231104 "GET /static/admin_interface/foldable-apps/foldable-apps.css?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,660 basehttp 9 126285942789824 "GET /static/admin_interface/css/rtl.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,661 basehttp 9 126285720315584 "GET /static/admin/css/dashboard.css HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,664 basehttp 9 126285728708288 "GET /static/admin_interface/css/ckeditor.css?v=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,669 basehttp 9 126285960623808 "GET /static/admin_interface/foldable-apps/foldable-apps.js?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,672 basehttp 9 126285711922880 "GET /static/admin_interface/magnific-popup/jquery.magnific-popup.js?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,673 basehttp 9 126285952231104 "GET /static/admin_interface/related-modal/related-modal.js?nocache=09666d757b59a801494c303f4fff36bec090d0965ced83dc1921577e HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,724 basehttp 9 126285952231104 "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,750 basehttp 9 126285960623808 "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,751 basehttp 9 126285728708288 "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:48,765 basehttp 9 126285711922880 "GET /static/admin/img/icon-deletelink.svg HTTP/1.1" 200 392
+INFO 2026-04-03 06:40:49,322 middleware 9 126285711922880 Request started: GET /favicon.ico
+INFO 2026-04-03 06:40:49,334 middleware 9 126285711922880 Request completed: GET /favicon.ico - 404
+WARNING 2026-04-03 06:40:49,338 basehttp 9 126285711922880 "GET /favicon.ico HTTP/1.1" 404 3684
+INFO 2026-04-03 06:40:52,797 basehttp 9 126285711922880 "GET /admin/users/user/ HTTP/1.1" 200 28953
+INFO 2026-04-03 06:40:52,848 basehttp 9 126285711922880 "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:52,850 basehttp 9 126285942789824 "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:52,851 basehttp 9 126285952231104 "GET /static/admin/js/core.js HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:52,851 basehttp 9 126285728708288 "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:52,852 basehttp 9 126285711922880 "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:52,852 basehttp 9 126285720315584 "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:52,858 basehttp 9 126285942789824 "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:52,860 basehttp 9 126285952231104 "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:52,863 basehttp 9 126285728708288 "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:52,867 basehttp 9 126285720315584 "GET /static/admin/img/search.svg HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:52,879 basehttp 9 126285960623808 "GET /admin/jsi18n/ HTTP/1.1" 200 12182
+INFO 2026-04-03 06:40:52,884 basehttp 9 126285960623808 "GET /static/admin/img/icon-yes.svg HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:52,920 basehttp 9 126285720315584 "GET /static/admin/js/filters.js HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:52,972 basehttp 9 126285720315584 "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+INFO 2026-04-03 06:40:52,977 basehttp 9 126285960623808 "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 304 0
+INFO 2026-04-03 06:45:00,078 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 06:50:00,077 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 06:50:00,136 tasks 1 126518832931584 Cleaned up 0 stale driver locations
+INFO 2026-04-03 06:55:00,080 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 07:00:00,068 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 07:00:00,130 tasks 1 126518832931584 Cleaned up 0 stale driver locations
+INFO 2026-04-03 07:05:00,075 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 07:10:00,074 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 07:10:00,121 tasks 1 126518832931584 Cleaned up 0 stale driver locations
+INFO 2026-04-03 07:15:00,188 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 07:20:00,066 tasks 1 126518832931584 Cleaned up 0 stale driver locations
+INFO 2026-04-03 07:20:00,119 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 07:25:00,077 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 07:30:00,069 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 07:30:00,127 tasks 1 126518832931584 Cleaned up 0 stale driver locations
+INFO 2026-04-03 07:35:00,075 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 07:40:00,074 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 07:40:00,151 tasks 1 126518832931584 Cleaned up 0 stale driver locations
+INFO 2026-04-03 07:45:00,076 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 07:50:00,082 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 07:50:00,142 tasks 1 126518832931584 Cleaned up 0 stale driver locations
+INFO 2026-04-03 07:55:00,116 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 08:00:00,088 tasks 1 126518832931584 Cleaned up 0 stale driver locations
+INFO 2026-04-03 08:00:00,137 tasks 1 126518832931584 Found 0 drivers with expiring documents
+INFO 2026-04-03 08:00:00,185 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 08:05:00,089 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 08:10:00,129 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 08:10:00,190 tasks 1 126518832931584 Cleaned up 0 stale driver locations
+INFO 2026-04-03 08:15:00,090 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 08:20:00,077 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 08:20:00,122 tasks 1 126518832931584 Cleaned up 0 stale driver locations
+INFO 2026-04-03 08:25:00,081 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 08:30:00,060 tasks 1 126518832931584 Cleaned up 0 stale driver locations
+INFO 2026-04-03 08:30:00,121 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 08:35:00,096 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 08:40:00,076 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 08:40:00,164 tasks 1 126518832931584 Cleaned up 0 stale driver locations
+INFO 2026-04-03 08:45:00,073 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 08:50:00,086 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 08:50:00,145 tasks 1 126518832931584 Cleaned up 0 stale driver locations
+INFO 2026-04-03 08:55:00,078 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 09:00:00,075 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 09:00:00,132 tasks 1 126518832931584 Cleaned up 0 stale driver locations
+INFO 2026-04-03 09:05:00,078 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 09:10:00,078 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 09:10:00,135 tasks 1 126518832931584 Cleaned up 0 stale driver locations
+INFO 2026-04-03 09:15:00,075 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 09:20:00,098 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 09:20:00,161 tasks 1 126518832931584 Cleaned up 0 stale driver locations
+INFO 2026-04-03 09:25:00,096 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 09:30:00,062 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 09:30:00,142 tasks 1 126518832931584 Cleaned up 0 stale driver locations
+INFO 2026-04-03 09:35:00,075 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 09:40:00,095 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 09:40:00,149 tasks 1 126518832931584 Cleaned up 0 stale driver locations
+INFO 2026-04-03 09:45:00,216 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 09:50:00,095 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 09:50:00,157 tasks 1 126518832931584 Cleaned up 0 stale driver locations
+INFO 2026-04-03 09:55:00,075 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 10:00:00,068 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 10:00:00,126 tasks 1 126518832931584 Cleaned up 0 stale driver locations
+INFO 2026-04-03 10:05:00,096 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 10:10:00,075 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 10:10:00,132 tasks 1 126518832931584 Cleaned up 0 stale driver locations
+INFO 2026-04-03 10:15:00,079 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 10:20:00,234 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 10:20:00,297 tasks 1 126518832931584 Cleaned up 0 stale driver locations
+INFO 2026-04-03 10:25:48,343 tasks 1 126518832931584 Cancelled 0 timeout rides
+INFO 2026-04-03 10:40:27,889 command 1 135626741826304 Visit me at http://0.0.0.0:5555
+INFO 2026-04-03 10:40:27,901 command 1 135626741826304 Broker: redis://redis:6379/0
+INFO 2026-04-03 10:40:27,909 command 1 135626741826304 Registered tasks: 
+['apps.drivers.tasks.check_driver_documents_expiry',
+ 'apps.drivers.tasks.cleanup_stale_locations',
+ 'apps.drivers.tasks.notify_driver_new_ride',
+ 'apps.drivers.tasks.update_driver_statistics',
+ 'apps.notifications.tasks.cleanup_old_notifications',
+ 'apps.notifications.tasks.send_bulk_notification',
+ 'apps.notifications.tasks.send_promo_notifications',
+ 'apps.notifications.tasks.send_push_notification',
+ 'apps.rides.tasks.calculate_ride_statistics',
+ 'apps.rides.tasks.cancel_timeout_rides',
+ 'apps.rides.tasks.find_driver_for_ride',
+ 'apps.rides.tasks.generate_daily_ride_report',
+ 'celery.accumulate',
+ 'celery.backend_cleanup',
+ 'celery.chain',
+ 'celery.chord',
+ 'celery.chord_unlock',
+ 'celery.chunks',
+ 'celery.group',
+ 'celery.map',
+ 'celery.starmap']
+INFO 2026-04-03 10:40:27,918 mixins 1 135626454132416 Connected to redis://redis:6379/0
+INFO 2026-04-03 10:40:28,265 autoreload 9 137247989805824 Watching for file changes with StatReloader
+WARNING 2026-04-03 10:40:28,986 inspector 1 135626436298432 Inspect method active_queues failed
+WARNING 2026-04-03 10:40:28,988 inspector 1 135626444691136 Inspect method stats failed
+WARNING 2026-04-03 10:40:28,989 inspector 1 135626427889344 Inspect method registered failed
+WARNING 2026-04-03 10:40:28,995 inspector 1 135626057832128 Inspect method revoked failed
+WARNING 2026-04-03 10:40:28,997 inspector 1 135626074617536 Inspect method active failed
+WARNING 2026-04-03 10:40:28,999 inspector 1 135626049439424 Inspect method conf failed
+WARNING 2026-04-03 10:40:29,000 inspector 1 135626066224832 Inspect method reserved failed
+WARNING 2026-04-03 10:40:29,000 inspector 1 135626419480256 Inspect method scheduled failed
+INFO 2026-04-03 10:40:29,097 tasks 1 128852231234304 Cleaned up 0 stale driver locations
+INFO 2026-04-03 10:40:29,163 tasks 1 128852231234304 Cancelled 0 timeout rides
+INFO 2026-04-03 10:45:00,081 tasks 1 128852231234304 Cancelled 0 timeout rides
+INFO 2026-04-03 10:50:00,067 tasks 1 128852231234304 Cleaned up 0 stale driver locations
+INFO 2026-04-03 10:50:00,133 tasks 1 128852231234304 Cancelled 0 timeout rides
+INFO 2026-04-03 10:55:00,068 tasks 1 128852231234304 Cancelled 0 timeout rides
+INFO 2026-04-03 11:00:00,074 tasks 1 128852231234304 Cancelled 0 timeout rides
+INFO 2026-04-03 11:00:00,131 tasks 1 128852231234304 Cleaned up 0 stale driver locations
+INFO 2026-04-03 11:05:00,066 tasks 1 128852231234304 Cancelled 0 timeout rides
+INFO 2026-04-03 11:10:00,077 tasks 1 128852231234304 Cancelled 0 timeout rides
+INFO 2026-04-03 11:10:00,134 tasks 1 128852231234304 Cleaned up 0 stale driver locations
+INFO 2026-04-03 11:15:00,055 tasks 1 128852231234304 Cancelled 0 timeout rides
+INFO 2026-04-03 11:20:00,075 tasks 1 128852231234304 Cancelled 0 timeout rides
+INFO 2026-04-03 11:20:00,148 tasks 1 128852231234304 Cleaned up 0 stale driver locations
+INFO 2026-04-03 11:25:00,122 tasks 1 128852231234304 Cancelled 0 timeout rides
+INFO 2026-04-03 11:30:00,074 tasks 1 128852231234304 Cancelled 0 timeout rides
+INFO 2026-04-03 11:30:00,131 tasks 1 128852231234304 Cleaned up 0 stale driver locations
+INFO 2026-04-03 11:35:00,074 tasks 1 128852231234304 Cancelled 0 timeout rides
+INFO 2026-04-03 11:40:00,065 tasks 1 128852231234304 Cancelled 0 timeout rides
+INFO 2026-04-03 11:40:00,116 tasks 1 128852231234304 Cleaned up 0 stale driver locations
+INFO 2026-04-03 11:45:00,077 tasks 1 128852231234304 Cancelled 0 timeout rides
+INFO 2026-04-03 11:50:00,063 tasks 1 128852231234304 Cancelled 0 timeout rides
+INFO 2026-04-03 11:50:00,120 tasks 1 128852231234304 Cleaned up 0 stale driver locations
+INFO 2026-04-03 11:52:44,023 command 1 135626741826304 15 detected, shutting down
+INFO 2026-04-03 14:53:40,558 command 1 137970591494912 Visit me at http://0.0.0.0:5555
+INFO 2026-04-03 14:53:40,569 command 1 137970591494912 Broker: redis://redis:6379/0
+INFO 2026-04-03 14:53:40,578 command 1 137970591494912 Registered tasks: 
+['apps.drivers.tasks.check_driver_documents_expiry',
+ 'apps.drivers.tasks.cleanup_stale_locations',
+ 'apps.drivers.tasks.notify_driver_new_ride',
+ 'apps.drivers.tasks.update_driver_statistics',
+ 'apps.notifications.tasks.cleanup_old_notifications',
+ 'apps.notifications.tasks.send_bulk_notification',
+ 'apps.notifications.tasks.send_promo_notifications',
+ 'apps.notifications.tasks.send_push_notification',
+ 'apps.rides.tasks.calculate_ride_statistics',
+ 'apps.rides.tasks.cancel_timeout_rides',
+ 'apps.rides.tasks.find_driver_for_ride',
+ 'apps.rides.tasks.generate_daily_ride_report',
+ 'celery.accumulate',
+ 'celery.backend_cleanup',
+ 'celery.chain',
+ 'celery.chord',
+ 'celery.chord_unlock',
+ 'celery.chunks',
+ 'celery.group',
+ 'celery.map',
+ 'celery.starmap']
+INFO 2026-04-03 14:53:40,588 mixins 1 137970303805120 Connected to redis://redis:6379/0
+INFO 2026-04-03 14:53:41,007 autoreload 9 138837378511616 Watching for file changes with StatReloader
+WARNING 2026-04-03 14:53:41,647 inspector 1 137969902016192 Inspect method revoked failed
+WARNING 2026-04-03 14:53:41,655 inspector 1 137970269136576 Inspect method scheduled failed
+WARNING 2026-04-03 14:53:41,657 inspector 1 137970287003328 Inspect method active_queues failed
+WARNING 2026-04-03 14:53:41,660 inspector 1 137969893623488 Inspect method conf failed
+WARNING 2026-04-03 14:53:41,660 inspector 1 137970278594240 Inspect method registered failed
+WARNING 2026-04-03 14:53:41,661 inspector 1 137969910408896 Inspect method reserved failed
+WARNING 2026-04-03 14:53:41,666 inspector 1 137969918801600 Inspect method active failed
+WARNING 2026-04-03 14:53:41,666 inspector 1 137970295412416 Inspect method stats failed
+INFO 2026-04-03 14:53:41,769 tasks 1 123395827950336 Cleaned up 0 stale driver locations
+INFO 2026-04-03 14:53:41,833 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 14:55:00,103 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 15:00:00,067 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 15:00:00,124 tasks 1 123395827950336 Cleaned up 0 stale driver locations
+INFO 2026-04-03 15:05:00,062 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 15:10:00,073 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 15:10:00,122 tasks 1 123395827950336 Cleaned up 0 stale driver locations
+INFO 2026-04-03 15:15:00,076 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 15:20:00,076 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 15:20:00,130 tasks 1 123395827950336 Cleaned up 0 stale driver locations
+INFO 2026-04-03 15:25:00,074 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 15:30:00,079 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 15:30:00,133 tasks 1 123395827950336 Cleaned up 0 stale driver locations
+INFO 2026-04-03 15:35:00,075 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 15:40:00,072 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 15:40:00,144 tasks 1 123395827950336 Cleaned up 0 stale driver locations
+INFO 2026-04-03 15:45:00,055 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 15:50:00,088 tasks 1 123395827950336 Cleaned up 0 stale driver locations
+INFO 2026-04-03 15:50:00,147 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 15:55:00,074 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 16:00:00,076 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 16:00:00,131 tasks 1 123395827950336 Cleaned up 0 stale driver locations
+INFO 2026-04-03 16:05:00,074 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 16:10:00,074 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 16:10:00,130 tasks 1 123395827950336 Cleaned up 0 stale driver locations
+INFO 2026-04-03 16:15:00,074 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 16:20:00,075 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 16:20:00,132 tasks 1 123395827950336 Cleaned up 0 stale driver locations
+INFO 2026-04-03 16:25:00,075 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 16:30:00,071 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 16:30:00,128 tasks 1 123395827950336 Cleaned up 0 stale driver locations
+INFO 2026-04-03 16:35:00,082 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 16:40:00,088 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 16:40:00,144 tasks 1 123395827950336 Cleaned up 0 stale driver locations
+INFO 2026-04-03 16:45:00,074 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 16:50:00,074 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 16:50:00,133 tasks 1 123395827950336 Cleaned up 0 stale driver locations
+INFO 2026-04-03 18:24:20,091 tasks 1 123395827950336 Cleaned up 0 stale driver locations
+INFO 2026-04-03 18:24:20,149 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 18:25:00,076 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 18:30:00,066 tasks 1 123395827950336 Cleaned up 0 stale driver locations
+INFO 2026-04-03 18:30:00,125 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 18:35:00,055 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 18:40:00,079 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 18:40:00,134 tasks 1 123395827950336 Cleaned up 0 stale driver locations
+INFO 2026-04-03 18:45:00,077 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 18:50:00,064 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 18:50:00,115 tasks 1 123395827950336 Cleaned up 0 stale driver locations
+INFO 2026-04-03 18:55:00,077 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 19:00:00,064 tasks 1 123395827950336 Cleaned up 0 stale driver locations
+INFO 2026-04-03 19:00:00,127 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 19:05:00,069 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 19:10:00,075 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 19:10:00,133 tasks 1 123395827950336 Cleaned up 0 stale driver locations
+INFO 2026-04-03 19:15:00,073 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 19:20:00,075 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 19:20:00,135 tasks 1 123395827950336 Cleaned up 0 stale driver locations
+INFO 2026-04-03 19:25:00,119 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 19:30:00,141 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 19:30:00,202 tasks 1 123395827950336 Cleaned up 0 stale driver locations
+INFO 2026-04-03 19:35:00,085 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 19:40:00,092 tasks 1 123395827950336 Cleaned up 0 stale driver locations
+INFO 2026-04-03 19:40:00,152 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 19:45:00,083 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 19:50:00,076 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 19:50:00,137 tasks 1 123395827950336 Cleaned up 0 stale driver locations
+INFO 2026-04-03 19:55:00,076 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 20:00:00,075 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 20:00:00,132 tasks 1 123395827950336 Cleaned up 0 stale driver locations
+INFO 2026-04-03 20:05:00,091 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 20:10:00,067 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 20:10:00,116 tasks 1 123395827950336 Cleaned up 0 stale driver locations
+INFO 2026-04-03 20:15:00,079 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 20:20:00,072 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 20:20:00,134 tasks 1 123395827950336 Cleaned up 0 stale driver locations
+INFO 2026-04-03 20:25:00,083 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 20:30:00,073 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 20:30:00,131 tasks 1 123395827950336 Cleaned up 0 stale driver locations
+INFO 2026-04-03 20:35:00,080 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 20:40:00,150 tasks 1 123395827950336 Cleaned up 0 stale driver locations
+INFO 2026-04-03 20:40:00,209 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 20:45:00,070 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 20:50:00,076 tasks 1 123395827950336 Cancelled 0 timeout rides
+INFO 2026-04-03 20:50:00,209 tasks 1 123395827950336 Cleaned up 0 stale driver locations
+INFO 2026-04-03 20:50:31,652 command 1 137970591494912 15 detected, shutting down
+INFO 2026-04-04 19:02:15,305 command 1 132038030697216 Visit me at http://0.0.0.0:5555
+INFO 2026-04-04 19:02:15,317 command 1 132038030697216 Broker: redis://redis:6379/0
+INFO 2026-04-04 19:02:15,325 command 1 132038030697216 Registered tasks: 
+['apps.drivers.tasks.check_driver_documents_expiry',
+ 'apps.drivers.tasks.cleanup_stale_locations',
+ 'apps.drivers.tasks.notify_driver_new_ride',
+ 'apps.drivers.tasks.update_driver_statistics',
+ 'apps.notifications.tasks.cleanup_old_notifications',
+ 'apps.notifications.tasks.send_bulk_notification',
+ 'apps.notifications.tasks.send_promo_notifications',
+ 'apps.notifications.tasks.send_push_notification',
+ 'apps.rides.tasks.calculate_ride_statistics',
+ 'apps.rides.tasks.cancel_timeout_rides',
+ 'apps.rides.tasks.find_driver_for_ride',
+ 'apps.rides.tasks.generate_daily_ride_report',
+ 'celery.accumulate',
+ 'celery.backend_cleanup',
+ 'celery.chain',
+ 'celery.chord',
+ 'celery.chord_unlock',
+ 'celery.chunks',
+ 'celery.group',
+ 'celery.map',
+ 'celery.starmap']
+INFO 2026-04-04 19:02:15,336 mixins 1 132037743011520 Connected to redis://redis:6379/0
+INFO 2026-04-04 19:02:15,825 autoreload 9 123929103487744 Watching for file changes with StatReloader
+WARNING 2026-04-04 19:02:16,401 inspector 1 132037709407936 Inspect method scheduled failed
+WARNING 2026-04-04 19:02:16,404 inspector 1 132037726226112 Inspect method active_queues failed
+WARNING 2026-04-04 19:02:16,405 inspector 1 132037734618816 Inspect method stats failed
+WARNING 2026-04-04 19:02:16,415 inspector 1 132037352613568 Inspect method reserved failed
+WARNING 2026-04-04 19:02:16,416 inspector 1 132037335828160 Inspect method conf failed
+WARNING 2026-04-04 19:02:16,416 inspector 1 132037361006272 Inspect method active failed
+WARNING 2026-04-04 19:02:16,417 inspector 1 132037344220864 Inspect method revoked failed
+WARNING 2026-04-04 19:02:16,417 inspector 1 132037717817024 Inspect method registered failed
+INFO 2026-04-04 19:02:16,555 tasks 1 136084074087168 Cleaned up 0 stale driver locations
+INFO 2026-04-04 19:02:16,619 tasks 1 136084074087168 Cancelled 0 timeout rides
+INFO 2026-04-04 19:02:16,652 tasks 1 136084074087168 Found 0 drivers with expiring documents
+INFO 2026-04-04 19:05:20,391 tasks 1 136084074087168 Cancelled 0 timeout rides
+INFO 2026-04-04 19:10:00,210 tasks 1 136084074087168 Cancelled 0 timeout rides
+INFO 2026-04-04 19:10:00,273 tasks 1 136084074087168 Cleaned up 0 stale driver locations
