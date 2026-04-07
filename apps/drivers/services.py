@@ -6,10 +6,12 @@ import logging
 from typing import Optional
 from django.db import transaction
 from django.contrib.gis.geos import Point
-from apps.drivers.models import Driver
-from apps.users.models import User
+from django.core.files.uploadedfile import UploadedFile
 from django.core.cache import cache
 from django.utils import timezone
+
+from apps.drivers.models import Driver, DriverDocument
+from apps.users.models import User
 
 DRIVER_LOCATION_CACHE_TTL = 300
 
@@ -151,3 +153,65 @@ class LocationCacheService:
         # Pattern: driver:location:*
         # Note: Redis KEYS is expensive — use for debug only
         return []
+
+
+class DriverDocumentService:
+    """Service helpers for driver document lifecycle."""
+
+    @staticmethod
+    def upload_document(
+        driver: Driver,
+        *,
+        doc_type: str,
+        file: UploadedFile,
+        expires_at=None,
+        notes: Optional[str] = None,
+    ) -> DriverDocument:
+        """Create or replace a driver document and reset its status."""
+
+        if not file:
+            raise ValueError('Document file is required')
+
+        document, created = DriverDocument.objects.get_or_create(
+            driver=driver,
+            doc_type=doc_type,
+            defaults={'status': DriverDocument.VerificationStatus.PENDING},
+        )
+
+        if not created and document.file:
+            document.file.delete(save=False)
+
+        document.file = file
+        document.status = DriverDocument.VerificationStatus.PENDING
+        document.expires_at = expires_at
+        document.notes = notes or ''
+        document.reviewed_at = None
+        document.reviewer = None
+        document.save()
+        return document
+
+    @staticmethod
+    def review_document(
+        document_id: str,
+        *,
+        status: str,
+        reviewer: User,
+        notes: Optional[str] = None,
+    ) -> DriverDocument:
+        """Approve or reject a driver document."""
+
+        try:
+            document = DriverDocument.objects.select_related('driver', 'driver__user').get(id=document_id)
+        except DriverDocument.DoesNotExist as exc:
+            raise ValueError('Document not found') from exc
+
+        if status not in dict(DriverDocument.VerificationStatus.choices):
+            raise ValueError('Invalid review status')
+
+        document.status = status
+        document.reviewer = reviewer
+        document.reviewed_at = timezone.now()
+        if notes is not None:
+            document.notes = notes
+        document.save(update_fields=['status', 'reviewer', 'reviewed_at', 'notes'])
+        return document

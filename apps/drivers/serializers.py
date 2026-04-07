@@ -4,7 +4,7 @@ Serializers for drivers app.
 
 from rest_framework import serializers
 from django.contrib.gis.geos import Point
-from apps.drivers.models import Driver
+from apps.drivers.models import Driver, DriverDocument
 from apps.users.serializers import UserSerializer
 
 
@@ -80,19 +80,69 @@ class DriverAvailabilitySerializer(serializers.Serializer):
     )
 
 
+class DriverDocumentSerializer(serializers.ModelSerializer):
+    """Read serializer for driver documents."""
+    file_url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = DriverDocument
+        fields = [
+            'id', 'doc_type', 'status', 'notes', 'expires_at',
+            'file_url', 'uploaded_at', 'reviewed_at', 'reviewer_id',
+        ]
+        read_only_fields = fields
+
+    def get_file_url(self, obj) -> str | None:
+        request = self.context.get('request')
+        if obj.file and hasattr(obj.file, 'url'):
+            url = obj.file.url
+            if request:
+                return request.build_absolute_uri(url)
+            return url
+        return None
+
+
+class DriverDocumentUploadSerializer(serializers.Serializer):
+    """Serializer for uploading or replacing driver documents."""
+
+    doc_type = serializers.ChoiceField(choices=DriverDocument.DocumentType.choices)
+    file = serializers.FileField()
+    expires_at = serializers.DateField(required=False, allow_null=True)
+    notes = serializers.CharField(required=False, allow_blank=True)
+
+
+class DriverDocumentReviewSerializer(serializers.Serializer):
+    """Serializer for reviewing driver documents."""
+
+    document_id = serializers.UUIDField()
+    status = serializers.ChoiceField(choices=DriverDocument.VerificationStatus.choices)
+    notes = serializers.CharField(required=False, allow_blank=True)
+
+
 class DriverDetailSerializer(DriverSerializer):
     """Detailed read serializer with additional stats."""
     distance_km = serializers.SerializerMethodField()
+    documents = serializers.SerializerMethodField()
 
     class Meta(DriverSerializer.Meta):
         fields = DriverSerializer.Meta.fields + [
             'rejection_reason', 'suspension_reason', 'total_earnings', 'distance_km',
+            'documents',
         ]
 
     def get_distance_km(self, obj) -> float | None:
         if hasattr(obj, 'distance') and obj.distance:
             return round(obj.distance.km, 2)
         return None
+
+    def get_documents(self, obj):
+        documents = obj.documents.all()
+        serializer = DriverDocumentSerializer(
+            documents,
+            many=True,
+            context=self.context,
+        )
+        return serializer.data
 
 
 class DriverListSerializer(serializers.ModelSerializer):

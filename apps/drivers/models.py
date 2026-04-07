@@ -1,13 +1,23 @@
-"""
-Models for drivers app.
-"""
+"""Models for drivers app."""
+import os
 import uuid
-from django.contrib.gis.db.models.functions import Distance
-from django.db import models
-from django.contrib.gis.db import models as gis_models
-from django.core.validators import MinValueValidator, MaxValueValidator
-from django.utils import timezone
 from decimal import Decimal
+
+from django.contrib.gis.db import models as gis_models
+from django.contrib.gis.db.models.functions import Distance
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db import models
+from django.utils import timezone
+
+
+def driver_document_upload_to(instance, filename: str) -> str:
+    """Build upload path for driver documents."""
+    base, ext = os.path.splitext(filename)
+    ext = ext.lower() or '.dat'
+    return (
+        f"drivers/{instance.driver_id}/documents/"
+        f"{instance.doc_type}/{uuid.uuid4()}{ext}"
+    )
 
 
 class DriverManager(models.Manager):
@@ -160,3 +170,62 @@ class Driver(models.Model):
     @property
     def is_available(self) -> bool:
         return self.status == self.Status.APPROVED and self.availability == self.Availability.ONLINE
+
+
+class DriverDocument(models.Model):
+    """Stores driver verification documents (license, insurance, photos)."""
+
+    class DocumentType(models.TextChoices):
+        DRIVER_LICENSE = 'driver_license', 'Driver License'
+        VEHICLE_REGISTRATION = 'vehicle_registration', 'Vehicle Registration'
+        INSURANCE_POLICY = 'insurance_policy', 'Insurance Policy'
+        VEHICLE_PHOTO = 'vehicle_photo', 'Vehicle Photo'
+
+    class VerificationStatus(models.TextChoices):
+        PENDING = 'pending', 'Pending'
+        APPROVED = 'approved', 'Approved'
+        REJECTED = 'rejected', 'Rejected'
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    driver = models.ForeignKey(
+        Driver,
+        on_delete=models.CASCADE,
+        related_name='documents',
+        help_text='Driver profile owner',
+    )
+    doc_type = models.CharField(
+        max_length=50,
+        choices=DocumentType.choices,
+        help_text='Type of uploaded document',
+    )
+    file = models.FileField(
+        upload_to=driver_document_upload_to,
+        max_length=500,
+        help_text='Uploaded document file (image or pdf)',
+    )
+    status = models.CharField(
+        max_length=20,
+        choices=VerificationStatus.choices,
+        default=VerificationStatus.PENDING,
+        help_text='Verification status of the document',
+    )
+    notes = models.TextField(blank=True, help_text='Reviewer notes or driver comments')
+    expires_at = models.DateField(null=True, blank=True, help_text='Optional expiry date')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    reviewed_at = models.DateTimeField(null=True, blank=True)
+    reviewer = models.ForeignKey(
+        'users.User',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='reviewed_documents',
+        help_text='Admin who reviewed the document',
+    )
+
+    class Meta:
+        db_table = 'driver_documents'
+        ordering = ['-uploaded_at']
+        unique_together = ('driver', 'doc_type')
+
+    def __str__(self) -> str:
+        return f"{self.driver.user.email} → {self.doc_type} ({self.status})"

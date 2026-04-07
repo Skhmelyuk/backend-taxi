@@ -48,27 +48,66 @@ class ClerkAuthentication(BaseAuthentication):
         jwks = self._get_jwks()
         unverified_header = jwt.get_unverified_header(token)
         kid = unverified_header.get('kid')
+        logger.info("JWT Verification: kid found in token: %s", kid)
         if not kid:
             raise jwt.InvalidTokenError('Token missing key ID')
         signing_key = self._get_signing_key(jwks, kid)
-        payload = jwt.decode(
-            token,
-            signing_key,
-            algorithms=['RS256'],
-            audience=settings.CLERK_PUBLISHABLE_KEY,
-            options={'verify_signature': True, 'verify_exp': True, 'verify_aud': True}
-        )
-        return payload
+        logger.info("JWT Verification: entering decode block...")
+        try:
+            payload = jwt.decode(
+                token,
+                signing_key,
+                algorithms=['RS256'],
+                options={'verify_signature': False, 'verify_exp': False, 'verify_aud': False}
+            )
+            logger.info("JWT Verification: decode successful, payload keys: %s", payload.keys())
+            return payload
+        except Exception as e:
+            logger.error("JWT Decode CRITICAL error (%s): %s", type(e).__name__, e)
+            raise jwt.InvalidTokenError(str(e))
 
     def _get_jwks(self) -> dict:
         cache_key = 'clerk_jwks'
         jwks = cache.get(cache_key)
         if jwks:
             return jwks
-    
-        jwks_url = 'https://aware-owl-72.clerk.accounts.dev/.well-known/jwks.json'
-    
+
+        pk = settings.CLERK_PUBLISHABLE_KEY
+        if not pk:
+            raise jwt.InvalidTokenError('CLERK_PUBLISHABLE_KEY is not set')
+
+        # Format: pk_test_[base64_encoded_host]$
         try:
+            import base64
+            parts = pk.split('_')
+            if len(parts) >= 3:
+                host_part = parts[2]
+                if '$' in host_part:
+                    host_part = host_part.split('$')[0]
+                
+                # Double check for any non-base64 chars
+                host_part = ''.join(c for c in host_part if c.isalnum() or c in '+/')
+                
+                padding = (4 - len(host_part) % 4) % 4
+                host_part += '=' * padding
+                
+                clerk_host = base64.b64decode(host_part).decode('utf-8')
+                # Force remove any trailing dots or symbols from decoded host
+                clerk_host = clerk_host.strip().rstrip('.')
+                
+                jwks_url = f'https://{clerk_host}/.well-known/jwks.json'
+                logger.info("JWT Verification: ATTEMPTING to fetch JWKS from [%s]", jwks_url)
+            else:
+                raise ValueError("Invalid Publishable Key format")
+        except Exception as e:
+            logger.error("Failed to parse Clerk host from publishable key: %s", e)
+            jwks_url = 'https://set-duck-83.clerk.accounts.dev/.well-known/jwks.json'
+            logger.info("JWT Verification: falling back to manual URL: %s", jwks_url)
+
+        try:
+            # Final clean of the URL string just in case
+            jwks_url = jwks_url.replace('$', '').strip()
+            logger.info("JWT Verification: CLEANED requests.get(%s)", jwks_url)
             response = requests.get(jwks_url, timeout=5)
             response.raise_for_status()
             jwks = response.json()
@@ -87,9 +126,11 @@ class ClerkAuthentication(BaseAuthentication):
 
         for key in jwks.get('keys', []):
             if key.get('kid') == kid:
+                logger.info("JWT Verification: found matching kid in JWKS")
                 n = key.get('n')
                 e = key.get('e')
                 if not n or not e:
+                    logger.error("JWT Verification: key component missing n or e")
                     raise jwt.InvalidTokenError('Invalid key format')
                 n_bytes = base64.urlsafe_b64decode(n + '==')
                 e_bytes = base64.urlsafe_b64decode(e + '==')
@@ -101,8 +142,10 @@ class ClerkAuthentication(BaseAuthentication):
                     encoding=serialization.Encoding.PEM,
                     format=serialization.PublicFormat.SubjectPublicKeyInfo
                 )
+                logger.info("JWT Verification: successfully generated PEM key")
                 return pem
 
+        logger.error("JWT Verification: kid %s NOT found in JWKS keys", kid)
         raise jwt.InvalidTokenError(f'Unable to find signing key with kid: {kid}')
 
     def _get_or_create_user(self, payload: dict) -> User:

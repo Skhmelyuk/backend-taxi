@@ -114,6 +114,11 @@ class User(AbstractBaseUser, PermissionsMixin):
         blank=True,
         help_text='URL to user profile image'
     )
+    date_of_birth = models.DateField(
+        null=True,
+        blank=True,
+        help_text='User date of birth'
+    )
 
     # Role and permissions
     role = models.CharField(

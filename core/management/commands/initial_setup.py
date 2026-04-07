@@ -60,13 +60,33 @@ class Command(BaseCommand):
         if not options['skip_superuser']:
             self.stdout.write('Creating superuser...')
             try:
-                if not User.objects.filter(username='admin').exists():
+                admin_email = 'admin@example.com'
+                identifier_value = admin_email if User.USERNAME_FIELD == 'email' else 'admin'
+                lookup = {User.USERNAME_FIELD: identifier_value}
+
+                if not User.objects.filter(**lookup).exists():
+                    extra_fields = {
+                        'first_name': 'Admin',
+                        'last_name': 'User',
+                    }
+                    if User.USERNAME_FIELD != 'email':
+                        extra_fields[User.USERNAME_FIELD] = identifier_value
+
                     User.objects.create_superuser(
-                        username='admin',
-                        email='admin@example.com',
-                        password='admin123'
+                        admin_email,
+                        'admin123',
+                        **extra_fields,
                     )
-                    self.stdout.write(self.style.SUCCESS('✓ Superuser created (username: admin, password: admin123)'))
+                    login_hint = (
+                        f'email: {admin_email}'
+                        if User.USERNAME_FIELD == 'email'
+                        else f"{User.USERNAME_FIELD}: {identifier_value} (email: {admin_email})"
+                    )
+                    self.stdout.write(
+                        self.style.SUCCESS(
+                            f'✓ Superuser created ({login_hint}, password: admin123)'
+                        )
+                    )
                 else:
                     self.stdout.write(self.style.WARNING('! Superuser already exists'))
             except Exception as e:

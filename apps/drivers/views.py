@@ -11,8 +11,9 @@ from apps.drivers.models import Driver
 from apps.drivers.serializers import (
     DriverSerializer, DriverDetailSerializer, DriverListSerializer,
     DriverRegistrationSerializer, DriverLocationSerializer, DriverAvailabilitySerializer,
+    DriverDocumentSerializer, DriverDocumentUploadSerializer, DriverDocumentReviewSerializer,
 )
-from apps.drivers.services import DriverService
+from apps.drivers.services import DriverService, DriverDocumentService
 from core.permissions import IsAdminUser, IsDriverUser
 
 logger = logging.getLogger(__name__)
@@ -33,6 +34,10 @@ class DriverViewSet(viewsets.ModelViewSet):
             return DriverLocationSerializer
         elif self.action == 'availability':
             return DriverAvailabilitySerializer
+        elif self.action == 'upload_document':
+            return DriverDocumentUploadSerializer
+        elif self.action == 'review_document':
+            return DriverDocumentReviewSerializer
         elif self.action in ['retrieve', 'me']:
             return DriverDetailSerializer
         return DriverSerializer
@@ -40,8 +45,10 @@ class DriverViewSet(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.action in ['list', 'retrieve', 'approve', 'reject', 'suspend']:
             return [IsAuthenticated(), IsAdminUser()]
-        elif self.action in ['me', 'update_location', 'availability']:
+        elif self.action in ['me', 'update_location', 'availability', 'upload_document']:
             return [IsAuthenticated(), IsDriverUser()]
+        elif self.action in ['review_document']:
+            return [IsAuthenticated(), IsAdminUser()]
         elif self.action == 'nearby':
             return [IsAuthenticated()]
         return [IsAuthenticated()]
@@ -111,6 +118,52 @@ class DriverViewSet(viewsets.ModelViewSet):
             return Response(DriverSerializer(drivers, many=True).data)
         except (ValueError, TypeError) as e:
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=False, methods=['post'], url_path='documents')
+    def upload_document(self, request):
+        """POST /api/drivers/documents/ — Upload or replace driver document."""
+        driver = getattr(request.user, 'driver_profile', None)
+        if not driver:
+            return Response({'error': 'Driver profile not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = self.get_serializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            document = DriverDocumentService.upload_document(
+                driver=driver,
+                doc_type=serializer.validated_data['doc_type'],
+                file=serializer.validated_data['file'],
+                expires_at=serializer.validated_data.get('expires_at'),
+                notes=serializer.validated_data.get('notes'),
+            )
+        except ValueError as exc:
+            return Response({'error': str(exc)}, status=status.HTTP_400_BAD_REQUEST)
+
+        response_serializer = DriverDocumentSerializer(document, context={'request': request})
+        return Response(response_serializer.data, status=status.HTTP_201_CREATED)
+
+    @action(detail=False, methods=['post'], url_path='documents/review')
+    def review_document(self, request):
+        """POST /api/drivers/documents/review/ — Approve or reject a document (admin)."""
+
+        serializer = self.get_serializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            document = DriverDocumentService.review_document(
+                document_id=str(serializer.validated_data['document_id']),
+                status=serializer.validated_data['status'],
+                reviewer=request.user,
+                notes=serializer.validated_data.get('notes'),
+            )
+        except ValueError as exc:
+            return Response({'error': str(exc)}, status=status.HTTP_400_BAD_REQUEST)
+
+        response_serializer = DriverDocumentSerializer(document, context={'request': request})
+        return Response(response_serializer.data)
 
     @action(detail=True, methods=['post'])
     def approve(self, request, pk=None):
