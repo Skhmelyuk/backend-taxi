@@ -26,7 +26,7 @@ class DriverSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'user', 'status', 'availability', 'vehicle_type',
             'vehicle_make', 'vehicle_model', 'vehicle_year', 'vehicle_color',
-            'vehicle_plate', 'rating', 'total_rides',
+            'vehicle_plate', 'license_expiry', 'rating', 'total_rides',
             'latitude', 'longitude', 'location_updated_at',
             'created_at', 'is_available',
         ]
@@ -48,21 +48,38 @@ class DriverSerializer(serializers.ModelSerializer):
 class DriverRegistrationSerializer(serializers.ModelSerializer):
     """Write serializer for Driver registration."""
 
+    date_of_birth = serializers.DateField(write_only=True, required=False, allow_null=True)
+    
     class Meta:
         model = Driver
         fields = [
             'vehicle_type', 'vehicle_make', 'vehicle_model',
             'vehicle_year', 'vehicle_color', 'vehicle_plate',
-            'license_number', 'license_expiry',
+            'license_number', 'license_expiry', 'date_of_birth',
         ]
 
+    def update(self, instance, validated_data):
+        date_of_birth = validated_data.pop('date_of_birth', None)
+        if date_of_birth is not None:
+            user = instance.user
+            user.date_of_birth = date_of_birth
+            user.save(update_fields=['date_of_birth'])
+        
+        return super().update(instance, validated_data)
+
     def validate_vehicle_plate(self, value):
-        if Driver.objects.filter(vehicle_plate=value).exists():
+        query = Driver.objects.filter(vehicle_plate=value)
+        if self.instance:
+            query = query.exclude(id=self.instance.id)
+        if query.exists():
             raise serializers.ValidationError('Vehicle plate already registered.')
         return value.upper()
 
     def validate_license_number(self, value):
-        if Driver.objects.filter(license_number=value).exists():
+        query = Driver.objects.filter(license_number=value)
+        if self.instance:
+            query = query.exclude(id=self.instance.id)
+        if query.exists():
             raise serializers.ValidationError('License number already registered.')
         return value
 

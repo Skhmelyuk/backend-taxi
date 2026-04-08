@@ -106,6 +106,20 @@ class DriverViewSet(viewsets.ModelViewSet):
         except ValueError as e:
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
+    @action(detail=False, methods=['patch'])
+    def update_profile(self, request):
+        """PATCH /api/drivers/update_profile/ — Update driver details."""
+        try:
+            driver = request.user.driver_profile
+            # Use registration serializer for fields validation
+            serializer = DriverRegistrationSerializer(driver, data=request.data, partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(DriverDetailSerializer(driver).data)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Driver.DoesNotExist:
+            return Response({'error': 'Driver profile not found'}, status=status.HTTP_404_NOT_FOUND)
+
     @action(detail=False, methods=['get'])
     def nearby(self, request):
         """GET /api/drivers/nearby/?lat=50.45&lon=30.52&radius=5&vehicle_type=economy"""

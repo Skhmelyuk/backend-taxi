@@ -102,18 +102,23 @@ class Driver(models.Model):
     )
 
     vehicle_type = models.CharField(
-        max_length=20, choices=VehicleType.choices, default=VehicleType.ECONOMY
+        max_length=20,
+        choices=VehicleType.choices,
+        default=VehicleType.ECONOMY,
+        blank=True,
     )
-    vehicle_make = models.CharField(max_length=100)
-    vehicle_model = models.CharField(max_length=100)
+    vehicle_make = models.CharField(max_length=100, blank=True, default="")
+    vehicle_model = models.CharField(max_length=100, blank=True, default="")
     vehicle_year = models.IntegerField(
-        validators=[MinValueValidator(2000), MaxValueValidator(2030)]
+        validators=[MinValueValidator(2000), MaxValueValidator(2030)],
+        null=True,
+        blank=True,
     )
-    vehicle_color = models.CharField(max_length=50)
-    vehicle_plate = models.CharField(max_length=20, unique=True)
+    vehicle_color = models.CharField(max_length=50, blank=True, default="")
+    vehicle_plate = models.CharField(max_length=20, unique=True, null=True, blank=True)
 
-    license_number = models.CharField(max_length=50, unique=True)
-    license_expiry = models.DateField()
+    license_number = models.CharField(max_length=50, unique=True, null=True, blank=True)
+    license_expiry = models.DateField(null=True, blank=True)
 
     current_location = gis_models.PointField(
         geography=True, srid=4326, null=True, blank=True,
@@ -180,6 +185,8 @@ class DriverDocument(models.Model):
         VEHICLE_REGISTRATION = 'vehicle_registration', 'Vehicle Registration'
         INSURANCE_POLICY = 'insurance_policy', 'Insurance Policy'
         VEHICLE_PHOTO = 'vehicle_photo', 'Vehicle Photo'
+        VEHICLE_PHOTO_2 = 'vehicle_photo_2', 'Vehicle Photo 2'
+        VEHICLE_PHOTO_3 = 'vehicle_photo_3', 'Vehicle Photo 3'
 
     class VerificationStatus(models.TextChoices):
         PENDING = 'pending', 'Pending'

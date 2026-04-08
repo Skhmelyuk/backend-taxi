@@ -151,6 +151,7 @@ class ClerkAuthentication(BaseAuthentication):
     def _get_or_create_user(self, payload: dict) -> User:
         clerk_user_id = payload.get('sub')
         email = payload.get('email')
+        phone_number = payload.get('phone_number')
 
         if not clerk_user_id:
             raise AuthenticationFailed('Token missing user ID')
@@ -169,13 +170,27 @@ class ClerkAuthentication(BaseAuthentication):
             except User.DoesNotExist:
                 pass
 
+        # If still no email, use phone-based placeholder or user_id placeholder
         if not email:
-            raise AuthenticationFailed('Token missing email')
+            if phone_number:
+                email = f"phone_{phone_number.replace('+', '')}@clerk.user"
+            else:
+                email = f"user_{clerk_user_id}@clerk.user"
+            
+            # Check if user with this placeholder already exists
+            try:
+                user = User.objects.get(email=email)
+                user.clerk_user_id = clerk_user_id
+                user.save(update_fields=['clerk_user_id'])
+                return user
+            except User.DoesNotExist:
+                pass
 
         return User.objects.create_user(
             email=email,
             clerk_user_id=clerk_user_id,
             first_name=payload.get('given_name') or '',
             last_name=payload.get('family_name') or '',
-            is_verified=payload.get('email_verified', False)
+            phone_number=phone_number,
+            is_verified=payload.get('email_verified', False) or payload.get('phone_number_verified', False)
         )

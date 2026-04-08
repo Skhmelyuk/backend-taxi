@@ -12,7 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = [
             'id', 'email', 'phone_number', 'first_name', 'last_name',
-            'full_name', 'profile_image', 'role', 'is_verified', 'created_at',
+            'full_name', 'profile_image', 'date_of_birth', 'role', 'is_verified', 'created_at',
         ]
         read_only_fields = ['id', 'email', 'role', 'is_verified', 'created_at']
 
@@ -28,7 +28,7 @@ class UserDetailSerializer(serializers.ModelSerializer):
         model = User
         fields = [
             'id', 'email', 'phone_number', 'first_name', 'last_name',
-            'full_name', 'profile_image', 'role', 'is_verified', 'is_active',
+            'full_name', 'profile_image', 'date_of_birth', 'role', 'is_verified', 'is_active',
             'created_at', 'updated_at', 'last_login',
             'rides_count', 'total_spent', 'average_rating',
         ]
@@ -48,11 +48,11 @@ class UserDetailSerializer(serializers.ModelSerializer):
 
 
 class UserUpdateSerializer(serializers.ModelSerializer):
-    """Write serializer — update profile."""
+    license_expiry = serializers.DateField(required=False, allow_null=True)
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'phone_number', 'profile_image']
+        fields = ['first_name', 'last_name', 'phone_number', 'profile_image', 'date_of_birth', 'license_expiry']
 
     def validate_phone_number(self, value):
         if value:
@@ -61,11 +61,21 @@ class UserUpdateSerializer(serializers.ModelSerializer):
         return value
 
     def update(self, instance, validated_data):
+        license_expiry = validated_data.pop('license_expiry', None)
+
         instance.first_name = validated_data.get('first_name', instance.first_name)
         instance.last_name = validated_data.get('last_name', instance.last_name)
         instance.phone_number = validated_data.get('phone_number', instance.phone_number)
         instance.profile_image = validated_data.get('profile_image', instance.profile_image)
+        instance.date_of_birth = validated_data.get('date_of_birth', instance.date_of_birth)
         instance.save()
+
+        # Update driver profile if it exists
+        if license_expiry is not None and hasattr(instance, 'driver_profile'):
+            driver_profile = instance.driver_profile
+            driver_profile.license_expiry = license_expiry
+            driver_profile.save(update_fields=['license_expiry'])
+
         return instance
 
 
