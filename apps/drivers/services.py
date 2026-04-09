@@ -25,9 +25,17 @@ class DriverService:
         """Register user as driver."""
         if hasattr(user, 'driver_profile'):
             raise ValueError('User already registered as driver')
+        
+        # Pop date_of_birth as it belongs to User model, not Driver
+        date_of_birth = driver_data.pop('date_of_birth', None)
+        if date_of_birth:
+            user.date_of_birth = date_of_birth
+            user.save(update_fields=['date_of_birth'])
+
         if user.role != 'driver':
             user.role = 'driver'
             user.save(update_fields=['role'])
+            
         driver = Driver.objects.create(
             user=user, status=Driver.Status.PENDING, **driver_data
         )

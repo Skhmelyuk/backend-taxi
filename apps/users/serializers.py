@@ -49,6 +49,7 @@ class UserDetailSerializer(serializers.ModelSerializer):
 
 class UserUpdateSerializer(serializers.ModelSerializer):
     license_expiry = serializers.DateField(required=False, allow_null=True)
+    profile_image = serializers.CharField(required=False, allow_blank=True)
 
     class Meta:
         model = User
@@ -58,6 +59,12 @@ class UserUpdateSerializer(serializers.ModelSerializer):
         if value:
             from core.validators import validate_phone_number
             validate_phone_number(value)
+            # Check uniqueness excluding the current instance
+            qs = User.objects.filter(phone_number=value)
+            if self.instance:
+                qs = qs.exclude(pk=self.instance.pk)
+            if qs.exists():
+                raise serializers.ValidationError('Цей номер телефону вже використовується.')
         return value
 
     def update(self, instance, validated_data):

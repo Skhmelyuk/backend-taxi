@@ -68,6 +68,8 @@ class DriverRegistrationSerializer(serializers.ModelSerializer):
         return super().update(instance, validated_data)
 
     def validate_vehicle_plate(self, value):
+        if not value:
+            return None
         query = Driver.objects.filter(vehicle_plate=value)
         if self.instance:
             query = query.exclude(id=self.instance.id)
@@ -76,6 +78,8 @@ class DriverRegistrationSerializer(serializers.ModelSerializer):
         return value.upper()
 
     def validate_license_number(self, value):
+        if not value:
+            return None
         query = Driver.objects.filter(license_number=value)
         if self.instance:
             query = query.exclude(id=self.instance.id)

@@ -1,3 +1,4 @@
+from django import forms
 from django.contrib import admin
 from django.utils.html import format_html
 
@@ -10,6 +11,15 @@ class DriverDocumentInline(admin.TabularInline):
     extra = 0
     readonly_fields = ('uploaded_at', 'reviewed_at', 'preview', 'status_badge')
     fields = ('doc_type', 'status_badge', 'status', 'file', 'preview', 'notes', 'reviewer')
+    
+    def formfield_for_dbfield(self, db_field, request, **kwargs):
+        if db_field.name == 'file':
+            # Use FileInput instead of ClearableFileInput to hide the "Currently:" link
+            kwargs['widget'] = forms.FileInput
+        if db_field.name == 'notes':
+            # Reduce width of the notes field to save horizontal space
+            kwargs['widget'] = forms.Textarea(attrs={'rows': 2, 'style': 'width: 250px;'})
+        return super().formfield_for_dbfield(db_field, request, **kwargs)
     
     def status_badge(self, obj):
         if not obj or not obj.status:
@@ -115,6 +125,15 @@ class DriverDocumentAdmin(admin.ModelAdmin):
         return DriverDocumentInline.preview(self, obj)
     preview.short_description = 'Превʼю (клікніть для збільшення)'
 
+    def formfield_for_dbfield(self, db_field, request, **kwargs):
+        if db_field.name == 'file':
+            # Use FileInput instead of ClearableFileInput to hide the "Currently:" link
+            kwargs['widget'] = forms.FileInput
+        if db_field.name == 'notes':
+            # Reduce width of the notes field to save space
+            kwargs['widget'] = forms.Textarea(attrs={'rows': 3, 'style': 'width: 400px;'})
+        return super().formfield_for_dbfield(db_field, request, **kwargs)
+
 
 @admin.register(Driver, site=taxi_admin)
 class DriverAdmin(admin.ModelAdmin):
@@ -123,19 +142,19 @@ class DriverAdmin(admin.ModelAdmin):
     inlines = [DriverDocumentInline]
 
     list_display = (
-        'user_photo', 'user_email', 'status', 'availability', 'vehicle_plate', 'created_at',
+        'user_photo', 'first_name', 'last_name', 'user_email', 'status_badge', 'availability_badge', 'vehicle_plate', 'created_at',
     )
     list_filter = ('status', 'availability', 'vehicle_type', 'created_at')
     search_fields = (
         'user__email', 'user__first_name', 'user__last_name',
         'vehicle_plate', 'license_number',
     )
-    readonly_fields = ('created_at', 'updated_at', 'user_photo')
+    readonly_fields = ('created_at', 'updated_at', 'user_photo', 'status_badge', 'availability_badge')
     ordering = ('-created_at',)
 
     fieldsets = (
         ('Користувач', {
-            'fields': ('user', 'user_photo', 'status', 'availability'),
+            'fields': ('user', 'user_photo', 'first_name', 'last_name', 'status', 'availability'),
         }),
         ('Автомобіль', {
             'fields': (
@@ -174,6 +193,38 @@ class DriverAdmin(admin.ModelAdmin):
             '</div>'
         )
     user_photo.short_description = 'Фото'
+    
+    def status_badge(self, obj):
+        colors = {
+            'approved': '#10b981',
+            'pending': '#f59e0b',
+            'rejected': '#ef4444',
+            'suspended': '#374151',
+        }
+        color = colors.get(obj.status, '#6b7280')
+        label = dict(Driver.Status.choices).get(obj.status, obj.status)
+        return format_html(
+            '<span style="background-color: {}; color: white; padding: 4px 8px; border-radius: 12px; font-weight: bold; font-size: 11px; white-space: nowrap;">{}</span>',
+            color, label
+        )
+    status_badge.short_description = 'Статус'
+
+    def availability_badge(self, obj):
+        colors = {
+            'online': '#10b981',
+            'offline': '#ef4444',
+            'busy': '#f59e0b',
+        }
+        if not obj.availability:
+            return '-'
+            
+        color = colors.get(obj.availability, '#6b7280')
+        label = dict(Driver.Availability.choices).get(obj.availability, obj.availability)
+        return format_html(
+            '<span style="background-color: {}; color: white; padding: 4px 8px; border-radius: 12px; font-weight: bold; font-size: 11px; white-space: nowrap;">{}</span>',
+            color, label
+        )
+    availability_badge.short_description = 'Зміна'
 
 
 

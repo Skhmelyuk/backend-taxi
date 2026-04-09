@@ -101,6 +101,10 @@ class Driver(models.Model):
         default=Availability.OFFLINE, db_index=True
     )
 
+    # Personal info (duplicated from User for convenience in admin and reporting)
+    first_name = models.CharField(max_length=100, blank=True, default="")
+    last_name = models.CharField(max_length=100, blank=True, default="")
+
     vehicle_type = models.CharField(
         max_length=20,
         choices=VehicleType.choices,
