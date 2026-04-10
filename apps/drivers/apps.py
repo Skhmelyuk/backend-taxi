@@ -10,7 +10,7 @@ class DriversConfig(AppConfig):
 
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'apps.drivers'
-    verbose_name = 'Drivers'
+    verbose_name = '🚗 Водії'
 
     def ready(self):
         """Import signals when app is ready."""

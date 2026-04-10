@@ -10,7 +10,7 @@ class UsersConfig(AppConfig):
 
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'apps.users'
-    verbose_name = 'Users'
+    verbose_name = '👥 Користувачі'
 
     def ready(self):
         """Import signals when app is ready."""

@@ -65,9 +65,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     """Custom user model."""
 
     class Role(models.TextChoices):
-        USER = 'user', 'User'
-        DRIVER = 'driver', 'Driver'
-        ADMIN = 'admin', 'Admin'
+        USER = 'user', 'Пасажир'
+        DRIVER = 'driver', 'Водій'
+        ADMIN = 'admin', 'Адміністратор'
 
     # Primary key
     id = models.UUIDField(
@@ -78,91 +78,59 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     # Clerk integration
     clerk_user_id = models.CharField(
-        max_length=255,
-        unique=True,
-        null=True,
-        blank=True,
-        db_index=True,
-        help_text='Clerk user ID for authentication'
+        max_length=255, unique=True, null=True, blank=True, db_index=True,
+        verbose_name='Clerk ID',
     )
 
-    # Basic info
     email = models.EmailField(
-        unique=True,
-        db_index=True,
-        help_text='User email address'
+        unique=True, db_index=True,
+        verbose_name='Email',
     )
     phone_number = models.CharField(
-        max_length=20,
-        unique=True,
-        null=True,
-        blank=True,
-        help_text='User phone number in international format'
+        max_length=20, unique=True, null=True, blank=True,
+        verbose_name='Телефон',
     )
     first_name = models.CharField(
-        max_length=100,
-        blank=True,
-        help_text='User first name'
+        max_length=100, blank=True,
+        verbose_name="Ім'я",
     )
     last_name = models.CharField(
-        max_length=100,
-        blank=True,
-        help_text='User last name'
+        max_length=100, blank=True,
+        verbose_name='Прізвище',
     )
     profile_image = models.URLField(
-        max_length=500,
-        blank=True,
-        help_text='URL to user profile image'
+        max_length=500, blank=True,
+        verbose_name='Фото',
     )
     date_of_birth = models.DateField(
-        null=True,
-        blank=True,
-        help_text='User date of birth'
+        null=True, blank=True,
+        verbose_name='Дата народження',
     )
 
-    # Role and permissions
     role = models.CharField(
-        max_length=10,
-        choices=Role.choices,
-        default=Role.USER,
-        db_index=True,
-        help_text='User role in the system'
+        max_length=10, choices=Role.choices, default=Role.USER, db_index=True,
+        verbose_name='Роль',
     )
 
-    # Status
     is_active = models.BooleanField(
         default=True,
-        help_text='Designates whether this user should be treated as active'
+        verbose_name='Активний',
     )
     is_staff = models.BooleanField(
         default=False,
-        help_text='Designates whether the user can log into admin site'
+        verbose_name='Персонал',
     )
     is_verified = models.BooleanField(
         default=False,
-        help_text='Designates whether the user has verified their email/phone'
+        verbose_name='Підтверджений',
     )
 
     # Push notifications
-    fcm_token = models.TextField(
-        blank=True,
-        help_text='Firebase Cloud Messaging token for push notifications'
-    )
+    fcm_token = models.TextField(blank=True, verbose_name='FCM Token')
 
-    # Timestamps
-    created_at = models.DateTimeField(
-        auto_now_add=True,
-        help_text='Date and time when user was created'
-    )
-    updated_at = models.DateTimeField(
-        auto_now=True,
-        help_text='Date and time when user was last updated'
-    )
-    last_login = models.DateTimeField(
-        null=True,
-        blank=True,
-        help_text='Date and time of last login'
-    )
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Створено')
+    updated_at = models.DateTimeField(auto_now=True,       verbose_name='Оновлено')
+    last_login = models.DateTimeField(null=True, blank=True, verbose_name='Останній вхід')
 
     objects = UserManager()
 
@@ -180,8 +148,8 @@ class User(AbstractBaseUser, PermissionsMixin):
             models.Index(fields=['is_active']),
             models.Index(fields=['created_at']),
         ]
-        verbose_name = 'User'
-        verbose_name_plural = 'Users'
+        verbose_name = 'Користувач'
+        verbose_name_plural = 'Користувачі'
 
     def __str__(self) -> str:
         """String representation."""

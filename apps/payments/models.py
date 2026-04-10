@@ -30,45 +30,46 @@ class PaymentManager(models.Manager):
 class Payment(models.Model):
     """Model representing a payment for a ride."""
     class Status(models.TextChoices):
-        PENDING = 'pending', 'Pending'
-        PROCESSING = 'processing', 'Processing'
-        SUCCESS = 'success', 'Success'
-        FAILED = 'failed', 'Failed'
-        REFUNDED = 'refunded', 'Refunded'
-        CANCELLED = 'cancelled', 'Cancelled'
-        EXPIRED = 'expired', 'Expired'
-        PARTIAL_REFUND = 'partial_refund', 'Partial Refund'
+        PENDING = 'pending', 'Очікує'
+        PROCESSING = 'processing', 'Обробляється'
+        SUCCESS = 'success', 'Успішно'
+        FAILED = 'failed', 'Помилка'
+        REFUNDED = 'refunded', 'Повернуто'
+        CANCELLED = 'cancelled', 'Скасовано'
+        EXPIRED = 'expired', 'Строк сплив'
+        PARTIAL_REFUND = 'partial_refund', 'Часткове повернення'
 
     class PaymentMethod(models.TextChoices):
-        CARD = 'card', 'Card'
+        CARD = 'card', 'Картка'
         GOOGLE_PAY = 'google_pay', 'Google Pay'
         APPLE_PAY = 'apple_pay', 'Apple Pay'
-        CASH = 'cash', 'Cash'
+        CASH = 'cash', 'Готівка'
 
     class Provider(models.TextChoices):
         LIQPAY = 'liqpay', 'LiqPay'
         FONDY = 'fondy', 'Fondy'
-        CASH = 'cash', 'Cash'
+        CASH = 'cash', 'Готівка'
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    ride = models.ForeignKey('rides.Ride', on_delete=models.PROTECT, related_name='payments')
-    user = models.ForeignKey('users.User', on_delete=models.PROTECT, related_name='payments')
+    ride = models.ForeignKey('rides.Ride', on_delete=models.PROTECT, related_name='payments', verbose_name='Поїздка')
+    user = models.ForeignKey('users.User', on_delete=models.PROTECT, related_name='payments', verbose_name='Користувач')
     amount = models.DecimalField(
-        max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))]
+        max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))],
+        verbose_name='Сума',
     )
-    currency = models.CharField(max_length=3, default='UAH')
-    status = models.CharField(max_length=20, choices=Status.choices, default=Status.PENDING, db_index=True)
-    payment_method = models.CharField(max_length=20, choices=PaymentMethod.choices)
-    provider = models.CharField(max_length=20, choices=Provider.choices)
-    provider_transaction_id = models.CharField(max_length=255, unique=True, null=True, blank=True, db_index=True)
-    provider_data = models.JSONField(default=dict, blank=True)
-    description = models.TextField(blank=True)
-    error_message = models.TextField(blank=True)
-    created_at = models.DateTimeField(auto_now_add=True, db_index=True)
-    processed_at = models.DateTimeField(null=True, blank=True)
-    failed_at = models.DateTimeField(null=True, blank=True)
-    refunded_at = models.DateTimeField(null=True, blank=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    currency = models.CharField(max_length=3, default='UAH', verbose_name='Валюта')
+    status = models.CharField(max_length=20, choices=Status.choices, default=Status.PENDING, db_index=True, verbose_name='Статус')
+    payment_method = models.CharField(max_length=20, choices=PaymentMethod.choices, verbose_name='Спосіб оплати')
+    provider = models.CharField(max_length=20, choices=Provider.choices, verbose_name='Провайдер')
+    provider_transaction_id = models.CharField(max_length=255, unique=True, null=True, blank=True, db_index=True, verbose_name='ID транзакції')
+    provider_data = models.JSONField(default=dict, blank=True, verbose_name='Дані провайдера')
+    description = models.TextField(blank=True, verbose_name='Опис')
+    error_message = models.TextField(blank=True, verbose_name='Повідомлення про помилку')
+    created_at   = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='Створено')
+    processed_at = models.DateTimeField(null=True, blank=True, verbose_name='Оброблено')
+    failed_at    = models.DateTimeField(null=True, blank=True, verbose_name='Помилка о')
+    refunded_at  = models.DateTimeField(null=True, blank=True, verbose_name='Повернуто о')
+    updated_at   = models.DateTimeField(auto_now=True, verbose_name='Оновлено')
 
     objects = PaymentManager()
 
@@ -81,8 +82,8 @@ class Payment(models.Model):
             models.Index(fields=['provider_transaction_id']),
             models.Index(fields=['created_at']),
         ]
-        verbose_name = 'Payment'
-        verbose_name_plural = 'Payments'
+        verbose_name = 'Платіж'
+        verbose_name_plural = 'Платежі'
 
     def __str__(self) -> str:
         return f"Payment {self.id} ({self.status}) {self.amount} {self.currency}"
@@ -91,30 +92,31 @@ class Payment(models.Model):
 class PromoCode(models.Model):
     """Model representing a promotional code for discounts on rides."""
     class DiscountType(models.TextChoices):
-        PERCENTAGE = 'percentage', 'Percentage'
-        FIXED = 'fixed', 'Fixed Amount'
+        PERCENTAGE = 'percentage', 'Відсоткова'
+        FIXED = 'fixed', 'Фіксова сума'
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    code = models.CharField(max_length=50, unique=True, db_index=True)
-    discount_type = models.CharField(max_length=20, choices=DiscountType.choices, default=DiscountType.PERCENTAGE)
+    code = models.CharField(max_length=50, unique=True, db_index=True, verbose_name='Код')
+    discount_type = models.CharField(max_length=20, choices=DiscountType.choices, default=DiscountType.PERCENTAGE, verbose_name='Тип знижки')
     discount_percent = models.DecimalField(
         max_digits=5, decimal_places=2, default=0,
-        validators=[MinValueValidator(0), MaxValueValidator(100)]
+        validators=[MinValueValidator(0), MaxValueValidator(100)],
+        verbose_name='Відсоток знижки (%)',
     )
-    discount_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    max_discount = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    min_ride_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    is_active = models.BooleanField(default=True)
-    usage_limit = models.IntegerField(null=True, blank=True)
-    usage_count = models.IntegerField(default=0)
-    valid_from = models.DateTimeField(default=timezone.now)
-    valid_until = models.DateTimeField(null=True, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    discount_amount  = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name='Сума знижки')
+    max_discount     = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, verbose_name='Макс знижка')
+    min_ride_price   = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name='Мін сума поїздки')
+    is_active        = models.BooleanField(default=True, verbose_name='Активний')
+    usage_limit      = models.IntegerField(null=True, blank=True, verbose_name='Ліміт використань')
+    usage_count      = models.IntegerField(default=0, verbose_name='Кількість використань')
+    valid_from       = models.DateTimeField(default=timezone.now, verbose_name='Дійсний з')
+    valid_until      = models.DateTimeField(null=True, blank=True, verbose_name='Дійсний до')
+    created_at       = models.DateTimeField(auto_now_add=True, verbose_name='Створено')
 
     class Meta:
         db_table = 'promo_codes'
-        verbose_name = 'Promo Code'
-        verbose_name_plural = 'Promo Codes'
+        verbose_name = 'Промокод'
+        verbose_name_plural = 'Промокоди'
 
     def __str__(self) -> str:
         return self.code
@@ -136,23 +138,24 @@ class PromoCode(models.Model):
 class Refund(models.Model):
     """Model representing a refund for a payment."""
     class Status(models.TextChoices):
-        PENDING = 'pending', 'Pending'
-        PROCESSING = 'processing', 'Processing'
-        SUCCESS = 'success', 'Success'
-        FAILED = 'failed', 'Failed'
+        PENDING = 'pending', 'Очікує'
+        PROCESSING = 'processing', 'Обробляється'
+        SUCCESS = 'success', 'Успішно'
+        FAILED = 'failed', 'Помилка'
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    payment = models.ForeignKey(Payment, on_delete=models.PROTECT, related_name='refunds')
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
-    reason = models.TextField()
-    status = models.CharField(max_length=20, choices=Status.choices, default=Status.PENDING)
-    provider_refund_id = models.CharField(max_length=255, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    processed_at = models.DateTimeField(null=True, blank=True)
+    payment            = models.ForeignKey(Payment, on_delete=models.PROTECT, related_name='refunds', verbose_name='Платіж')
+    amount             = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Сума')
+    reason             = models.TextField(verbose_name='Причина')
+    status             = models.CharField(max_length=20, choices=Status.choices, default=Status.PENDING, verbose_name='Статус')
+    provider_refund_id = models.CharField(max_length=255, blank=True, verbose_name='ID повернення')
+    created_at         = models.DateTimeField(auto_now_add=True, verbose_name='Створено')
+    processed_at       = models.DateTimeField(null=True, blank=True, verbose_name='Оброблено')
 
     class Meta:
         db_table = 'refunds'
-        verbose_name = 'Refund'
+        verbose_name = 'Повернення'
+        verbose_name_plural = 'Повернення'
 
     def __str__(self) -> str:
         return f"Refund {self.id} ({self.status}) {self.amount}"

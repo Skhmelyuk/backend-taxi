@@ -1,0 +1,15 @@
+{% load i18n static %}
+{% if cl.search_fields %}
+<div id="toolbar" style="padding:12px 0;">
+  <form id="changelist-search" method="get" role="search">
+    <div style="display:flex;align-items:center;background:#fff;border:1.5px solid #c4b5fd;border-radius:12px;box-shadow:0 2px 8px rgba(121,0,255,0.08);overflow:hidden;width:50%;" onfocusin="this.style.borderColor='#7900FF';this.style.boxShadow='0 0 0 3px rgba(121,0,255,0.12)'" onfocusout="this.style.borderColor='#c4b5fd';this.style.boxShadow='0 2px 8px rgba(121,0,255,0.08)'">
+      <label for="searchbar" style="padding:0 10px 0 14px;display:flex;align-items:center;cursor:text;flex-shrink:0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></label>
+      <input type="text" name="{{ search_var }}" value="{{ cl.query }}" id="searchbar" {% if cl.search_help_text %}aria-describedby="searchbar_helptext"{% endif %} placeholder="Пошук..." style="flex:1;border:none;outline:none;box-shadow:none;background:transparent;font-size:13px;color:#1f2937;padding:9px 4px;min-width:0;height:38px;box-sizing:border-box;">
+      {% if cl.query %}<a href="?" style="display:flex;align-items:center;padding:0 10px;color:#9ca3af;text-decoration:none;font-size:18px;line-height:1;flex-shrink:0;" title="Очистити">&#215;</a>{% endif %}
+      <button type="submit" style="flex-shrink:0;background:#7900FF;color:#fff;border:none;padding:0 24px;height:38px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;" onmouseover="this.style.background='#6200cc'" onmouseout="this.style.background='#7900FF'">{% translate 'Search' %}</button>
+    </div>
+    {% for pair in cl.params.items %}{% if pair.0 != search_var %}<input type="hidden" name="{{ pair.0 }}" value="{{ pair.1 }}">{% endif %}{% endfor %}
+    {% if cl.search_help_text %}<div class="help" id="searchbar_helptext" style="font-size:11px;color:#9ca3af;margin-top:4px;">{{ cl.search_help_text }}</div>{% endif %}
+  </form>
+</div>
+{% endif %}

@@ -69,80 +69,79 @@ class DriverManager(models.Manager):
 class Driver(models.Model):
 
     class Status(models.TextChoices):
-        PENDING = 'pending', 'Pending Verification'
-        APPROVED = 'approved', 'Approved'
-        REJECTED = 'rejected', 'Rejected'
-        SUSPENDED = 'suspended', 'Suspended'
+        PENDING = 'pending', 'Очікує перевірки'
+        APPROVED = 'approved', 'Схвалено'
+        REJECTED = 'rejected', 'Відхилено'
+        SUSPENDED = 'suspended', 'Заблоковано'
 
     class Availability(models.TextChoices):
         ONLINE = 'online', 'Online'
         OFFLINE = 'offline', 'Offline'
-        BUSY = 'busy', 'Busy'
+        BUSY = 'busy', 'Зайнятий'
 
     class VehicleType(models.TextChoices):
-        ECONOMY = 'economy', 'Economy'
-        COMFORT = 'comfort', 'Comfort'
-        BUSINESS = 'business', 'Business'
+        ECONOMY = 'economy', 'Економ'
+        COMFORT = 'comfort', 'Комфорт'
+        BUSINESS = 'business', 'Бізнес'
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     user = models.OneToOneField(
         'users.User', on_delete=models.CASCADE,
         related_name='driver_profile',
-        help_text='User associated with this driver'
+        verbose_name='Користувач',
     )
 
     status = models.CharField(
         max_length=20, choices=Status.choices,
-        default=Status.PENDING, db_index=True
+        default=Status.PENDING, db_index=True,
+        verbose_name='Статус',
     )
     availability = models.CharField(
         max_length=20, choices=Availability.choices,
-        default=Availability.OFFLINE, db_index=True
+        default=Availability.OFFLINE, db_index=True,
+        verbose_name='Доступність',
     )
 
-    # Personal info (duplicated from User for convenience in admin and reporting)
-    first_name = models.CharField(max_length=100, blank=True, default="")
-    last_name = models.CharField(max_length=100, blank=True, default="")
+    first_name = models.CharField(max_length=100, blank=True, default='', verbose_name="Ім'я")
+    last_name  = models.CharField(max_length=100, blank=True, default='', verbose_name='Прізвище')
 
     vehicle_type = models.CharField(
-        max_length=20,
-        choices=VehicleType.choices,
-        default=VehicleType.ECONOMY,
-        blank=True,
+        max_length=20, choices=VehicleType.choices,
+        default=VehicleType.ECONOMY, blank=True,
+        verbose_name='Тип авто',
     )
-    vehicle_make = models.CharField(max_length=100, blank=True, default="")
-    vehicle_model = models.CharField(max_length=100, blank=True, default="")
-    vehicle_year = models.IntegerField(
+    vehicle_make  = models.CharField(max_length=100, blank=True, default='', verbose_name='Марка')
+    vehicle_model = models.CharField(max_length=100, blank=True, default='', verbose_name='Модель')
+    vehicle_year  = models.IntegerField(
         validators=[MinValueValidator(2000), MaxValueValidator(2030)],
-        null=True,
-        blank=True,
+        null=True, blank=True, verbose_name='Рік випуску',
     )
-    vehicle_color = models.CharField(max_length=50, blank=True, default="")
-    vehicle_plate = models.CharField(max_length=20, unique=True, null=True, blank=True)
+    vehicle_color = models.CharField(max_length=50, blank=True, default='', verbose_name='Колір')
+    vehicle_plate = models.CharField(max_length=20, unique=True, null=True, blank=True, verbose_name='Номерний знак')
 
-    license_number = models.CharField(max_length=50, unique=True, null=True, blank=True)
-    license_expiry = models.DateField(null=True, blank=True)
+    license_number = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name='Номер посвідчення')
+    license_expiry = models.DateField(null=True, blank=True, verbose_name='Дійсне до')
 
     current_location = gis_models.PointField(
         geography=True, srid=4326, null=True, blank=True,
-        help_text='Current GPS location'
+        verbose_name='Поточне місцезнаходження',
     )
-    location_updated_at = models.DateTimeField(null=True, blank=True)
+    location_updated_at = models.DateTimeField(null=True, blank=True, verbose_name='Місцезнаходження оновлено')
 
     rating = models.DecimalField(
-        max_digits=3, decimal_places=2,
-        default=5.0,
-        validators=[MinValueValidator(1.0), MaxValueValidator(5.0)]
+        max_digits=3, decimal_places=2, default=5.0,
+        validators=[MinValueValidator(1.0), MaxValueValidator(5.0)],
+        verbose_name='Рейтинг',
     )
-    total_rides = models.IntegerField(default=0)
-    total_earnings = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    total_rides    = models.IntegerField(default=0, verbose_name='Всього поїздок')
+    total_earnings = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name='Загальний заробіток')
 
-    rejection_reason = models.TextField(blank=True)
-    suspension_reason = models.TextField(blank=True)
+    rejection_reason  = models.TextField(blank=True, verbose_name='Причина відмови')
+    suspension_reason = models.TextField(blank=True, verbose_name='Причина блокування')
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Створено')
+    updated_at = models.DateTimeField(auto_now=True,       verbose_name='Оновлено')
 
     objects = DriverManager()
 
@@ -155,8 +154,8 @@ class Driver(models.Model):
             models.Index(fields=['vehicle_type']),
             models.Index(fields=['rating']),
         ]
-        verbose_name = 'Driver'
-        verbose_name_plural = 'Drivers'
+        verbose_name = 'Водій'
+        verbose_name_plural = 'Водії'
 
     def __str__(self) -> str:
         return f"Driver: {self.user.email} ({self.status})"
@@ -185,17 +184,17 @@ class DriverDocument(models.Model):
     """Stores driver verification documents (license, insurance, photos)."""
 
     class DocumentType(models.TextChoices):
-        DRIVER_LICENSE = 'driver_license', 'Driver License'
-        VEHICLE_REGISTRATION = 'vehicle_registration', 'Vehicle Registration'
-        INSURANCE_POLICY = 'insurance_policy', 'Insurance Policy'
-        VEHICLE_PHOTO = 'vehicle_photo', 'Vehicle Photo'
-        VEHICLE_PHOTO_2 = 'vehicle_photo_2', 'Vehicle Photo 2'
-        VEHICLE_PHOTO_3 = 'vehicle_photo_3', 'Vehicle Photo 3'
+        DRIVER_LICENSE        = 'driver_license',        'Водійське посвідчення'
+        VEHICLE_REGISTRATION  = 'vehicle_registration',  'Техпаспорт'
+        INSURANCE_POLICY      = 'insurance_policy',      'Страховий поліс'
+        VEHICLE_PHOTO         = 'vehicle_photo',         'Фото авто 1'
+        VEHICLE_PHOTO_2       = 'vehicle_photo_2',       'Фото авто 2'
+        VEHICLE_PHOTO_3       = 'vehicle_photo_3',       'Фото авто 3'
 
     class VerificationStatus(models.TextChoices):
-        PENDING = 'pending', 'Pending'
-        APPROVED = 'approved', 'Approved'
-        REJECTED = 'rejected', 'Rejected'
+        PENDING  = 'pending',  'Очікує перевірки'
+        APPROVED = 'approved', 'Схвалено'
+        REJECTED = 'rejected', 'Відхилено'
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     driver = models.ForeignKey(
@@ -207,36 +206,38 @@ class DriverDocument(models.Model):
     doc_type = models.CharField(
         max_length=50,
         choices=DocumentType.choices,
-        help_text='Type of uploaded document',
+        verbose_name='Тип документа',
     )
     file = models.FileField(
         upload_to=driver_document_upload_to,
         max_length=500,
-        help_text='Uploaded document file (image or pdf)',
+        verbose_name='Файл',
     )
     status = models.CharField(
         max_length=20,
         choices=VerificationStatus.choices,
         default=VerificationStatus.PENDING,
-        help_text='Verification status of the document',
+        verbose_name='Статус',
     )
-    notes = models.TextField(blank=True, help_text='Reviewer notes or driver comments')
-    expires_at = models.DateField(null=True, blank=True, help_text='Optional expiry date')
-    uploaded_at = models.DateTimeField(auto_now_add=True)
-    reviewed_at = models.DateTimeField(null=True, blank=True)
+    notes      = models.TextField(blank=True, verbose_name='Нотатки')
+    expires_at = models.DateField(null=True, blank=True, verbose_name='Дійсне до')
+    uploaded_at = models.DateTimeField(auto_now_add=True, verbose_name='Завантажено')
+    reviewed_at = models.DateTimeField(null=True, blank=True, verbose_name='Перевірено')
     reviewer = models.ForeignKey(
         'users.User',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
         related_name='reviewed_documents',
-        help_text='Admin who reviewed the document',
+        verbose_name='Перевіряв',
     )
 
     class Meta:
         db_table = 'driver_documents'
         ordering = ['-uploaded_at']
         unique_together = ('driver', 'doc_type')
+        verbose_name = 'Документ водія'
+        verbose_name_plural = 'Документи водія'
 
     def __str__(self) -> str:
         return f"{self.driver.user.email} → {self.doc_type} ({self.status})"

@@ -179,6 +179,93 @@ class DriverViewSet(viewsets.ModelViewSet):
         response_serializer = DriverDocumentSerializer(document, context={'request': request})
         return Response(response_serializer.data)
 
+    @action(detail=False, methods=['get'])
+    def rating_stats(self, request):
+        """GET /api/drivers/rating_stats/ — Current driver rating details."""
+        from datetime import date, timedelta
+        from django.utils.timezone import now
+        from django.db.models import Avg, Count, Q
+        from apps.rides.models import Ride
+
+        driver = getattr(request.user, 'driver_profile', None)
+        if not driver:
+            return Response({'error': 'Driver profile not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        today = now().date()
+
+        # ── Monthly chart: last 3 months, 4 weeks each ──────────────────────
+        MONTH_UA = {
+            1: 'Січень', 2: 'Лютий', 3: 'Березень', 4: 'Квітень',
+            5: 'Травень', 6: 'Червень', 7: 'Липень', 8: 'Серпень',
+            9: 'Вересень', 10: 'Жовтень', 11: 'Листопад', 12: 'Грудень',
+        }
+
+        months = []
+        for i in range(2, -1, -1):
+            month_offset = today.month - i
+            year = today.year + (month_offset - 1) // 12
+            month = (month_offset - 1) % 12 + 1
+            months.append((year, month))
+
+        monthly_data = []
+        for year, month in months:
+            month_start = date(year, month, 1)
+            month_end = date(year + 1, 1, 1) if month == 12 else date(year, month + 1, 1)
+
+            weeks = []
+            for w in range(4):
+                week_start = month_start + timedelta(days=w * 7)
+                week_end = month_start + timedelta(days=(w + 1) * 7)
+                if week_end > month_end:
+                    week_end = month_end
+                count = Ride.objects.filter(
+                    driver=driver,
+                    status=Ride.Status.COMPLETED,
+                    completed_at__date__gte=week_start,
+                    completed_at__date__lt=week_end,
+                ).count()
+                weeks.append(count)
+
+            monthly_data.append({'label': MONTH_UA[month], 'weeks': weeks})
+
+        # ── On-time: accepted within 3 minutes of creation ──────────────────
+        accepted_rides = Ride.objects.filter(
+            driver=driver,
+            status__in=[Ride.Status.COMPLETED, Ride.Status.IN_PROGRESS, Ride.Status.ACCEPTED],
+            accepted_at__isnull=False,
+        )
+        total_accepted = accepted_rides.count()
+        on_time_count = sum(
+            1 for r in accepted_rides
+            if r.accepted_at and (r.accepted_at - r.created_at).total_seconds() <= 180
+        ) if total_accepted > 0 else 0
+        on_time_percent = round(on_time_count / total_accepted * 100) if total_accepted > 0 else 0
+
+        # ── Convenient route: completion rate (completed / accepted) ─────────
+        completed_count = Ride.objects.filter(driver=driver, status=Ride.Status.COMPLETED).count()
+        convenient_route_percent = round(completed_count / total_accepted * 100) if total_accepted > 0 else 0
+
+        # ── Safe driving: derived from average ride rating (1-5 → 0-100%) ────
+        avg_rating_data = Ride.objects.filter(
+            driver=driver,
+            status=Ride.Status.COMPLETED,
+            rating__isnull=False,
+        ).aggregate(avg=Avg('rating'))
+        avg_rating = avg_rating_data['avg']
+        safe_driving_percent = round((avg_rating - 1) / 4 * 100) if avg_rating is not None else 0
+
+        return Response({
+            'rating': float(driver.rating),
+            'total_rides': driver.total_rides,
+            'first_name': driver.user.first_name,
+            'last_name': driver.user.last_name,
+            'profile_image': driver.user.profile_image,
+            'on_time_percent': on_time_percent,
+            'convenient_route_percent': convenient_route_percent,
+            'safe_driving_percent': safe_driving_percent,
+            'monthly_chart': monthly_data,
+        })
+
     @action(detail=True, methods=['post'])
     def approve(self, request, pk=None):
         """POST /api/drivers/{id}/approve/ — Approve driver (admin)."""
