@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html, mark_safe
 
-from apps.drivers.models import Driver, DriverDocument
+from apps.drivers.models import Driver, DriverDocument, WithdrawalRequest
 from core.admin_site import taxi_admin
 
 
@@ -276,11 +276,26 @@ class DriverAdmin(admin.ModelAdmin):
         ('Статистика', {
             'fields': ('stats_panel', 'driver_rides_link'),
         }),
+        ('Виплати', {
+            'fields': (
+                'payout_card_number',
+                'pending_card_withdrawal',
+                'cash_earnings',
+                'card_earnings',
+                'total_earnings',
+            ),
+        }),
         ('Службова інформація', {
             'classes': ('collapse',),
-            'fields': ('rating', 'total_rides', 'total_earnings', 'created_at', 'updated_at'),
+            'fields': ('rating', 'total_rides', 'created_at', 'updated_at'),
         }),
     )
+
+    def formfield_for_dbfield(self, db_field, request, **kwargs):
+        field = super().formfield_for_dbfield(db_field, request, **kwargs)
+        if db_field.name == 'vehicle_year':
+            field.widget.attrs.update({'style': 'width:90px;'})
+        return field
 
     actions = ['approve_drivers', 'suspend_drivers', 'set_online', 'set_offline']
 
@@ -492,7 +507,7 @@ class DriverAdmin(admin.ModelAdmin):
             f'<div {S}"display:grid;grid-template-columns:1fr 1fr;gap:10px;">{pills_html}</div>',
         )
 
-        # ── Section 3: Bar chart ──────────────────────────────────────────────
+        # ── Section 3: Bar chart (rides) ─────────────────────────────────────
         bars = ''
         for label, cnt in months_data:
             h   = max(6, round(cnt / max_cnt * 90))
@@ -514,10 +529,259 @@ class DriverAdmin(admin.ModelAdmin):
             f'border-bottom:2px solid #ede9fe;padding-bottom:0;">{bars}</div>',
         )
 
+        # ── Section 4: Earnings ───────────────────────────────────────────────
+        from django.db.models import Sum
+        from apps.payments.models import Payment
+
+        total_e   = float(obj.total_earnings or 0)
+        cash_e    = float(obj.cash_earnings or 0)
+        card_e    = float(obj.card_earnings or 0)
+        pending_w = float(obj.pending_card_withdrawal or 0)
+
+        cash_pct = round(cash_e / total_e * 100) if total_e else 0
+        card_pct = 100 - cash_pct if total_e else 0
+
+        # Monthly earnings (last 5 months)
+        earn_months = []
+        for i in range(4, -1, -1):
+            mo = (today.month - i - 1) % 12 + 1
+            yr = today.year + ((today.month - i - 1) // 12)
+            ms = date(yr, mo, 1)
+            me = date(yr + 1, 1, 1) if mo == 12 else date(yr, mo + 1, 1)
+            earn = Payment.objects.filter(
+                ride__driver=obj, status='success',
+                processed_at__date__gte=ms, processed_at__date__lt=me,
+            ).aggregate(t=Sum('amount'))['t'] or 0
+            earn_months.append((MONTH_UA[mo], float(earn)))
+
+        max_earn = max((e for _, e in earn_months), default=1) or 1
+
+        earn_bars = ''
+        for label, earn in earn_months:
+            h   = max(6, round(earn / max_earn * 90))
+            pct = round(earn / max_earn * 100) if max_earn else 0
+            clr = '#10b981' if pct >= 70 else '#34d399' if pct >= 30 else '#a7f3d0'
+            earn_bars += (
+                f'<div {S}"flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">'
+                f'<span {S}"font-size:10px;font-weight:700;color:#374151;">{int(earn):,}₴</span>'
+                f'<div {S}"width:100%;height:{h}px;background:{clr};border-radius:6px 6px 0 0;"></div>'
+                f'<span {S}"font-size:11px;color:#9ca3af;font-weight:500;">{label}</span>'
+                f'</div>'
+            )
+
+        def earn_row(label, val, color):
+            return (
+                f'<div {S}"display:flex;justify-content:space-between;align-items:center;'
+                f'padding:6px 0;border-bottom:1px solid #f3f4f6;">'
+                f'<span {S}"font-size:12px;color:#6b7280;">{label}</span>'
+                f'<span {S}"font-size:14px;font-weight:700;color:{color};">{val:,.0f} ₴</span>'
+                f'</div>'
+            )
+
+        bar_w_cash = f'{cash_pct}%'
+        bar_w_card = f'{card_pct}%'
+
+        split_bar = (
+            f'<div {S}"display:flex;border-radius:8px;overflow:hidden;height:10px;margin:12px 0 4px;">'
+            f'<div {S}"width:{bar_w_cash};background:#22c55e;" title="Готівка {cash_pct}%"></div>'
+            f'<div {S}"width:{bar_w_card};background:#7900FF;" title="Картка {card_pct}%"></div>'
+            f'</div>'
+            f'<div {S}"display:flex;gap:14px;margin-bottom:10px;">'
+            f'<span {S}"font-size:11px;color:#22c55e;font-weight:600;">● Готівка {cash_pct}%</span>'
+            f'<span {S}"font-size:11px;color:#7900FF;font-weight:600;">● Картка {card_pct}%</span>'
+            f'</div>'
+        )
+
+        from apps.drivers.models import WithdrawalRequest as _WR
+        card_paid_out = float(_WR.objects.filter(
+            driver=obj, status=_WR.Status.COMPLETED
+        ).aggregate(t=Sum('amount'))['t'] or 0)
+        card_remaining = card_e - card_paid_out  # what's left incl. pending_w
+
+        earn_summary = (
+            earn_row('Загальний заробіток', total_e, '#1f2937') +
+            earn_row('Готівка', cash_e, '#22c55e') +
+            earn_row('Картка (всього)', card_e, '#7900FF')
+        )
+
+        card_breakdown = (
+            f'<div {S}"margin-top:10px;background:#f5f3ff;border:1px solid #ede9fe;'
+            f'border-radius:10px;padding:10px 14px;">'
+            f'<div {S}"font-size:10px;font-weight:700;color:#5A00CC;text-transform:uppercase;'
+            f'letter-spacing:0.5px;margin-bottom:8px;">💳 Розбивка картки</div>'
+            f'<div {S}"display:flex;justify-content:space-between;padding:4px 0;'
+            f'border-bottom:1px solid #ede9fe;">'
+            f'<span {S}"font-size:12px;color:#6b7280;">Зароблено карткою</span>'
+            f'<span {S}"font-size:13px;font-weight:700;color:#7900FF;">{card_e:,.0f} ₴</span>'
+            f'</div>'
+            f'<div {S}"display:flex;justify-content:space-between;padding:4px 0;'
+            f'border-bottom:1px solid #ede9fe;">'
+            f'<span {S}"font-size:12px;color:#6b7280;">Виплачено</span>'
+            f'<span {S}"font-size:13px;font-weight:700;color:#10b981;">− {card_paid_out:,.0f} ₴</span>'
+            f'</div>'
+            f'<div {S}"display:flex;justify-content:space-between;padding:6px 0 0;">'
+            f'<span {S}"font-size:12px;font-weight:700;color:#1f2937;">Залишок (не виплачено)</span>'
+            f'<span {S}"font-size:15px;font-weight:800;color:#d97706;">{card_remaining:,.0f} ₴</span>'
+            f'</div>'
+            f'</div>'
+        )
+
+        pending_html = ''
+        if pending_w > 0:
+            pending_html = (
+                f'<div {S}"display:flex;justify-content:space-between;align-items:center;'
+                f'margin-top:8px;background:#fffbeb;border:1px solid #fde68a;'
+                f'border-radius:10px;padding:8px 12px;">'
+                f'<span {S}"font-size:12px;color:#d97706;font-weight:600;">⏳ Доступно до виведення</span>'
+                f'<span {S}"font-size:14px;font-weight:800;color:#d97706;">{pending_w:,.0f} ₴</span>'
+                f'</div>'
+            )
+
+        section4_left = card(
+            f'<div {S}"font-size:12px;font-weight:700;color:#5A00CC;text-transform:uppercase;'
+            f'letter-spacing:0.8px;margin-bottom:12px;">💰 Заробіток</div>'
+            f'{earn_summary}'
+            f'{split_bar}'
+            f'{card_breakdown}'
+            f'{pending_html}',
+        )
+
+        section4_right = card(
+            f'<div {S}"font-size:12px;font-weight:700;color:#5A00CC;text-transform:uppercase;'
+            f'letter-spacing:0.8px;margin-bottom:16px;">📈 Заробіток за місяцями</div>'
+            f'<div {S}"display:flex;align-items:flex-end;gap:8px;height:110px;'
+            f'border-bottom:2px solid #dcfce7;padding-bottom:0;">{earn_bars}</div>',
+        )
+
+        # ── Section 5: Withdrawal statistics ──────────────────────────────────
+        from apps.drivers.models import WithdrawalRequest as WR
+
+        wrs = WR.objects.filter(driver=obj)
+        wr_total      = wrs.count()
+        wr_pending    = wrs.filter(status=WR.Status.PENDING).count()
+        wr_approved   = wrs.filter(status=WR.Status.APPROVED).count()
+        wr_completed  = wrs.filter(status=WR.Status.COMPLETED).count()
+        wr_rejected   = wrs.filter(status=WR.Status.REJECTED).count()
+        wr_paid_sum   = float(wrs.filter(status=WR.Status.COMPLETED).aggregate(
+            t=Sum('amount'))['t'] or 0)
+        payout_card   = obj.payout_card_number or None
+        pending_now   = float(obj.pending_card_withdrawal or 0)
+
+        def wr_pill(icon, label, val, color, bg):
+            return (
+                f'<div {S}"display:flex;align-items:center;gap:10px;background:{bg};'
+                f'border-radius:12px;padding:10px 14px;">'
+                f'<span {S}"font-size:20px;">{icon}</span>'
+                f'<div>'
+                f'<div {S}"font-size:18px;font-weight:800;color:{color};">{val}</div>'
+                f'<div {S}"font-size:11px;color:#6b7280;margin-top:1px;">{label}</div>'
+                f'</div></div>'
+            )
+
+        card_block = ''
+        if payout_card:
+            url_list = reverse('taxi_admin:drivers_withdrawalrequest_changelist') + f'?driver__id__exact={obj.pk}'
+            card_block = (
+                f'<div {S}"background:#f5f3ff;border:1px solid #ede9fe;border-radius:10px;'
+                f'padding:12px 16px;margin-top:12px;">'
+                f'<div {S}"font-size:10px;font-weight:700;color:#6b7280;text-transform:uppercase;'
+                f'letter-spacing:0.5px;margin-bottom:6px;">💳 Картка виплати</div>'
+                f'<div {S}"font-size:20px;font-weight:800;color:#7900FF;letter-spacing:2px;margin-bottom:8px;">'
+                f'{payout_card}</div>'
+                f'<a href="{url_list}" {S}"font-size:12px;color:#7900FF;font-weight:600;">'
+                f'Переглянути всі запити →</a>'
+                f'</div>'
+            )
+        else:
+            card_block = (
+                f'<div {S}"background:#fef2f2;border:1px solid #fecaca;border-radius:10px;'
+                f'padding:10px 14px;margin-top:12px;">'
+                f'<span {S}"font-size:12px;color:#ef4444;font-weight:600;">'
+                f'⚠️ Картку виплати не вказано</span>'
+                f'</div>'
+            )
+
+        pending_block = ''
+        if pending_now > 0:
+            pending_block = (
+                f'<div {S}"display:flex;justify-content:space-between;align-items:center;'
+                f'background:#fffbeb;border:1px solid #fde68a;border-radius:10px;'
+                f'padding:10px 14px;margin-top:10px;">'
+                f'<span {S}"font-size:12px;color:#d97706;font-weight:700;">💰 Доступно до виведення</span>'
+                f'<span {S}"font-size:16px;font-weight:800;color:#d97706;">{pending_now:,.0f} ₴</span>'
+                f'</div>'
+            )
+
+        section5_left = card(
+            f'<div {S}"font-size:12px;font-weight:700;color:#5A00CC;text-transform:uppercase;'
+            f'letter-spacing:0.8px;margin-bottom:14px;">💸 Виведення коштів</div>'
+            f'<div {S}"display:grid;grid-template-columns:1fr 1fr;gap:8px;">'
+            f'{wr_pill("📋", "Всього запитів", wr_total, "#374151", "#f9fafb")}'
+            f'{wr_pill("✅", "Виплачено", wr_completed, "#7900FF", "#f5f3ff")}'
+            f'{wr_pill("⏳", "Очікує розгляду", wr_pending, "#d97706", "#fffbeb")}'
+            f'{wr_pill("🔄", "Схвалено", wr_approved, "#10b981", "#f0fdf4")}'
+            f'{wr_pill("❌", "Відхилено", wr_rejected, "#ef4444", "#fef2f2")}'
+            f'{wr_pill("💵", "Виплачено разом", f"{wr_paid_sum:,.0f} ₴", "#7900FF", "#f5f3ff")}'
+            f'</div>'
+            f'{pending_block}'
+            f'{card_block}',
+        )
+
+        # Withdrawal history table (last 5)
+        recent_wrs = wrs.order_by('-created_at')[:5]
+        wr_rows = ''
+        status_cfg = {
+            WR.Status.PENDING:   ('#d97706', '#fffbeb', '⏳ Очікує'),
+            WR.Status.APPROVED:  ('#10b981', '#f0fdf4', '✅ Схвалено'),
+            WR.Status.REJECTED:  ('#ef4444', '#fef2f2', '❌ Відхилено'),
+            WR.Status.COMPLETED: ('#7900FF', '#f5f3ff', '💸 Виплачено'),
+        }
+        for wr in recent_wrs:
+            sc, sbg, sl = status_cfg.get(wr.status, ('#6b7280', '#f9fafb', wr.status))
+            edit_url = reverse('taxi_admin:drivers_withdrawalrequest_change', args=[wr.pk])
+            ref = f'<span {S}"font-size:10px;color:#10b981;">{wr.payment_reference[:20]}</span>' if wr.payment_reference else ''
+            wr_rows += (
+                f'<tr>'
+                f'<td {S}"padding:6px 8px;font-size:12px;color:#374151;">{wr.created_at.strftime("%d.%m.%Y")}</td>'
+                f'<td {S}"padding:6px 8px;font-size:13px;font-weight:700;color:#7900FF;">{float(wr.amount):,.0f} ₴</td>'
+                f'<td {S}"padding:6px 8px;">'
+                f'<span {S}"background:{sbg};color:{sc};border:1px solid {sc}40;padding:2px 8px;'
+                f'border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap;">{sl}</span>'
+                f'</td>'
+                f'<td {S}"padding:6px 8px;">{ref}</td>'
+                f'<td {S}"padding:6px 8px;">'
+                f'<a href="{edit_url}" {S}"font-size:11px;color:#7900FF;font-weight:600;">Деталі</a>'
+                f'</td>'
+                f'</tr>'
+            )
+
+        section5_right = card(
+            f'<div {S}"font-size:12px;font-weight:700;color:#5A00CC;text-transform:uppercase;'
+            f'letter-spacing:0.8px;margin-bottom:12px;">🕐 Останні запити на виведення</div>'
+            + ((
+                f'<table {S}"width:100%;border-collapse:collapse;">'
+                f'<thead><tr>'
+                f'<th {S}"text-align:left;font-size:10px;color:#9ca3af;padding:4px 8px;">Дата</th>'
+                f'<th {S}"text-align:left;font-size:10px;color:#9ca3af;padding:4px 8px;">Сума</th>'
+                f'<th {S}"text-align:left;font-size:10px;color:#9ca3af;padding:4px 8px;">Статус</th>'
+                f'<th {S}"text-align:left;font-size:10px;color:#9ca3af;padding:4px 8px;">Транзакція</th>'
+                f'<th></th>'
+                f'</tr></thead>'
+                f'<tbody>{wr_rows}</tbody>'
+                f'</table>'
+            ) if wr_rows else f'<div {S}"color:#9ca3af;font-size:13px;">Запитів ще немає</div>')
+        )
+
         return mark_safe(
-            f'<div {S}"font-family:Inter,system-ui,sans-serif;">'
+            f'<div {S}"font-family:Inter,system-ui,sans-serif;display:flex;flex-direction:column;gap:12px;">'
             f'<div {S}"display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:12px;align-items:start;">'
             f'{section1}{section2}{section3}'
+            f'</div>'
+            f'<div {S}"display:grid;grid-template-columns:1fr 1.6fr;gap:12px;align-items:start;">'
+            f'{section4_left}{section4_right}'
+            f'</div>'
+            f'<div {S}"display:grid;grid-template-columns:1fr 1.6fr;gap:12px;align-items:start;">'
+            f'{section5_left}{section5_right}'
             f'</div>'
             f'</div>'
         )
@@ -536,4 +800,173 @@ class DriverAdmin(admin.ModelAdmin):
     driver_rides_link.short_description = 'Всі поїздки'
 
 
+@admin.register(WithdrawalRequest, site=taxi_admin)
+class WithdrawalRequestAdmin(admin.ModelAdmin):
+    """Admin for driver card-earnings withdrawal requests."""
 
+    list_display = (
+        'created_at_fmt', 'driver_link', 'amount_fmt',
+        'payout_card_display', 'status_badge', 'admin_comment_short', 'resolved_at',
+    )
+    list_display_links = ('created_at_fmt', 'driver_link')
+    list_filter = ('status', 'created_at')
+    search_fields = ('driver__user__email', 'driver__user__first_name', 'driver__user__last_name')
+    ordering = ('-created_at',)
+    readonly_fields = ('id', 'driver_link', 'amount', 'status_badge', 'created_at', 'resolved_at', 'payout_card_display')
+
+    fieldsets = (
+        ('Запит', {
+            'fields': ('id', 'driver_link', 'amount', 'status_badge', 'created_at'),
+        }),
+        ('Реквізити виплати', {
+            'fields': ('payout_card_display',),
+            'description': 'Номер картки водія для переказу коштів',
+        }),
+        ('Рішення', {
+            'fields': ('status', 'admin_comment', 'payment_reference', 'resolved_at'),
+        }),
+    )
+
+    actions = ['approve_requests', 'reject_requests', 'mark_completed']
+
+    # ── Save override (handles manual form edits) ─────────────────────────────
+
+    def save_model(self, request, obj, form, change):
+        from django.utils import timezone
+        from decimal import Decimal
+
+        if change and 'status' in form.changed_data:
+            old_status = WithdrawalRequest.objects.get(pk=obj.pk).status
+            new_status = obj.status
+
+            if new_status in (WithdrawalRequest.Status.APPROVED,
+                              WithdrawalRequest.Status.REJECTED,
+                              WithdrawalRequest.Status.COMPLETED):
+                if not obj.resolved_at:
+                    obj.resolved_at = timezone.now()
+
+            # Restore balance if rejected
+            if new_status == WithdrawalRequest.Status.REJECTED and old_status in (
+                WithdrawalRequest.Status.PENDING, WithdrawalRequest.Status.APPROVED
+            ):
+                driver = obj.driver
+                driver.pending_card_withdrawal = (
+                    Decimal(str(driver.pending_card_withdrawal)) + obj.amount
+                )
+                driver.save(update_fields=['pending_card_withdrawal'])
+
+        super().save_model(request, obj, form, change)
+
+    # ── Actions ──────────────────────────────────────────────────────────────
+
+    def approve_requests(self, request, queryset):
+        from django.utils import timezone
+        updated = queryset.filter(status=WithdrawalRequest.Status.PENDING).update(
+            status=WithdrawalRequest.Status.APPROVED,
+            resolved_at=timezone.now(),
+        )
+        self.message_user(request, f'Схвалено {updated} запитів.')
+    approve_requests.short_description = '✅ Схвалити вибрані'
+
+    def reject_requests(self, request, queryset):
+        from django.utils import timezone
+        from decimal import Decimal
+
+        updated = 0
+        for wr in queryset.filter(
+            status__in=[WithdrawalRequest.Status.PENDING, WithdrawalRequest.Status.APPROVED]
+        ).select_related('driver'):
+            wr.status = WithdrawalRequest.Status.REJECTED
+            wr.resolved_at = timezone.now()
+            wr.save(update_fields=['status', 'resolved_at'])
+            # Restore frozen amount back to driver balance
+            driver = wr.driver
+            driver.pending_card_withdrawal = (
+                Decimal(str(driver.pending_card_withdrawal)) + wr.amount
+            )
+            driver.save(update_fields=['pending_card_withdrawal'])
+            updated += 1
+        self.message_user(request, f'Відхилено {updated} запитів, суму повернено на баланс водія.')
+    reject_requests.short_description = '❌ Відхилити вибрані'
+
+    def mark_completed(self, request, queryset):
+        from django.utils import timezone
+        from decimal import Decimal
+
+        updated = 0
+        for wr in queryset.filter(status=WithdrawalRequest.Status.APPROVED).select_related('driver'):
+            wr.status = WithdrawalRequest.Status.COMPLETED
+            wr.resolved_at = timezone.now()
+            wr.save(update_fields=['status', 'resolved_at'])
+            # Amount was already deducted from pending_card_withdrawal on request creation
+            updated += 1
+        self.message_user(request, f'Виплачено {updated} запитів.')
+    mark_completed.short_description = '💸 Позначити як виплачено'
+
+    # ── Display helpers ───────────────────────────────────────────────────────
+
+    def payout_card_display(self, obj):
+        card = obj.driver.payout_card_number
+        if not card:
+            return mark_safe(
+                '<span style="color:#ef4444;font-weight:600;font-size:12px;">'
+                '⚠️ Картку не вказано</span>'
+            )
+        return mark_safe(
+            f'<div style="background:#f5f3ff;border:1px solid #ede9fe;border-radius:8px;'
+            f'padding:8px 14px;display:inline-block;">'
+            f'<div style="font-size:10px;color:#6b7280;font-weight:600;text-transform:uppercase;'
+            f'letter-spacing:0.5px;margin-bottom:4px;">💳 Картка виплати</div>'
+            f'<div style="font-size:18px;font-weight:800;color:#7900FF;letter-spacing:2px;">'
+            f'{card}</div>'
+            f'</div>'
+        )
+    payout_card_display.short_description = 'Картка виплати'
+
+    def created_at_fmt(self, obj):
+        return obj.created_at.strftime('%d.%m.%Y %H:%M')
+    created_at_fmt.short_description = 'Дата запиту'
+    created_at_fmt.admin_order_field = 'created_at'
+
+    def driver_link(self, obj):
+        url = reverse('taxi_admin:drivers_driver_change', args=[obj.driver.pk])
+        name = f'{obj.driver.user.last_name} {obj.driver.user.first_name}'.strip() or obj.driver.user.email
+        return mark_safe(
+            f'<a href="{url}" style="font-weight:600;color:#7900FF;text-decoration:none;">'
+            f'{name}<br/>'
+            f'<span style="font-size:11px;color:#6b7280;font-weight:400;">{obj.driver.user.email}</span>'
+            f'</a>'
+        )
+    driver_link.short_description = 'Водій'
+
+    def amount_fmt(self, obj):
+        return mark_safe(
+            f'<span style="font-size:16px;font-weight:800;color:#7900FF;">'
+            f'{obj.amount:.0f} ₴</span>'
+        )
+    amount_fmt.short_description = 'Сума'
+    amount_fmt.admin_order_field = 'amount'
+
+    def status_badge(self, obj):
+        config = {
+            WithdrawalRequest.Status.PENDING:   ('#f59e0b', '#fffbeb', '⏳ Очікує розгляду'),
+            WithdrawalRequest.Status.APPROVED:  ('#10b981', '#f0fdf4', '✅ Схвалено'),
+            WithdrawalRequest.Status.REJECTED:  ('#ef4444', '#fef2f2', '❌ Відхилено'),
+            WithdrawalRequest.Status.COMPLETED: ('#7900FF', '#f5f3ff', '💸 Виплачено'),
+        }
+        color, bg, label = config.get(obj.status, ('#6b7280', '#f9fafb', obj.status))
+        return mark_safe(
+            f'<span style="background:{bg};color:{color};border:1px solid {color}40;'
+            f'padding:4px 12px;border-radius:20px;font-weight:700;font-size:12px;'
+            f'white-space:nowrap;">{label}</span>'
+        )
+    status_badge.short_description = 'Статус'
+
+    def admin_comment_short(self, obj):
+        if not obj.admin_comment:
+            return mark_safe('<span style="color:#9ca3af;">—</span>')
+        short = obj.admin_comment[:60]
+        if len(obj.admin_comment) > 60:
+            short += '…'
+        return short
+    admin_comment_short.short_description = 'Коментар'

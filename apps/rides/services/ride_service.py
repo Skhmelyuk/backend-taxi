@@ -139,8 +139,30 @@ class RideService:
             'status', 'completed_at', 'final_distance', 'final_duration', 'final_price'
         ])
 
+        # Update driver earnings — detect payment method from Payment if exists
+        from apps.payments.models import Payment
+        payment = Payment.objects.filter(
+            ride=ride, status=Payment.Status.SUCCESS
+        ).first()
+
+        driver_update_fields = ['availability', 'total_earnings', 'total_rides']
         driver.availability = Driver.Availability.ONLINE
-        driver.save(update_fields=['availability'])
+        driver.total_earnings = Decimal(str(driver.total_earnings)) + ride.final_price
+        driver.total_rides += 1
+
+        if payment and payment.payment_method == Payment.PaymentMethod.CASH:
+            driver.cash_earnings = Decimal(str(driver.cash_earnings)) + ride.final_price
+            driver_update_fields.append('cash_earnings')
+        elif payment and payment.payment_method in (
+            Payment.PaymentMethod.CARD,
+            Payment.PaymentMethod.GOOGLE_PAY,
+            Payment.PaymentMethod.APPLE_PAY,
+        ):
+            driver.card_earnings = Decimal(str(driver.card_earnings)) + ride.final_price
+            driver.pending_card_withdrawal = Decimal(str(driver.pending_card_withdrawal)) + ride.final_price
+            driver_update_fields += ['card_earnings', 'pending_card_withdrawal']
+
+        driver.save(update_fields=driver_update_fields)
 
         logger.info(f"Ride {ride_id} completed, final price: {ride.final_price} UAH")
         return ride

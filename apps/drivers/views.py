@@ -45,7 +45,8 @@ class DriverViewSet(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.action in ['list', 'retrieve', 'approve', 'reject', 'suspend']:
             return [IsAuthenticated(), IsAdminUser()]
-        elif self.action in ['me', 'update_location', 'availability', 'upload_document']:
+        elif self.action in ['me', 'update_location', 'availability', 'upload_document',
+                             'wallet_stats', 'request_withdrawal', 'withdrawal_history', 'payout_card']:
             return [IsAuthenticated(), IsDriverUser()]
         elif self.action in ['review_document']:
             return [IsAuthenticated(), IsAdminUser()]
@@ -178,6 +179,152 @@ class DriverViewSet(viewsets.ModelViewSet):
 
         response_serializer = DriverDocumentSerializer(document, context={'request': request})
         return Response(response_serializer.data)
+
+    @action(detail=False, methods=['get'])
+    def wallet_stats(self, request):
+        """GET /api/drivers/wallet_stats/?date=YYYY-MM-DD — Earnings split by cash/card for a date."""
+        from datetime import date as date_type
+        from django.db.models import Sum, Count
+        from apps.payments.models import Payment
+
+        driver = getattr(request.user, 'driver_profile', None)
+        if not driver:
+            return Response({'error': 'Driver profile not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        date_str = request.query_params.get('date')
+        if date_str:
+            try:
+                filter_date = date_type.fromisoformat(date_str)
+            except ValueError:
+                return Response({'error': 'Invalid date format, use YYYY-MM-DD'}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            from django.utils.timezone import now
+            filter_date = now().date()
+
+        payments_qs = Payment.objects.filter(
+            ride__driver=driver,
+            status=Payment.Status.SUCCESS,
+            processed_at__date=filter_date,
+        )
+
+        cash_agg = payments_qs.filter(
+            payment_method=Payment.PaymentMethod.CASH,
+        ).aggregate(total=Sum('amount'), count=Count('id'))
+
+        card_agg = payments_qs.filter(
+            payment_method__in=[
+                Payment.PaymentMethod.CARD,
+                Payment.PaymentMethod.GOOGLE_PAY,
+                Payment.PaymentMethod.APPLE_PAY,
+            ]
+        ).aggregate(total=Sum('amount'), count=Count('id'))
+
+        from apps.drivers.models import WithdrawalRequest
+        active_request = WithdrawalRequest.objects.filter(
+            driver=driver,
+            status__in=[WithdrawalRequest.Status.PENDING, WithdrawalRequest.Status.APPROVED],
+        ).order_by('-created_at').first()
+
+        return Response({
+            'date': filter_date.isoformat(),
+            'cash_earnings': float(cash_agg['total'] or 0),
+            'cash_rides': cash_agg['count'] or 0,
+            'card_earnings': float(card_agg['total'] or 0),
+            'card_rides': card_agg['count'] or 0,
+            'total_earnings': float((cash_agg['total'] or 0) + (card_agg['total'] or 0)),
+            'total_rides': (cash_agg['count'] or 0) + (card_agg['count'] or 0),
+            'all_time_total': float(driver.total_earnings),
+            'all_time_cash': float(driver.cash_earnings),
+            'all_time_card': float(driver.card_earnings),
+            'pending_card_withdrawal': float(driver.pending_card_withdrawal),
+            'active_withdrawal_status': active_request.status if active_request else None,
+            'payout_card_number': driver.payout_card_number or None,
+        })
+
+    @action(detail=False, methods=['post'])
+    def request_withdrawal(self, request):
+        """POST /api/drivers/request_withdrawal/ — Request card earnings withdrawal."""
+        from decimal import Decimal
+        from apps.drivers.models import WithdrawalRequest
+
+        driver = getattr(request.user, 'driver_profile', None)
+        if not driver:
+            return Response({'error': 'Driver profile not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        available = Decimal(str(driver.pending_card_withdrawal))
+        if available <= 0:
+            return Response(
+                {'error': 'No card earnings available for withdrawal'},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        # Prevent duplicate pending requests
+        if WithdrawalRequest.objects.filter(
+            driver=driver,
+            status__in=[WithdrawalRequest.Status.PENDING, WithdrawalRequest.Status.APPROVED],
+        ).exists():
+            return Response(
+                {'error': 'You already have a pending withdrawal request'},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        wr = WithdrawalRequest.objects.create(driver=driver, amount=available)
+        # Freeze: deduct immediately so driver cannot request the same amount again
+        driver.pending_card_withdrawal = max(
+            Decimal('0'),
+            Decimal(str(driver.pending_card_withdrawal)) - available,
+        )
+        driver.save(update_fields=['pending_card_withdrawal'])
+
+        return Response({
+            'id': str(wr.id),
+            'amount': float(wr.amount),
+            'status': wr.status,
+            'created_at': wr.created_at.isoformat(),
+        }, status=status.HTTP_201_CREATED)
+
+    @action(detail=False, methods=['patch'])
+    def payout_card(self, request):
+        """PATCH /api/drivers/payout_card/ — Save driver\'s payout card number."""
+        import re
+        driver = getattr(request.user, 'driver_profile', None)
+        if not driver:
+            return Response({'error': 'Driver profile not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        raw = request.data.get('card_number', '')
+        digits = re.sub(r'\D', '', str(raw))
+        if len(digits) not in (16, 19):
+            return Response({'error': 'Невірний номер картки. Введіть 16 цифр.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        formatted = ' '.join(digits[i:i+4] for i in range(0, len(digits), 4))
+        driver.payout_card_number = formatted
+        driver.save(update_fields=['payout_card_number'])
+        return Response({'payout_card_number': formatted})
+
+    @action(detail=False, methods=['get'])
+    def withdrawal_history(self, request):
+        """GET /api/drivers/withdrawal_history/ — Paginated list of driver's withdrawal requests."""
+        from apps.drivers.models import WithdrawalRequest
+
+        driver = getattr(request.user, 'driver_profile', None)
+        if not driver:
+            return Response({'error': 'Driver profile not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        qs = WithdrawalRequest.objects.filter(driver=driver).order_by('-created_at')
+
+        results = []
+        for wr in qs:
+            results.append({
+                'id': str(wr.id),
+                'amount': float(wr.amount),
+                'status': wr.status,
+                'admin_comment': wr.admin_comment or None,
+                'payment_reference': wr.payment_reference or None,
+                'created_at': wr.created_at.isoformat(),
+                'resolved_at': wr.resolved_at.isoformat() if wr.resolved_at else None,
+            })
+
+        return Response(results)
 
     @action(detail=False, methods=['get'])
     def rating_stats(self, request):

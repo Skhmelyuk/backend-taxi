@@ -135,7 +135,11 @@ class Driver(models.Model):
         verbose_name='Рейтинг',
     )
     total_rides    = models.IntegerField(default=0, verbose_name='Всього поїздок')
-    total_earnings = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name='Загальний заробіток')
+    total_earnings         = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name='Загальний заробіток')
+    cash_earnings          = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name='Заробіток готівкою')
+    card_earnings          = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name='Заробіток карткою')
+    pending_card_withdrawal = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name='Очікує виведення (картка)')
+    payout_card_number = models.CharField(max_length=19, blank=True, default='', verbose_name='Номер картки для виплати')
 
     rejection_reason  = models.TextField(blank=True, verbose_name='Причина відмови')
     suspension_reason = models.TextField(blank=True, verbose_name='Причина блокування')
@@ -241,3 +245,43 @@ class DriverDocument(models.Model):
 
     def __str__(self) -> str:
         return f"{self.driver.user.email} → {self.doc_type} ({self.status})"
+
+
+class WithdrawalRequest(models.Model):
+
+    class Status(models.TextChoices):
+        PENDING   = 'pending',   'Очікує розгляду'
+        APPROVED  = 'approved',  'Схвалено'
+        REJECTED  = 'rejected',  'Відхилено'
+        COMPLETED = 'completed', 'Виплачено'
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
+    driver = models.ForeignKey(
+        Driver, on_delete=models.CASCADE,
+        related_name='withdrawal_requests',
+        verbose_name='Водій',
+    )
+    amount = models.DecimalField(
+        max_digits=10, decimal_places=2,
+        validators=[MinValueValidator(0.01)],
+        verbose_name='Сума виведення',
+    )
+    status = models.CharField(
+        max_length=20, choices=Status.choices,
+        default=Status.PENDING, db_index=True,
+        verbose_name='Статус',
+    )
+    admin_comment = models.TextField(blank=True, verbose_name='Коментар адміністратора')
+    payment_reference = models.CharField(max_length=200, blank=True, default='', verbose_name='Номер транзакції / квитанції')
+    created_at  = models.DateTimeField(auto_now_add=True, verbose_name='Створено')
+    resolved_at = models.DateTimeField(null=True, blank=True, verbose_name='Оброблено')
+
+    class Meta:
+        db_table = 'withdrawal_requests'
+        ordering = ['-created_at']
+        verbose_name = 'Запит на виведення'
+        verbose_name_plural = 'Запити на виведення'
+
+    def __str__(self) -> str:
+        return f"Withdrawal {self.amount} UAH — {self.driver.user.email} ({self.status})"

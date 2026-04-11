@@ -88,6 +88,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         from apps.drivers.models import Driver, DriverDocument
         from apps.rides.models import Ride
+        from apps.payments.models import Payment
 
         rides_count = options['rides']
         driver_emails = options.get('driver_emails')
@@ -95,7 +96,13 @@ class Command(BaseCommand):
 
         if options['clear']:
             self.stdout.write('Clearing existing test data...')
-            Ride.objects.filter(driver__user__email__endswith='@testdriver.dev').delete()
+            from apps.payments.models import Payment as _P
+            # Delete in correct FK order
+            test_rides = Ride.objects.filter(
+                user__email__endswith='@testpassenger.dev'
+            )
+            _P.objects.filter(ride__in=test_rides).delete()
+            test_rides.delete()
             Driver.objects.filter(user__email__endswith='@testdriver.dev').delete()
             User.objects.filter(email__endswith='@testdriver.dev').delete()
             User.objects.filter(email__endswith='@testpassenger.dev').delete()
@@ -233,7 +240,7 @@ class Command(BaseCommand):
                 ride_rating = random.randint(3, 5)
                 passenger = random.choice(passengers)
 
-                Ride.objects.create(
+                ride = Ride.objects.create(
                     user=passenger,
                     driver=driver,
                     status=Ride.Status.COMPLETED,
@@ -254,22 +261,60 @@ class Command(BaseCommand):
                     started_at=started_at,
                     completed_at=completed_at,
                 )
+
+                # Create payment with random cash/card split (~60% cash, 40% card)
+                payment_method = random.choices(
+                    ['cash', 'card'],
+                    weights=[60, 40],
+                )[0]
+                Payment.objects.create(
+                    ride=ride,
+                    user=passenger,
+                    amount=125,
+                    currency='UAH',
+                    status='success',
+                    payment_method=payment_method,
+                    provider='cash' if payment_method == 'cash' else 'liqpay',
+                    provider_transaction_id=f'test_{ride.id}',
+                    processed_at=completed_at,
+                )
+
                 ride_rating_sum += ride_rating
                 ride_rating_count += 1
                 total_created += 1
 
-            # Update driver aggregate rating & total_rides
+            # Update driver aggregate fields
             if ride_rating_count > 0:
+                from django.db.models import Sum
+                from apps.payments.models import Payment as P
                 driver.rating = round(ride_rating_sum / ride_rating_count, 2)
                 driver.total_rides = Ride.objects.filter(
                     driver=driver, status=Ride.Status.COMPLETED
                 ).count()
-                driver.save(update_fields=['rating', 'total_rides'])
+                driver.total_earnings = Ride.objects.filter(
+                    driver=driver, status=Ride.Status.COMPLETED
+                ).aggregate(total=Sum('final_price'))['total'] or 0
+
+                cash_total = P.objects.filter(
+                    ride__driver=driver, status='success', payment_method='cash'
+                ).aggregate(total=Sum('amount'))['total'] or 0
+                card_total = P.objects.filter(
+                    ride__driver=driver, status='success', payment_method='card'
+                ).aggregate(total=Sum('amount'))['total'] or 0
+
+                driver.cash_earnings = cash_total
+                driver.card_earnings = card_total
+                driver.pending_card_withdrawal = card_total
+                driver.save(update_fields=[
+                    'rating', 'total_rides', 'total_earnings',
+                    'cash_earnings', 'card_earnings', 'pending_card_withdrawal',
+                ])
 
             self.stdout.write(
                 self.style.SUCCESS(
                     f'  ✓ {rides_count} rides for {driver.user.email} '
-                    f'| rating={driver.rating} total={driver.total_rides}'
+                    f'| rating={driver.rating} total={driver.total_rides} '
+                    f'| cash={driver.cash_earnings} card={driver.card_earnings}'
                 )
             )
 
