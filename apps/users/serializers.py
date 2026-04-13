@@ -12,9 +12,9 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = [
             'id', 'email', 'phone_number', 'first_name', 'last_name',
-            'full_name', 'profile_image', 'date_of_birth', 'role', 'is_verified', 'created_at',
+            'full_name', 'profile_image', 'date_of_birth', 'is_passenger', 'is_driver', 'is_verified', 'created_at',
         ]
-        read_only_fields = ['id', 'email', 'role', 'is_verified', 'created_at']
+        read_only_fields = ['id', 'email', 'is_passenger', 'is_driver', 'is_verified', 'created_at']
 
 
 class UserDetailSerializer(serializers.ModelSerializer):
@@ -28,12 +28,12 @@ class UserDetailSerializer(serializers.ModelSerializer):
         model = User
         fields = [
             'id', 'email', 'phone_number', 'first_name', 'last_name',
-            'full_name', 'profile_image', 'date_of_birth', 'role', 'is_verified', 'is_active',
+            'full_name', 'profile_image', 'date_of_birth', 'is_passenger', 'is_driver', 'is_verified', 'is_active',
             'created_at', 'updated_at', 'last_login',
             'rides_count', 'total_spent', 'average_rating',
         ]
         read_only_fields = [
-            'id', 'email', 'role', 'is_verified', 'is_active',
+            'id', 'email', 'is_passenger', 'is_driver', 'is_verified', 'is_active',
             'created_at', 'updated_at', 'last_login',
         ]
 
@@ -102,5 +102,5 @@ class UserListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'email', 'full_name', 'role', 'is_active', 'is_verified', 'created_at']
-        read_only_fields = ['id', 'email', 'full_name', 'role', 'is_active', 'is_verified', 'created_at']
+        fields = ['id', 'email', 'full_name', 'is_passenger', 'is_driver', 'is_active', 'is_verified', 'created_at']
+        read_only_fields = ['id', 'email', 'full_name', 'is_passenger', 'is_driver', 'is_active', 'is_verified', 'created_at']

@@ -127,21 +127,26 @@ def handle_clerk_user_created(data: dict) -> None:
     # Determine role: respect intended_role from driver app, or existing public_metadata role.
     intended_role = unsafe_metadata.get('intended_role')
     
-    if role == User.Role.DRIVER or intended_role == 'driver':
-        if user.role != User.Role.DRIVER:
-            user.role = User.Role.DRIVER
-            updates.append('role')
+    # Determine role from Clerk metadata
+    is_driver_role = (role == 'driver' or intended_role == 'driver')
+    
+    if is_driver_role:
+        if not user.is_driver:
+            user.is_driver = True
+            user.is_passenger = True  # Driver is also a passenger
+            updates.append('is_driver')
+            updates.append('is_passenger')
             # Push publicMetadata.role=driver to Clerk so JWT claims are updated
-            if role != User.Role.DRIVER:
+            if role != 'driver':
                 _set_clerk_user_role_driver(clerk_user_id)
     else:
-        # For all other cases (e.g. client app registration), default to USER
-        if not user.role:
-            user.role = User.Role.USER
-            updates.append('role')
+        # For all other cases (e.g. client app registration), default to passenger
+        if not user.is_passenger and not user.is_driver:
+            user.is_passenger = True
+            updates.append('is_passenger')
 
     created_driver = False
-    if user.role == User.Role.DRIVER and not hasattr(user, 'driver_profile'):
+    if user.is_driver and not hasattr(user, 'driver_profile'):
         try:
             DriverService.register_driver(user)
             created_driver = True
@@ -220,12 +225,15 @@ def handle_clerk_user_updated(data: dict) -> None:
             user.phone_number = phone_number
             updates.append('phone_number')
 
-        if (role == User.Role.DRIVER or intended_role == 'driver') and user.role != User.Role.DRIVER:
-            user.role = User.Role.DRIVER
-            updates.append('role')
-            logger.info("Setting role to DRIVER for user %s based on %s", user.email, 
-                        "metadata role" if role == User.Role.DRIVER else "intended_role")
-            if role != User.Role.DRIVER:
+        is_driver_role = (role == 'driver' or intended_role == 'driver')
+        if is_driver_role and not user.is_driver:
+            user.is_driver = True
+            user.is_passenger = True  # Driver is also a passenger
+            updates.append('is_driver')
+            updates.append('is_passenger')
+            logger.info("Setting is_driver=True for user %s based on %s", user.email, 
+                        "metadata role" if role == 'driver' else "intended_role")
+            if role != 'driver':
                 _set_clerk_user_role_driver(clerk_user_id)
 
         if updates:
@@ -233,7 +241,7 @@ def handle_clerk_user_updated(data: dict) -> None:
             user.save(update_fields=update_fields)
             logger.info("Saved updates for %s: %s", user.email, ', '.join(updates))
 
-        if user.role == User.Role.DRIVER and not hasattr(user, 'driver_profile'):
+        if user.is_driver and not hasattr(user, 'driver_profile'):
             try:
                 logger.info("Auto-creating driver profile for %s...", user.email)
                 DriverService.register_driver(user)
@@ -243,8 +251,8 @@ def handle_clerk_user_updated(data: dict) -> None:
             except Exception as exc:
                 logger.error("Failed to auto-create driver profile for %s: %s", user.email, exc)
         else:
-            logger.info("Skipping driver profile creation for %s: role=%s, has_profile=%s", 
-                        user.email, user.role, hasattr(user, 'driver_profile'))
+            logger.info("Skipping driver profile creation for %s: is_driver=%s, has_profile=%s", 
+                        user.email, user.is_driver, hasattr(user, 'driver_profile'))
     except User.DoesNotExist:
         logger.warning("User not found for webhook update: %s", clerk_user_id)
 

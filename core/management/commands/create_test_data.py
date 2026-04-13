@@ -103,14 +103,13 @@ class Command(BaseCommand):
             )
             _P.objects.filter(ride__in=test_rides).delete()
             test_rides.delete()
-            Driver.objects.filter(user__email__endswith='@testdriver.dev').delete()
-            User.objects.filter(email__endswith='@testdriver.dev').delete()
+            # Note: we don't create test drivers anymore, so don't delete them
             User.objects.filter(email__endswith='@testpassenger.dev').delete()
             self.stdout.write(self.style.WARNING('✓ Cleared'))
 
         # ── Mode: seed existing drivers ───────────────────────────────────────
         if driver_emails or all_drivers:
-            passengers = list(User.objects.filter(role='user')[:10])
+            passengers = list(User.objects.filter(is_passenger=True, is_driver=False)[:10])
             if not passengers:
                 passengers = list(User.objects.filter(email__endswith='@testpassenger.dev'))
             if not passengers:
@@ -141,7 +140,8 @@ class Command(BaseCommand):
                 defaults={
                     'first_name': f'Passenger',
                     'last_name': f'{i}',
-                    'role': 'user',
+                    'is_passenger': True,
+                    'is_driver': False,
                     'is_active': True,
                 },
             )
@@ -151,75 +151,26 @@ class Command(BaseCommand):
                 self.stdout.write(self.style.SUCCESS(f'  ✓ Passenger: {email}'))
             passengers.append(user)
 
-        # ── Drivers ───────────────────────────────────────────────────────────
-        drivers_data = [
-            {
-                'email': 'driver1@testdriver.dev',
-                'first_name': 'Іван',
-                'last_name': 'Коваль',
-                'vehicle_make': 'Toyota',
-                'vehicle_model': 'Camry',
-                'vehicle_year': 2021,
-                'vehicle_color': 'Білий',
-                'vehicle_plate': 'AA1234BB',
-                'vehicle_type': Driver.VehicleType.COMFORT,
-                'license_number': 'DRV-001',
-            },
-            {
-                'email': 'driver2@testdriver.dev',
-                'first_name': 'Олег',
-                'last_name': 'Мельник',
-                'vehicle_make': 'Volkswagen',
-                'vehicle_model': 'Passat',
-                'vehicle_year': 2020,
-                'vehicle_color': 'Чорний',
-                'vehicle_plate': 'BB5678CC',
-                'vehicle_type': Driver.VehicleType.ECONOMY,
-                'license_number': 'DRV-002',
-            },
-        ]
-
-        created_drivers = []
-        for dd in drivers_data:
-            email = dd.pop('email')
-            first_name = dd.pop('first_name')
-            last_name = dd.pop('last_name')
-
-            user, u_created = User.objects.get_or_create(
-                email=email,
-                defaults={
-                    'first_name': first_name,
-                    'last_name': last_name,
-                    'role': 'driver',
-                    'is_active': True,
-                    'is_verified': True,
-                },
-            )
-            if u_created:
-                user.set_password('testpass123')
-                user.save()
-
-            driver, d_created = Driver.objects.get_or_create(
-                user=user,
-                defaults={
-                    'status': Driver.Status.APPROVED,
-                    'availability': Driver.Availability.ONLINE,
-                    'current_location': Point(30.5, 50.45, srid=4326),
-                    **dd,
-                },
-            )
-            if d_created:
-                self.stdout.write(self.style.SUCCESS(f'  ✓ Driver: {email}'))
-            else:
-                self.stdout.write(self.style.WARNING(f'  ! Driver exists: {email}'))
-
-            created_drivers.append(driver)
+        # ── Drivers: NOT creating new drivers, only use existing ───────────────
+        # Get existing approved drivers from database
+        existing_drivers = list(Driver.objects.filter(
+            status=Driver.Status.APPROVED
+        ).select_related('user')[:5])
+        
+        if not existing_drivers:
+            self.stdout.write(self.style.ERROR(
+                'Немає водіїв у базі. Спочатку створіть водіїв через driver-app або адмінку.'
+            ))
+            return
+        
+        created_drivers = existing_drivers
+        self.stdout.write(self.style.SUCCESS(f'  ✓ Using {len(existing_drivers)} existing drivers'))
 
         # ── Rides (last 3 months) ─────────────────────────────────────────────
         now = timezone.now()
         pickup = Point(30.523, 50.450, srid=4326)
         dropoff = Point(30.600, 50.480, srid=4326)
-
+        
         total_created = 0
         for driver in created_drivers:
             existing = Ride.objects.filter(driver=driver).count()

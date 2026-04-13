@@ -32,9 +32,11 @@ class DriverService:
             user.date_of_birth = date_of_birth
             user.save(update_fields=['date_of_birth'])
 
-        if user.role != 'driver':
-            user.role = 'driver'
-            user.save(update_fields=['role'])
+        # Driver is also a passenger (can use both apps)
+        if not user.is_driver:
+            user.is_driver = True
+            user.is_passenger = True
+            user.save(update_fields=['is_driver', 'is_passenger'])
             
         driver = Driver.objects.create(
             user=user, status=Driver.Status.PENDING, **driver_data

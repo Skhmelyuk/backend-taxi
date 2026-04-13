@@ -27,6 +27,10 @@ class UserManager(BaseUserManager):
             raise ValueError('Email is required')
 
         email = self.normalize_email(email)
+        
+        # Default to passenger if no role specified
+        extra_fields.setdefault('is_passenger', True)
+        
         user = self.model(email=email, **extra_fields)
 
         if password:
@@ -51,7 +55,8 @@ class UserManager(BaseUserManager):
         """
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
-        extra_fields.setdefault('role', 'admin')
+        extra_fields.setdefault('is_passenger', True)
+        extra_fields.setdefault('is_driver', False)
 
         if extra_fields.get('is_staff') is not True:
             raise ValueError('Superuser must have is_staff=True')
@@ -62,12 +67,13 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    """Custom user model."""
-
-    class Role(models.TextChoices):
-        USER = 'user', 'Пасажир'
-        DRIVER = 'driver', 'Водій'
-        ADMIN = 'admin', 'Адміністратор'
+    """Custom user model.
+    
+    Користувач може бути одночасно пасажиром і водієм.
+    is_passenger - доступ до client-app
+    is_driver - доступ до driver-app  
+    is_staff - доступ до admin панелі
+    """
 
     # Primary key
     id = models.UUIDField(
@@ -107,18 +113,26 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name='Дата народження',
     )
 
-    role = models.CharField(
-        max_length=10, choices=Role.choices, default=Role.USER, db_index=True,
-        verbose_name='Роль',
+    # Ролі користувача (можуть бути обидві True)
+    is_passenger = models.BooleanField(
+        default=True,
+        verbose_name='Пасажир',
+        help_text='Має доступ до client-app'
+    )
+    is_driver = models.BooleanField(
+        default=False,
+        verbose_name='Водій',
+        help_text='Має доступ до driver-app'
+    )
+    is_staff = models.BooleanField(
+        default=False,
+        verbose_name='Адміністратор',
+        help_text='Доступ до admin панелі'
     )
 
     is_active = models.BooleanField(
         default=True,
         verbose_name='Активний',
-    )
-    is_staff = models.BooleanField(
-        default=False,
-        verbose_name='Персонал',
     )
     is_verified = models.BooleanField(
         default=False,
@@ -127,6 +141,11 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     # Push notifications
     fcm_token = models.TextField(blank=True, verbose_name='FCM Token')
+
+    # Statistics
+    total_rides = models.PositiveIntegerField(default=0, verbose_name='Всього поїздок')
+    total_spent = models.DecimalField(max_digits=12, decimal_places=2, default=0, verbose_name='Всього витрачено')
+    average_rating = models.DecimalField(max_digits=3, decimal_places=2, default=0, verbose_name='Середній рейтинг')
 
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Створено')
     updated_at = models.DateTimeField(auto_now=True,       verbose_name='Оновлено')
@@ -144,7 +163,8 @@ class User(AbstractBaseUser, PermissionsMixin):
             models.Index(fields=['email']),
             models.Index(fields=['phone_number']),
             models.Index(fields=['clerk_user_id']),
-            models.Index(fields=['role']),
+            models.Index(fields=['is_passenger']),
+            models.Index(fields=['is_driver']),
             models.Index(fields=['is_active']),
             models.Index(fields=['created_at']),
         ]
@@ -174,6 +194,26 @@ class User(AbstractBaseUser, PermissionsMixin):
             First name or email
         """
         return self.first_name if self.first_name else self.email
+
+    @property
+    def role_display(self) -> str:
+        """Return display string for user roles."""
+        roles = []
+        if self.is_passenger:
+            roles.append('Пасажир')
+        if self.is_driver:
+            roles.append('Водій')
+        if self.is_staff:
+            roles.append('Адмін')
+        return ', '.join(roles) if roles else 'Користувач'
+
+    def can_become_driver(self) -> bool:
+        """Check if user can register as driver."""
+        return not self.is_driver
+
+    def can_become_passenger(self) -> bool:
+        """Check if user can use client app."""
+        return True
 
     def update_last_login(self):
         """Update last login timestamp."""

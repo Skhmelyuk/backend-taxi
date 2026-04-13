@@ -40,10 +40,10 @@ class UserAdmin(BaseUserAdmin):
     """Admin interface for User model."""
 
     list_display = [
-        'photo_preview', 'email', 'full_name', 'role_badge', 'is_verified_badge',
+        'photo_preview', 'email', 'full_name', 'roles_badge', 'is_verified_badge',
         'is_active', 'driver_profile_link', 'created_at',
     ]
-    list_filter = ['role', 'is_active', 'is_verified', 'is_staff', 'created_at']
+    list_filter = ['is_passenger', 'is_driver', 'is_staff', 'is_active', 'is_verified', 'created_at']
     search_fields = ['email', 'first_name', 'last_name', 'phone_number', 'clerk_user_id']
     ordering = ['-created_at']
     readonly_fields = ['id', 'clerk_user_id', 'created_at', 'updated_at', 'last_login', 'photo_preview', 'driver_profile_link']
@@ -57,9 +57,9 @@ class UserAdmin(BaseUserAdmin):
             'fields': ('clerk_user_id',),
             'classes': ('collapse',),
         }),
-        ('Роль та дозволи', {
-            'fields': ('role', 'is_active', 'is_verified', 'is_staff', 'is_superuser',
-                       'groups', 'user_permissions')
+        ('Ролі та дозволи', {
+            'fields': ('is_passenger', 'is_driver', 'is_staff', 'is_superuser',
+                       'is_active', 'is_verified', 'groups', 'user_permissions')
         }),
         ('Профіль водія', {
             'fields': ('driver_profile_link',),
@@ -77,7 +77,7 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2', 'role'),
+            'fields': ('email', 'password1', 'password2', 'is_passenger', 'is_driver'),
         }),
     )
 
@@ -103,18 +103,19 @@ class UserAdmin(BaseUserAdmin):
         )
     photo_preview.short_description = 'Фото'
 
-    def role_badge(self, obj) -> str:
-        config = {
-            'admin': ('#dc3545', 'Адмін'),
-            'driver': ('#7900FF', 'Водій'),
-            'user': ('#198754', 'Пасажир'),
-        }
-        color, label = config.get(obj.role, ('#6c757d', obj.role))
-        return mark_safe(
-            f'<span style="background:{color};color:white;padding:3px 10px;'
-            f'border-radius:12px;font-size:11px;font-weight:600;white-space:nowrap;">{label}</span>'
-        )
-    role_badge.short_description = 'Роль'
+    def roles_badge(self, obj) -> str:
+        badges = []
+        if obj.is_passenger:
+            badges.append('<span style="background:#198754;color:white;padding:3px 8px;'
+                         'border-radius:8px;font-size:10px;font-weight:600;margin-right:4px;">П</span>')
+        if obj.is_driver:
+            badges.append('<span style="background:#7900FF;color:white;padding:3px 8px;'
+                         'border-radius:8px;font-size:10px;font-weight:600;margin-right:4px;">В</span>')
+        if obj.is_staff:
+            badges.append('<span style="background:#dc3545;color:white;padding:3px 8px;'
+                         'border-radius:8px;font-size:10px;font-weight:600;">А</span>')
+        return mark_safe(' '.join(badges)) if badges else mark_safe('<span style="color:#6c757d;">—</span>')
+    roles_badge.short_description = 'Ролі'
 
     def is_verified_badge(self, obj) -> str:
         if obj.is_verified:

@@ -2,12 +2,11 @@ from rest_framework import permissions
 
 class IsAdminUser(permissions.BasePermission):
     """
-    Permission class that allows access only to users with admin role.
+    Permission class that allows access only to admin users (is_staff).
 
     This permission checks:
         - User is authenticated
-        - User has role attribute
-        - User role equals "admin"
+        - User has is_staff=True
 
     Attributes:
         None
@@ -19,7 +18,7 @@ class IsAdminUser(permissions.BasePermission):
 
     def has_permission(self, request, view) -> bool:
         """
-        Check if authenticated user has admin role.
+        Check if authenticated user is admin.
 
         Args:
             request (Request): DRF request object.
@@ -31,18 +30,17 @@ class IsAdminUser(permissions.BasePermission):
         return (
             request.user
             and request.user.is_authenticated
-            and getattr(request.user, "role", None) == "admin"
+            and getattr(request.user, "is_staff", False)
         )
 
 
 class IsDriverUser(permissions.BasePermission):
     """
-    Permission class that allows access only to users with driver role.
+    Permission class that allows access only to driver users.
 
     This permission checks:
         - User is authenticated
-        - User has role attribute
-        - User role equals "driver"
+        - User has is_driver=True
 
     Methods:
         has_permission(request, view): Returns True if user is driver.
@@ -51,7 +49,7 @@ class IsDriverUser(permissions.BasePermission):
 
     def has_permission(self, request, view) -> bool:
         """
-        Check if authenticated user has driver role.
+        Check if authenticated user is driver.
 
         Args:
             request (Request): DRF request object.
@@ -63,7 +61,7 @@ class IsDriverUser(permissions.BasePermission):
         return (
             request.user
             and request.user.is_authenticated
-            and getattr(request.user, "role", None) == "driver"
+            and getattr(request.user, "is_driver", False)
         )
 
 
@@ -93,7 +91,7 @@ class IsOwnerOrAdmin(permissions.BasePermission):
             bool: True if user is owner or admin, False otherwise.
         """
 
-        if getattr(request.user, "role", None) == "admin":
+        if getattr(request.user, "is_staff", False):
             return True
 
         if hasattr(obj, "user"):

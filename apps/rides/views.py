@@ -22,9 +22,9 @@ class RideViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        if getattr(user, 'role', None) == 'admin':
+        if getattr(user, 'is_staff', False):
             return Ride.objects.all()
-        elif getattr(user, 'role', None) == 'driver':
+        elif getattr(user, 'is_driver', False):
             try:
                 return Ride.objects.for_driver(user.driver_profile)
             except Exception:
@@ -126,7 +126,7 @@ class RideViewSet(viewsets.ReadOnlyModelViewSet):
             user = request.user
             if (user != ride.user and
                     (not hasattr(user, 'driver_profile') or ride.driver != user.driver_profile) and
-                    getattr(user, 'role', None) != 'admin'):
+                    not getattr(user, 'is_staff', False)):
                 return Response({'error': 'Permission denied'}, status=status.HTTP_403_FORBIDDEN)
 
             data = {

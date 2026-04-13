@@ -52,7 +52,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        if hasattr(user, 'role') and user.role == 'admin':
+        if user.is_staff:
             return User.objects.all()
         return User.objects.filter(id=user.id)
 

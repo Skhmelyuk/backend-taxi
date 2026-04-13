@@ -1,4 +1,4 @@
-.PHONY: help build up down restart logs shell migrate test seed seed-driver seed-all-drivers seed-clear
+.PHONY: help build up down restart logs shell migrate test seed seed-rides seed-all-drivers seed-clear check-drivers
 
 help:
 	@echo "Taxi Platform Commands:"
@@ -11,10 +11,11 @@ help:
 	@echo "  make migrate     - Виконати міграції бази даних"
 	@echo "  make test        - Запустити тести (pytest)"
 	@echo "  make initial     - Повний setup (міграції + суперюзер)"
-	@echo "  make seed        - Створити тестові дані (пасажири + 2 тест-драйвери + поїздки)"
-	@echo "  make seed-clear  - Очистити і перестворити тестові дані"
-	@echo "  make seed-driver EMAILS=a@b.com,c@d.com RIDES=30  - Додати поїздки існуючим драйверам"
-	@echo "  make seed-all-drivers RIDES=30                     - Додати поїздки всім драйверам"
+	@echo "  make seed        - Створити тестових пасажирів та поїздки для існуючих драйверів"
+	@echo "  make seed-clear  - Очистити тестові дані і перестворити пасажирів"
+	@echo "  make seed-rides RIDES=50              - Додати поїздки існуючим драйверам"
+	@echo "  make seed-all-drivers RIDES=30        - Додати поїздки всім драйверам"
+	@echo "  make check-drivers                    - Перевірити кількість активних драйверів"
 
 build:
 	docker compose build
@@ -59,9 +60,14 @@ seed:
 seed-clear:
 	docker compose exec api python manage.py create_test_data --clear --rides $(RIDES)
 
-seed-driver:
-	@if [ -z "$(EMAILS)" ]; then echo "Вкажіть EMAILS=email1@x.com,email2@x.com"; exit 1; fi
-	docker compose exec api python manage.py create_test_data --driver "$(EMAILS)" --rides $(RIDES)
+seed-rides:
+	docker compose exec api python manage.py create_test_data --rides $(RIDES)
 
 seed-all-drivers:
 	docker compose exec api python manage.py create_test_data --all-drivers --rides $(RIDES)
+
+check-drivers:
+	@docker compose exec api python manage.py shell -c "from apps.drivers.models import Driver; print(f'Драйверів у системі: {Driver.objects.filter(status=2).count()}')"
+
+recent-rides:
+	docker compose exec api python /app/add_recent_rides.py
