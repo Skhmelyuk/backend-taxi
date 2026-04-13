@@ -208,3 +208,60 @@ class RideService:
             DriverService.update_driver_rating(ride.driver, float(rating))
 
         return ride
+
+    @staticmethod
+    @transaction.atomic
+    def rate_passenger(ride_id: str, driver: Driver, rating: int, comment: str = '') -> Ride:
+        """Driver rates the passenger after ride completion."""
+        ride = Ride.objects.get(id=ride_id)
+        if ride.driver != driver:
+            raise ValueError('You are not the assigned driver for this ride')
+        if ride.status != Ride.Status.COMPLETED:
+            raise ValueError('Only completed rides can be rated')
+        if ride.driver_rating_for_passenger is not None:
+            raise ValueError('Passenger already rated for this ride')
+
+        ride.driver_rating_for_passenger = rating
+        ride.driver_comment_for_passenger = comment
+        ride.save(update_fields=['driver_rating_for_passenger', 'driver_comment_for_passenger'])
+
+        # Update passenger's average_rating on User model
+        passenger = ride.user
+        completed_rides_with_rating = Ride.objects.filter(
+            user=passenger,
+            driver_rating_for_passenger__isnull=False
+        ).values_list('driver_rating_for_passenger', flat=True)
+        ratings = list(completed_rides_with_rating)
+        if ratings:
+            avg = sum(ratings) / len(ratings)
+            from decimal import Decimal
+            passenger.average_rating = Decimal(str(round(avg, 2)))
+            passenger.save(update_fields=['average_rating'])
+
+        logger.info(f"Passenger {passenger.email} rated {rating} by driver {driver.user.email} for ride {ride_id}")
+        return ride
+
+    @staticmethod
+    @transaction.atomic
+    def reject_ride(ride_id: str, driver: Driver) -> Ride:
+        """Driver rejects an accepted ride — returns it to pending and re-queues matching."""
+        ride = Ride.objects.select_related(None).select_for_update().get(id=ride_id)
+        if ride.status != Ride.Status.ACCEPTED:
+            raise ValueError('Only accepted rides can be rejected')
+        if ride.driver != driver:
+            raise ValueError('You are not the assigned driver for this ride')
+
+        ride.driver = None
+        ride.status = Ride.Status.PENDING
+        ride.accepted_at = None
+        ride.save(update_fields=['driver', 'status', 'accepted_at'])
+
+        driver.availability = Driver.Availability.ONLINE
+        driver.save(update_fields=['availability'])
+
+        # Re-queue driver matching
+        from apps.rides.tasks import find_driver_for_ride
+        find_driver_for_ride.delay(str(ride.id))
+
+        logger.info(f"Ride {ride_id} rejected by driver {driver.user.email}, re-queued for matching")
+        return ride

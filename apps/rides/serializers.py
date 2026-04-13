@@ -32,6 +32,7 @@ class RideSerializer(serializers.ModelSerializer):
             'estimated_distance', 'estimated_duration', 'estimated_price',
             'final_distance', 'final_duration', 'final_price',
             'discount', 'rating', 'user_comment',
+            'driver_rating_for_passenger', 'driver_comment_for_passenger',
             'cancellation_reason', 'cancellation_comment',
             'created_at', 'accepted_at', 'started_at', 'completed_at', 'cancelled_at',
         ]
@@ -47,6 +48,41 @@ class RideSerializer(serializers.ModelSerializer):
                 'plate': obj.driver.vehicle_plate,
             }
         return None
+
+    def get_pickup_lat(self, obj): return obj.pickup_location.y
+    def get_pickup_lon(self, obj): return obj.pickup_location.x
+    def get_dropoff_lat(self, obj): return obj.dropoff_location.y
+    def get_dropoff_lon(self, obj): return obj.dropoff_location.x
+
+
+class ActiveRideForDriverSerializer(serializers.ModelSerializer):
+    """Lightweight serializer for driver's active ride (used for polling)."""
+    passenger_info = serializers.SerializerMethodField()
+    pickup_lat = serializers.SerializerMethodField()
+    pickup_lon = serializers.SerializerMethodField()
+    dropoff_lat = serializers.SerializerMethodField()
+    dropoff_lon = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Ride
+        fields = [
+            'id', 'status', 'vehicle_type',
+            'pickup_lat', 'pickup_lon', 'pickup_address',
+            'dropoff_lat', 'dropoff_lon', 'dropoff_address',
+            'estimated_distance', 'estimated_duration', 'estimated_price',
+            'final_price', 'discount',
+            'passenger_info',
+            'accepted_at', 'started_at',
+        ]
+        read_only_fields = fields
+
+    def get_passenger_info(self, obj):
+        return {
+            'id': str(obj.user.id),
+            'name': obj.user.full_name,
+            'rating': float(obj.user.average_rating),
+            'phone': obj.user.phone_number or '',
+        }
 
     def get_pickup_lat(self, obj): return obj.pickup_location.y
     def get_pickup_lon(self, obj): return obj.pickup_location.x
@@ -70,6 +106,12 @@ class RideCancelSerializer(serializers.Serializer):
 
 
 class RideRateSerializer(serializers.Serializer):
-    """Serializer for ride rating."""
+    """Serializer for ride rating (passenger rates the ride)."""
+    rating = serializers.IntegerField(min_value=1, max_value=5)
+    comment = serializers.CharField(required=False, allow_blank=True)
+
+
+class RatePassengerSerializer(serializers.Serializer):
+    """Serializer for driver rating a passenger after ride completion."""
     rating = serializers.IntegerField(min_value=1, max_value=5)
     comment = serializers.CharField(required=False, allow_blank=True)

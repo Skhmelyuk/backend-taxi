@@ -2966,3 +2966,11 @@ Traceback (most recent call last):
     raise ImproperlyConfigured(
 django.core.exceptions.ImproperlyConfigured: Field name `role` is not valid for model `User` in `apps.users.serializers.UserDetailSerializer`.
 ERROR 2026-04-13 15:04:59,668 basehttp 9 133106866579136 "PATCH /api/v1/users/update_profile/ HTTP/1.1" 500 153109
+ERROR 2026-04-13 18:40:52,156 log 99 128340660840128 Internal Server Error: /api/v1/users/webhooks/clerk/
+ERROR 2026-04-13 18:40:52,157 basehttp 99 128340660840128 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 500 145
+ERROR 2026-04-13 18:40:56,364 log 99 128340651398848 Internal Server Error: /api/v1/users/webhooks/clerk/
+ERROR 2026-04-13 18:40:56,364 basehttp 99 128340651398848 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 500 145
+ERROR 2026-04-13 18:41:43,025 log 99 128340643006144 Internal Server Error: /api/v1/users/webhooks/clerk/
+ERROR 2026-04-13 18:41:43,026 basehttp 99 128340643006144 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 500 145
+ERROR 2026-04-13 18:41:47,152 log 99 128340651398848 Internal Server Error: /api/v1/users/webhooks/clerk/
+ERROR 2026-04-13 18:41:47,153 basehttp 99 128340651398848 "POST /api/v1/users/webhooks/clerk/ HTTP/1.1" 500 145

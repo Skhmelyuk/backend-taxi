@@ -104,6 +104,13 @@ class Ride(models.Model):
         verbose_name='Оцінка',
     )
     user_comment = models.TextField(blank=True, verbose_name='Коментар пасажира')
+
+    driver_rating_for_passenger = models.IntegerField(
+        null=True, blank=True,
+        validators=[MinValueValidator(1), MaxValueValidator(5)],
+        verbose_name='Оцінка пасажира водієм',
+    )
+    driver_comment_for_passenger = models.TextField(blank=True, verbose_name='Коментар водія про пасажира')
     cancellation_reason = models.CharField(
         max_length=50, choices=CancellationReason.choices, blank=True,
         verbose_name='Причина скасування',

@@ -6,7 +6,8 @@ from rest_framework.permissions import IsAuthenticated
 from apps.rides.models import Ride
 from apps.rides.serializers import (
     RideSerializer, RideCreateSerializer, PriceEstimateSerializer,
-    RideCancelSerializer, RideRateSerializer,
+    RideCancelSerializer, RideRateSerializer, RatePassengerSerializer,
+    ActiveRideForDriverSerializer,
 )
 from apps.rides.services import RideService, PricingService
 from core.permissions import IsDriverUser
@@ -169,3 +170,53 @@ class RideViewSet(viewsets.ReadOnlyModelViewSet):
             return Response(RideSerializer(ride).data)
         except ValueError as e:
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated, IsDriverUser])
+    def rate_passenger(self, request, pk=None):
+        """POST /api/v1/rides/{id}/rate_passenger/ — Driver rates the passenger."""
+        serializer = RatePassengerSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            driver = request.user.driver_profile
+            ride = RideService.rate_passenger(
+                pk, driver,
+                serializer.validated_data['rating'],
+                serializer.validated_data.get('comment', '')
+            )
+            return Response(RideSerializer(ride).data)
+        except ValueError as e:
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated, IsDriverUser])
+    def reject(self, request, pk=None):
+        """POST /api/v1/rides/{id}/reject/ — Driver rejects the assigned ride."""
+        try:
+            driver = request.user.driver_profile
+            ride = RideService.reject_ride(pk, driver)
+            return Response(RideSerializer(ride).data)
+        except ValueError as e:
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=False, methods=['get'], permission_classes=[IsAuthenticated, IsDriverUser])
+    def active_for_driver(self, request):
+        """
+        GET /api/v1/rides/active_for_driver/ — Current active ride for the driver.
+
+        Used for polling from the driver app (every 3-5 seconds).
+        Returns the single active ride or null.
+        """
+        try:
+            driver = request.user.driver_profile
+        except Exception:
+            return Response({'error': 'Driver profile not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        ride = Ride.objects.filter(
+            driver=driver,
+            status__in=[Ride.Status.ACCEPTED, Ride.Status.IN_PROGRESS]
+        ).first()
+
+        if ride is None:
+            return Response({'ride': None})
+
+        return Response({'ride': ActiveRideForDriverSerializer(ride).data})
